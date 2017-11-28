@@ -346,8 +346,7 @@
         
           
             <h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>时间复杂度O(n^2)，额外空间复杂度O(1)，实现可以做到稳定性</p>
-<p>###插入排序过程</p>
-<ul>
+<h3 id="插入排序过程"><a href="#插入排序过程" class="headerlink" title="插入排序过程"></a>插入排序过程</h3><ul>
 <li>第一轮比较<br>位置0上的数前无比较数组，不动。</li>
 <li>第二轮比较<br>位置1上的数与位置0上的数比较，如果array[1] &lt; array[0]，则交换两者的位置</li>
 <li>第三轮比较<br>位置2上的数与位置1上的数比较，如果array[2] &lt; array[1]，则交换两者的位置。此时，位置1上的数与位置0上的数比较，如果array[1] &lt; array[0]。则交换两者的位置。</li>
@@ -355,12 +354,12 @@
 <li>省略过程</li>
 <li>第 n - 1 轮比较<br>所有数都经过上述的插入过程，整个数组就有序了。</li>
 </ul>
-<p>###和冒泡排序的区别<br>冒泡排序是将数组中的元素向外冒，每一轮都会确定本次比较范围最大的数。而插入排序的每一轮是将数组中的元素向前面有序的数组中插。</p>
+<h3 id="和冒泡排序的区别"><a href="#和冒泡排序的区别" class="headerlink" title="和冒泡排序的区别"></a>和冒泡排序的区别</h3><p>冒泡排序是将数组中的元素向外冒，每一轮都会确定本次比较范围最大的数。而插入排序的每一轮是将数组中的元素向前面有序的数组中插。</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>这里解释我们排序思想的关键部分，详细代码请见我的<a href="https://github.com/Edward-1020/arithmetic/blob/master/InsertSort.js" target="_blank" rel="noopener">GitHub</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//	0位置上的数是不需要插入的，我们从1位置开始插。</span><br><span class="line">//	所以i从1位置开始 let i = 1</span><br><span class="line">//	所以最后一次的需要插入是 n - 1 位置上的数</span><br><span class="line">//	所以 i &lt; arr.length</span><br><span class="line">//	每一轮会在往后移一位。 i++</span><br><span class="line">for (let i = 1; i &lt; arr.length; i++) &#123;</span><br><span class="line">//	i是与其前面的有序数组中的元素比较</span><br><span class="line">//	所以 j 从 i - 1开始， j = i - 1</span><br><span class="line">//	比较到 有序数组的 0 位置</span><br><span class="line">//	所以 j &gt; = 0</span><br><span class="line">//	什么时候交换一次位置？</span><br><span class="line">//	当前一个比后一个小时，交换一次位置</span><br><span class="line">//	然后再往前推一位，再次比较交换位置，直到前一个比后一个小</span><br><span class="line">//	上述是交换位置应该满足的条件 即 arr[j] &gt; arr[j+1]</span><br><span class="line">  for (let j = i - 1; j &gt;= 0 &amp;&amp; arr[j] &gt; arr[j+1]; j--) &#123;</span><br><span class="line">    swap(arr, j, j+1)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function swap (arr, i, j) &#123;</span><br><span class="line">  [arr[i], arr[j]] = [arr[j], arr[i]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###时间复杂度<br>这里，数组中每个元素都要和前面的有序数组一个一个比较，所以其时间频度是个等差数列，时间复杂度是O(n^2)</p>
-<p>###空间复杂度<br>这里我们用有限的空间去做排序，所以是O(1)</p>
-<p>###稳定性<br>数组中元素再向前比较时，因为 &lt;= 有序数组中的某一个元素时就停止了，所以相同的元素之间的相对顺序不变，是稳定的。</p>
-<p>###思想总结<br>类似于插扑克，每一个数和它前面的一组有序的数比较，将其正确的插入有序区。最后，整个数组就有序了。</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>这里，数组中每个元素都要和前面的有序数组一个一个比较，所以其时间频度是个等差数列(1+ 2 + 3 + … + n-1)，时间复杂度是O(n^2)</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>这里我们用有限的空间去做排序，所以是O(1)</p>
+<h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><p>数组中元素再向前比较时，因为 &lt;= 有序数组中的某一个元素时就停止了，所以相同的元素之间的相对顺序不变，是稳定的。</p>
+<h3 id="思想总结"><a href="#思想总结" class="headerlink" title="思想总结"></a>思想总结</h3><p>类似于插扑克，每一个数和它前面的一组有序的数比较，将其正确的插入有序区。最后，整个数组就有序了。</p>
 
           
         
