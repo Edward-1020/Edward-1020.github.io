@@ -8,7 +8,6 @@
         <category>JavaScript经典算法</category>
       </categories>
       <tags>
-        <tag>函数式编程</tag>
         <tag>web前端</tag>
       </tags>
   </entry>
@@ -20,7 +19,6 @@
         <category>JavaScript经典算法</category>
       </categories>
       <tags>
-        <tag>函数式编程</tag>
         <tag>web前端</tag>
       </tags>
   </entry>
@@ -32,8 +30,8 @@
         <category>JavaScript之美</category>
       </categories>
       <tags>
-        <tag>函数式编程</tag>
         <tag>web前端</tag>
+        <tag>函数式编程</tag>
       </tags>
   </entry>
 </search>
