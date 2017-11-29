@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="快速排序的引子A和B两数组，想找在B中存在但是在A中不存的数？ 二分如果数组的长度为N，每一次分一半，一共能分几次？是 log2(N)简称为logN  思路及时间复杂度分析 A和B两数组，想找在B中存在但是在A中不存的数。  笨办法从B中拿出一个，在A中遍历。这样时间复杂度O(m * n) 好办法1.将A排序 O(A)">
+<meta name="description" content="快速排序的引子A和B两数组，想找在B中存在但是在A中不存的数？ 二分如果数组的长度为N，每一次分一半，一共能分几次？是 log2(N)简称为logN  思路及时间复杂度分析 A和B两数组，想找在B中存在但是在A中不存的数。A的长度为N，B的长度为M  笨办法从B中拿出一个，在A中遍历。这样时间复杂度O(m * n) 好">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript经典排序算法--快速排序的引子">
 <meta property="og:url" content="http://yoursite.com/2017/11/29/快速排序的引子/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="快速排序的引子A和B两数组，想找在B中存在但是在A中不存的数？ 二分如果数组的长度为N，每一次分一半，一共能分几次？是 log2(N)简称为logN  思路及时间复杂度分析 A和B两数组，想找在B中存在但是在A中不存的数。  笨办法从B中拿出一个，在A中遍历。这样时间复杂度O(m * n) 好办法1.将A排序 O(A)2因为A是有序的，所以B中的每一个数可以通过2分的方式确定在A中有没有。O(lo">
+<meta property="og:description" content="快速排序的引子A和B两数组，想找在B中存在但是在A中不存的数？ 二分如果数组的长度为N，每一次分一半，一共能分几次？是 log2(N)简称为logN  思路及时间复杂度分析 A和B两数组，想找在B中存在但是在A中不存的数。A的长度为N，B的长度为M  笨办法从B中拿出一个，在A中遍历。这样时间复杂度O(m * n) 好办法1.将A排序 O(A)2因为A是有序的，所以B中的每一个数可以通过2分的方式">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T15:20:24.775Z">
+<meta property="og:updated_time" content="2017-11-29T15:25:31.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript经典排序算法--快速排序的引子">
-<meta name="twitter:description" content="快速排序的引子A和B两数组，想找在B中存在但是在A中不存的数？ 二分如果数组的长度为N，每一次分一半，一共能分几次？是 log2(N)简称为logN  思路及时间复杂度分析 A和B两数组，想找在B中存在但是在A中不存的数。  笨办法从B中拿出一个，在A中遍历。这样时间复杂度O(m * n) 好办法1.将A排序 O(A)2因为A是有序的，所以B中的每一个数可以通过2分的方式确定在A中有没有。O(lo">
+<meta name="twitter:description" content="快速排序的引子A和B两数组，想找在B中存在但是在A中不存的数？ 二分如果数组的长度为N，每一次分一半，一共能分几次？是 log2(N)简称为logN  思路及时间复杂度分析 A和B两数组，想找在B中存在但是在A中不存的数。A的长度为N，B的长度为M  笨办法从B中拿出一个，在A中遍历。这样时间复杂度O(m * n) 好办法1.将A排序 O(A)2因为A是有序的，所以B中的每一个数可以通过2分的方式">
 
 
 
@@ -344,7 +344,7 @@
       
         <h1 id="快速排序的引子"><a href="#快速排序的引子" class="headerlink" title="快速排序的引子"></a>快速排序的引子</h1><p>A和B两数组，想找在B中存在但是在A中不存的数？</p>
 <h3 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h3><p>如果数组的长度为N，每一次分一半，一共能分几次？<br>是 log2(N)简称为logN </p>
-<h3 id="思路及时间复杂度分析"><a href="#思路及时间复杂度分析" class="headerlink" title="思路及时间复杂度分析"></a>思路及时间复杂度分析</h3><p> A和B两数组，想找在B中存在但是在A中不存的数。</p>
+<h3 id="思路及时间复杂度分析"><a href="#思路及时间复杂度分析" class="headerlink" title="思路及时间复杂度分析"></a>思路及时间复杂度分析</h3><p> A和B两数组，想找在B中存在但是在A中不存的数。A的长度为N，B的长度为M</p>
 <ul>
 <li>笨办法<br>从B中拿出一个，在A中遍历。这样时间复杂度O(m * n)</li>
 <li>好办法<br>1.将A排序 O(A)<br>2因为A是有序的，所以B中的每一个数可以通过2分的方式确定在A中有没有。O(logN <em> M)<br>3.复杂度为 O(A) + O(logN </em> M)<br>4.看 加号 两边 谁大， 复杂度就是谁（只要高阶）<br>5.所以看对A排序，怎么做比较好，时间复杂度低</li>
