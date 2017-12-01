@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="0.618:1">
 <meta property="og:description" content="快速排序随机快排的流程在一个数组中，随机确定一个数num。 &amp;lt;  num 的放左边， = num 的放中间，&amp;gt; num的放右边递归的重复上过程，将左边的部分排好。递归的重复上过程，将右边的部分排好。如此这般，重复，直到整个数组排好。 快速排序过程 随机选择一个数 randomNum 将array[array.length - 1] 与 array[randomNum] 交换位置。即，随">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T05:32:04.370Z">
+<meta property="og:updated_time" content="2017-12-01T05:33:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速排序">
 <meta name="twitter:description" content="快速排序随机快排的流程在一个数组中，随机确定一个数num。 &amp;lt;  num 的放左边， = num 的放中间，&amp;gt; num的放右边递归的重复上过程，将左边的部分排好。递归的重复上过程，将右边的部分排好。如此这般，重复，直到整个数组排好。 快速排序过程 随机选择一个数 randomNum 将array[array.length - 1] 与 array[randomNum] 交换位置。即，随">
@@ -350,8 +350,11 @@
 </ul>
 <ol>
 <li>将随机选择的数设为p，p放到数组末尾。</li>
-<li>数组分为3个部分：<p 区域+="" 原数组="" +=""> p 区域</p></li>
-<li>m作为一个指针，扫描原数组</li>
+<li><p>数组分为3个部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p 区域+ 原数组 + &gt; p 区域</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>m作为一个指针，扫描原数组</p>
+</li>
 <li>m = 0，array[0] &lt; p , 此时m继续向下走，m++</li>
 <li>m = 1，array[1] &lt; p，那么array[m] 与 &lt; p 区域的下一个数交换位置。然后m++，即 &lt; p 的区域增加了一个位置。</li>
 <li>即一个数，它 =p , m++；它 &lt;p，就与&lt;p的区域的下一数交换位置，m++。这样 = p的在一个区域, &lt;p的在一个区域。</li>
