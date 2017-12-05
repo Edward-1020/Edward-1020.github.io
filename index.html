@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/04/归并排序的扩展（小盒问题）/" itemprop="url">归并排序的扩展</a></h1>
+                <a class="post-title-link" href="/2017/12/04/归并排序的扩展（小盒问题）/" itemprop="url">JavaScript经典排序算法--归并排序的扩展</a></h1>
         
 
         <div class="post-meta">
@@ -345,23 +345,15 @@
       
         
           
-            <h1 id="归并排序的扩展（小盒问题）"><a href="#归并排序的扩展（小盒问题）" class="headerlink" title="归并排序的扩展（小盒问题）"></a>归并排序的扩展（小盒问题）</h1><h3 id="什么是小盒问题？"><a href="#什么是小盒问题？" class="headerlink" title="什么是小盒问题？"></a>什么是小盒问题？</h3><p>[3, 5, 1, 4, 6]。3的左边比3小的是0；5的左边比5小的是3；1的左边比1小的是0；4的左边比4小的是3；6的左边比6小的是3、5、1、4。那么小盒为0 + 3 + 0 + 3 + （3 + 5 + 1 + 4） = 20。<br>即每个数的左边比它本身小的数的值累加起来。</p>
-<h3 id="笨方法"><a href="#笨方法" class="headerlink" title="笨方法"></a>笨方法</h3><p>看每个数左边有哪些比它小的数，累加起来。是一个时间复杂度为O(n ^ 2) 的问题。</p>
-<h3 id="改写归并排序解小盒问题-–-举个例子："><a href="#改写归并排序解小盒问题-–-举个例子：" class="headerlink" title="改写归并排序解小盒问题 – 举个例子："></a>改写归并排序解小盒问题 – 举个例子：</h3><ul>
-<li>例子1：[3,4,5,2,6,7] =&gt; 3 | 4 | 5 | 2 | 6 | 7<br>3 | 4 merge =&gt; 产生小盒  3<br>34 | 5 merge =&gt; 产生小盒 4 5</li>
-<li>由例子1 引出 例子2：3 4 5 6 | 7 8 9 10 ，两组数 merge</li>
-</ul>
-<ol>
-<li>两组数merge，因为3 比 7 小，所以3 一定比4个数小！<br>因此有一个小盒是  4 * 3</li>
-<li>此时放入help[]数组中一个3</li>
-<li>即整个问题变成了看看在merge的过程中，看左边与右边比较时，右边有多少个比左边的这个数大。就有多少个小盒，就可求值。</li>
-</ol>
-<ul>
-<li>上述做法正确的原因？<br>在每一次merge的时候，两个数字比较之后会放在同一区域内，下一次不会再相遇。</li>
-</ul>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function mergeSort (arr, l, r) &#123;</span><br><span class="line">	if (l === r) &#123;</span><br><span class="line">		return 0</span><br><span class="line">	&#125;</span><br><span class="line">	let mid = l + (r - l) &gt;&gt; 1</span><br><span class="line">	//左边的小盒 + 右边的小盒 + 整个的小盒</span><br><span class="line">	return mergeSort(arr, l, mid) + mergeSort(arr, mid + 1, r) + merge(arr, l, mid, r)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function merge(arr, l, mid ,r) &#123;</span><br><span class="line">	let help = []</span><br><span class="line">	let l = 0</span><br><span class="line">	let p1 = l</span><br><span class="line">	let p2 = m + 1</span><br><span class="line">	let res = 0</span><br><span class="line">	while(p1 &lt;= m &amp;&amp; p2 &lt;= r) &#123;</span><br><span class="line">		//如果右边的比左边的大，那有右边有多少个比左边的大，就有多少个小盒</span><br><span class="line">		res += arr[p1] &lt; arr[p2] ? (r - p2 + 1) * arr[p1] : 0</span><br><span class="line">		help[i++] =  arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++]</span><br><span class="line">	&#125;</span><br><span class="line">	while(p1 &lt;= m) &#123;</span><br><span class="line">		help[i++] =  arr[p1++]</span><br><span class="line">	&#125;</span><br><span class="line">	while(p2 &lt;= r) &#123;</span><br><span class="line">		help[i++] = arr[p2++]</span><br><span class="line">	&#125;</span><br><span class="line">	for (i = 0; i &lt; help.length; i++) &#123;</span><br><span class="line">		arr[l + i] = help[i]	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          归并排序的扩展（小盒问题）什么是小盒问题？[3, 5, 1, 4, 6]。3的左边比3小的是0；5的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/04/归并排序的扩展（小盒问题）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -427,7 +419,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/04/归并排序/" itemprop="url">归并排序</a></h1>
+                <a class="post-title-link" href="/2017/12/04/归并排序/" itemprop="url">JavaScript经典排序算法--归并排序</a></h1>
         
 
         <div class="post-meta">
@@ -501,42 +493,16 @@
       
         
           
-            <h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>时间复杂度O(N * logN)，额外空间复杂度O(N)，实现可以做到稳定性。</p>
-<p>###例子<br>简而言之，是将有序小数组，merge成大的有序数组的过程。<br>举个例子，数组[1,3,2,4]</p>
-<ul>
-<li>第一步分为[1, 3]和[2, 4]</li>
-<li>第二步分为1，3，4，2</li>
-<li>第三步有序合并 [1, 3] 和 [2, 4]</li>
-<li>第四步再次有序合并[1, 2, 3, 4]</li>
-<li>最终数组有序</li>
-</ul>
-<h3 id="归并排序过程及代码"><a href="#归并排序过程及代码" class="headerlink" title="归并排序过程及代码"></a>归并排序过程及代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">function mergeSort (arr, l, r) &#123;</span><br><span class="line">	//递归跳出条件，只剩下一个数，即l = r</span><br><span class="line">	</span><br><span class="line">	if (l === r) &#123;</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//找中间位置做划分点</span><br><span class="line">	let mid = l + ((r - l ) &gt;&gt; 1)</span><br><span class="line">	</span><br><span class="line">	//递归在不满足条件时，会中断跳出</span><br><span class="line">	//对左半边部分做递归，即递归的左子过程</span><br><span class="line">	</span><br><span class="line">	mergeSort(arr, l, mid)</span><br><span class="line">	</span><br><span class="line">	//对右半边部分做递归，即递归的又子过程</span><br><span class="line">	</span><br><span class="line">	mergeSort(arr, mid + 1, r)</span><br><span class="line">	</span><br><span class="line">	//merge过程</span><br><span class="line">	//merge过程同上述例子，左半边和右半边进行有序合并</span><br><span class="line">	merge(arr, l, mid, r)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function merge(arr, l, m, r) &#123;</span><br><span class="line">	//辅助数组</span><br><span class="line">	let help = []</span><br><span class="line">	</span><br><span class="line">	//辅助指针</span><br><span class="line">	let i = 0</span><br><span class="line">	//左半部分指针</span><br><span class="line">	let p1 = l</span><br><span class="line">	//右半部分指针</span><br><span class="line">	let p2 = m + 1</span><br><span class="line"></span><br><span class="line">	//当左半部分数组和右半部分数组都有元素时</span><br><span class="line">	while (p1 &lt;= m &amp;&amp; p2 &lt;= r) &#123;</span><br><span class="line">		//arr[p1]与arr[p2]哪个小，就先填写在辅助数组上,同时指针向后移一位</span><br><span class="line">		help[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++]</span><br><span class="line">		</span><br><span class="line">		//当只有左半部分数组有值时</span><br><span class="line">		while (p1 &lt;= m) &#123;</span><br><span class="line">			help[i++] = arr[p1++]</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//当只有右半部分数组有值时</span><br><span class="line">		while (p2 &lt;= r) &#123;</span><br><span class="line">			help[i++] = arr[p2++]</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		//复制回原数组</span><br><span class="line">		for (i = 0; i &lt; help.length; i++) &#123;</span><br><span class="line">			arr[l + i] = help[i]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>T(n) = 左右两部分递归 2T(n/2) + merge的过程 O(n)，所以时间复杂度为O(n * logn)</p>
-<h3 id="系统递归压栈的过程"><a href="#系统递归压栈的过程" class="headerlink" title="系统递归压栈的过程"></a>系统递归压栈的过程</h3><ol>
-<li>f1( )调用 f2( )</li>
-<li>f2( )调用 f3 ()</li>
-<li>f3( ) 退出 , 接着调用 f4( )</li>
-<li>f4( )退出， 调用 f5 ( )</li>
-<li>f5( ) 退出，，f3( )退出，f2( ) 退出， f1 ( ) 退出</li>
-</ol>
-<ul>
-<li>系统怎么做这个过程呢？</li>
-</ul>
-<ol>
-<li>压栈:指的是系统将函数的所有现场信息，记录在一个栈里.</li>
-<li>系统将f1压栈 =&gt; 将f2压栈 =&gt; 将f3压栈 =&gt; f3弹出 =&gt; f4压栈 =&gt; f4弹出 =&gt; f5压栈=&gt;f5弹出 =&gt; f3弹出=&gt; f2弹出</li>
-</ol>
-<ul>
-<li>因此递归是可以改成非递归的，你不使用系统帮你压栈即可。</li>
-<li>为什么说工程上尽量不使用递归排序呢？<br>1.准备一个函数并运行它是十分消耗资源的<br>2.在递归压栈的过程中，系统会帮你把函数的所有信息都保存。而我们在业务中，不一定需要那么多的信息。<br>3.系统的栈是有限制的。</li>
-</ul>
-<h3 id="额外空间复杂度"><a href="#额外空间复杂度" class="headerlink" title="额外空间复杂度"></a>额外空间复杂度</h3><ul>
-<li>因为在merge的过程中，需要一个额外的数组，所以额外空间复杂度是O(n)</li>
-<li>是否存在额外空间复杂度为O(1)的？<br>网上的为原地归并排序，但时间复杂度从O(N * logN) 变成了 O(N ^ 2)，不对。</li>
-<li>内部缓存法可以正确降低额外空间复杂度。</li>
-</ul>
-
-          
+          归并排序时间复杂度O(N * logN)，额外空间复杂度O(N)，实现可以做到稳定性。
+###例子简
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/04/归并排序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -602,7 +568,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/01/快速排序/" itemprop="url">快速排序</a></h1>
+                <a class="post-title-link" href="/2017/12/01/快速排序/" itemprop="url">JavaScript经典排序算法--快速排序</a></h1>
         
 
         <div class="post-meta">
@@ -676,66 +642,16 @@
       
         
           
-            <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h3 id="随机快排的流程"><a href="#随机快排的流程" class="headerlink" title="随机快排的流程"></a>随机快排的流程</h3><ol>
-<li>在一个数组中，随机确定一个数num。 &lt;  num 的放左边， = num 的放中间，&gt; num的放右边</li>
-<li>递归的重复上过程，将左边的部分排好。</li>
-<li>递归的重复上过程，将右边的部分排好。</li>
-<li>如此这般，重复，直到整个数组排好。</li>
-</ol>
-<h3 id="快速排序过程"><a href="#快速排序过程" class="headerlink" title="快速排序过程"></a>快速排序过程</h3><ul>
-<li>随机选择一个数 randomNum</li>
-<li>将array[array.length - 1] 与 array[randomNum] 交换位置。即，随机选择的数与原数组中最后一个数交换位置</li>
-<li>然后 &lt; array[array.length - 1] 的放右边， &gt; 的放左边， = 的放中间，那么这个过程怎么做？</li>
-</ul>
-<ol>
-<li>将随机选择的数设为p，p放到数组末尾。</li>
-<li><p>数组分为3个部分：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p 区域+ 原数组 + &gt; p 区域</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>m作为一个指针，扫描原数组</p>
-</li>
-<li>m = 0，array[0] &lt; p , 此时m继续向下走，m++</li>
-<li>m = 1，array[1] &lt; p，那么array[m] 与 &lt; p 区域的下一个数交换位置。然后m++，即 &lt; p 的区域增加了一个位置。</li>
-<li>即一个数，它 =p , m++；它 &lt;p，就与&lt;p的区域的下一数交换位置，m++。这样 = p的在一个区域, &lt;p的在一个区域。</li>
-<li>m = 2, array[2] &gt; p, 那么array[m] 与 &gt; p 区域的前一个数交换位置, m 原地不动，不加不减， &gt; p 的区域增加了一个位置。</li>
-<li>继续看此时，array[m] 是 = p的，还是 &lt; p的，还是 &gt; p 的。重复上述过程。</li>
-<li>一旦m与 &gt; p 的区域碰上，整个过程停止。</li>
-<li>该过程也叫荷兰国旗问题， partition的过程</li>
-</ol>
-<ul>
-<li>我们递归调用partition的过程，多个 = p 区域的部分合起来，就是排好序的数组了</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>这里解释我们排序思想的关键部分，详细代码请见我的<a href="https://github.com/Edward-1020/arithmetic/blob/master/SelectionSort.js" target="_blank" rel="noopener">GitHub</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// 这里解释partition部分，同时也是荷兰国旗问题</span><br><span class="line">// 要partition的数组是arr，左边界是l，右边界是r</span><br><span class="line"></span><br><span class="line">function partition (arr, l, r) &#123;</span><br><span class="line">	//小于区域为less，大于区域为more</span><br><span class="line">	</span><br><span class="line">	let less = l - 1</span><br><span class="line">	let more = r</span><br><span class="line">	</span><br><span class="line">	//l作为扫描数组的指针，是不能碰到 大于区域 的边界的。当l = more 的时候整个区域都调完了</span><br><span class="line">	</span><br><span class="line">	while (l &lt; more) &#123;</span><br><span class="line">		//如果arr[l]的值 小于  我们选择的划分值 arr[r] (此时我们选择的值已经放在了数组的最末位了)，less 区域扩大一位，将此时less指向的数值与我们的arr[l]交换。保证less 代表的小于区域是小于我们选择的 划分值 arr[r]的。l要继续向前进一位。</span><br><span class="line">		//只有arr[l]和arr[r]相等时，l和less的才会错开，即less区域的下一位上的数值不管怎样，一定是等于arr[r]的。即交换后的arr[l]知道了自己所在的范围。所以l++，指向下一个数去确定它在哪个区域。</span><br><span class="line">		</span><br><span class="line">		if (arr[l] &lt; arr[r]) &#123;</span><br><span class="line">			swap(arr, ++less, l++)</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//如果arr[l]的值 大于 我们选择的划分值arr[r]，more区域就要扩一位，此时more代表的数值要与我们arr[l]交换。因为我们想要中间的区域是等于 划分值arr[r]的，又因为我们根本不确定此时的arr[l]即之前的减过一位的arr[more]是否等于arr[r]，所以我们的 l 不动。</span><br><span class="line">		//即我们将more的前一位与已知自己所在范围的arr[l]交换过来了，此时的arr[l]是不知道自己所在范围的，所以我们的l不动。</span><br><span class="line">		</span><br><span class="line">		if (arr[l] &gt; arr[r]) &#123;</span><br><span class="line">			swap(arr, --more; l)</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//相等，没什么好说的，l指向下一位</span><br><span class="line">		</span><br><span class="line">		if (arr[l] = arr[r]) &#123;</span><br><span class="line">			l++</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//最后还剩下一个等于划分值arr[r]很早被我们安排在了末尾，我们让它和 大于区 的边界上的第一个数交换, 此时原more位置上的数是arr[r]，原r位置上的数是arr[more]。</span><br><span class="line">		</span><br><span class="line">		swap(arr, more, r)</span><br><span class="line">		</span><br><span class="line">		//这样做到了 小于划分值的在左边，大于划分值的在右边，等于划分值的在中间。</span><br><span class="line">		//返回等于区的左边界和右边界</span><br><span class="line">		</span><br><span class="line">		return [less + 1, more]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ul>
-<li>第1步 选一个随机的划分值。 O(1)</li>
-<li>第2部 分为三个部分 <p +="p">p，在partition的过程，要么l向右走，要么more向左走，l和more碰上就会停止。所以partition的过程是进行长度的次数。O(n)</p></li>
-<li>第三部 左侧和右侧剩下的 &gt;p 和 <p部分去递归。所以这个划分值就有讲究了。如果>p 或者 &lt;p 的部分特别大，那么我们递归的复杂度就很大。</p部分去递归。所以这个划分值就有讲究了。如果></li>
-<li>如果划分值每次都在第一个或者最后一个，那么复杂度就会很差。是O(n^2)</li>
-<li>我们选择划分值选随机值，可以避免上面说的情况。并且我们希望我们的算法不与输入数的规律有关。</li>
-<li>随机选，我们不会轻易给出一个最差情况的例子。我们的时间复杂度是一个概率表达，与数据的规律无关。 </li>
-<li>随机选，我们运气好，划分值选在中间位置。 <p的区域是 2="" n="" 数量级，="">p的区域是N/2的数量级。那么我们时间频度的公式 T(N) = O(1) + O(N) + 2T(N/2)<br>（2T(N/2)是左右区域递归），即T(N) = 2T(N/2) + O(1)</p的区域是></li>
-<li>mater公式<br>  T(n) = aT(N/b) + O(N^d)<br>  aT(N/b)是递归子过程的规模，O(N^d)是递归行为之外的复杂度<br>  如果 log(b，a) = d  ，那么复杂度O(n^d * logN )<br>  如果 log(b，a) &gt; d  ，那么复杂度O(  n^(log(b, a)  )  ),即以b为底<br>  如果 log(b，a) &lt; d  ，那么复杂度O(n^d )</li>
-<li>由于master公式，我们可以得在情况很好的情况是 n*logn，因为随机划分值，所以不会出现最差情况O(n^2)。</li>
-</ul>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><ul>
-<li>快速排序中，额外空间复杂度最低为O(logN)。为什么？<br>1.要记录中间断点的位置，做左侧递归，再做右侧递归。<br>2.为什么要记录中间断点的位置？先做完左侧递归，才去做右侧递归，做完左侧递归，一定要知道中间断点的位置，你才能去进行右侧递归。<br>3.你每一次的递归都需要打断点。第一次打一个断点，第二次打2个断点，第三次打4个断点，这样就形成了一个树。<br>4.因为断点使用完是会释放的，所以这棵树有多高，我们就打几个断点。<br>5.这棵树有多高？数组的长度决定了树的高度，即log(2)N就是树的高度。<br>6.所以记录 logN 个的断点位置 的 这些个变量你是省不下来的。</li>
-</ul>
-<h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><ul>
-<li>快速排序可以做到稳定性，是论文级别的！</li>
-<li>我们在partition的过程中，不能保证相对次序。所以不能保证稳定性。</li>
-<li>稳定做法：找一个辅助数组，对数组遍历3遍，<p，=p，>p 放好。但是这就不符合快排的优点了：常数项少，空间复杂度小。</p，=p，></li>
-</ul>
-<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>要求奇数放在左边，偶数放在右边，要求奇数和偶数在排序的过程中，相对次序保持不变，且不给额外空间，不用额外数组。能做到吗？</p>
-<ul>
-<li>回答：不能<br>1.我们将奇数和偶数作为一个标准，奇数是1，看作大于某一个数 ， &gt;=p；偶数是0，看作小于等于某一个数 &lt;=p。奇数<br>2.如果我们能完成这道题，相当于完成了partition，这是做不到的。如果你做到了，快排就稳定了。</li>
-</ul>
-<h3 id="系统中的排序"><a href="#系统中的排序" class="headerlink" title="系统中的排序"></a>系统中的排序</h3><ul>
-<li>数据量大时，是一个快排。</li>
-<li>当快排的规模慢慢变小时，排序方法自动变为插排了</li>
-<li>原因：数据量小的时候，插排的常数项少，常数操作少，排序快。虽然时间复杂度高，但是O(n^2)，n^2的特性表达的不明显。</li>
-</ul>
-
-          
+          快速排序随机快排的流程
+在一个数组中，随机确定一个数num。 &lt;  num 的放左边， = n
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/01/快速排序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -875,17 +791,16 @@
       
         
           
-            <h1 id="快速排序的引子"><a href="#快速排序的引子" class="headerlink" title="快速排序的引子"></a>快速排序的引子</h1><p>A和B两数组，想找在B中存在但是在A中不存的数？</p>
-<h3 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h3><p>如果数组的长度为N，每一次分一半，一共能分几次？<br>是 log2(N)简称为logN </p>
-<h3 id="思路及时间复杂度分析"><a href="#思路及时间复杂度分析" class="headerlink" title="思路及时间复杂度分析"></a>思路及时间复杂度分析</h3><p> A和B两数组，想找在B中存在但是在A中不存的数。A的长度为N，B的长度为M</p>
-<ul>
-<li>笨办法<br>从B中拿出一个，在A中遍历。这样时间复杂度O(m * n)</li>
-<li>好办法<br>1.将A排序 O(A)<br>2因为A是有序的，所以B中的每一个数可以通过2分的方式确定在A中有没有。O(logN <em> M)<br>3.复杂度为 O(A) + O(logN </em> M)<br>4.看 加号 两边 谁大， 复杂度就是谁（只要高阶）<br>5.所以看对A排序，怎么做比较好，时间复杂度低</li>
-</ul>
-<h3 id="在数组-L-R-中找中位数"><a href="#在数组-L-R-中找中位数" class="headerlink" title="在数组[L, R]中找中位数"></a>在数组[L, R]中找中位数</h3><p>L + (L - R) &gt;&gt; 1  正确<br>(L + R) / 2 是可能溢出的 </p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>这里解释我们算法思想的关键部分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">//	两数组 A 和 B，其中数组A是有序的</span><br><span class="line"></span><br><span class="line">for (let i = 0; i &lt; B.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">// l 是数组A的左边界， r 是数组A的右边界</span><br><span class="line"></span><br><span class="line">	let l = 0</span><br><span class="line">	let r = A.length - 1</span><br><span class="line">	let contains = false</span><br><span class="line">	</span><br><span class="line">//	循环以下过程确定，B[i]是否在A数组中</span><br><span class="line">//	A的中位数是A[mid]</span><br><span class="line">//	遍历B，B[i]比A[mid]大，则在左边部分 r = mid - 1</span><br><span class="line">//	B[i]比A[mid]小，则在右边部分 l = mid + 1</span><br><span class="line">//	b[i] 等于 A[mid]，则正好在中点	</span><br><span class="line"></span><br><span class="line">	while (l &lt;= r) &#123;</span><br><span class="line">		let mid = l + ((r - l) &gt;&gt; 1)</span><br><span class="line">		if (A[mid] === B[i]) &#123;</span><br><span class="line">			contains = true</span><br><span class="line">		&#125;</span><br><span class="line">		if (A[mid] &gt; B[i]) &#123;</span><br><span class="line">			r = mid - 1</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			l = mid + 1</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if (!contains) &#123;</span><br><span class="line">		result.push(B[i])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
+          快速排序的引子A和B两数组，想找在B中存在但是在A中不存的数？
+二分如果数组的长度为N，每一次分一半
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/快速排序的引子/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1025,499 +940,17 @@
       
         
           
-            <h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>时间复杂度O(n^2)，额外空间复杂度O(1)，实现不可以做到稳定性</p>
-<h3 id="选择排序过程"><a href="#选择排序过程" class="headerlink" title="选择排序过程"></a>选择排序过程</h3><ul>
-<li>第一轮排序<br>在 0 到 n - 1 的范围内，找一个最小的放在 0 这个位置。</li>
-<li>第二轮排序<br>在 1 到 n - 1 的范围内，找一个最小的放在 1 这个位置。</li>
-<li>第三轮排序<br>在 2 到 n - 1 的范围内，找一个最小的放在 2 这个位置。</li>
-<li>省略</li>
-<li>第 n - 1 排序<br>最后一个不用动了，数组已经排好了。</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>这里解释我们排序思想的关键部分，详细代码请见我的<a href="https://github.com/Edward-1020/arithmetic/blob/master/SelectionSort.js" target="_blank" rel="noopener">GitHub</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//	因为第 i 轮排序，会确定 第 i 个位置为本轮未排序数组范围内的最小值, 从 0 位置开始第一轮</span><br><span class="line">//	所以 let i = 0</span><br><span class="line">//	因为最后一个数不需要动了，1个数确定是该范围内最小的毫无意义</span><br><span class="line">//	所以 i &lt; arr.length - 1</span><br><span class="line"></span><br><span class="line">for (let i = 0; i&lt; arr.length - 1; i++) &#123;</span><br><span class="line"></span><br><span class="line">//	从该轮未排序的数组范围内，找最小的数，并放到未排序的数组范围内的第一个位置</span><br><span class="line"></span><br><span class="line">	let minIndex = i</span><br><span class="line">	for (let j = i + 1; j &lt; arr.length; j++) &#123;</span><br><span class="line">		minIndex = arr[j] &lt; arr[minIndex] ? j : minIndex</span><br><span class="line">	&#125;</span><br><span class="line">	swap(arr, i, minIndex)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>时间频度公式是一个等差数列，去掉低阶项，却掉常数项，时间复杂度为O(n ^ 2)</p>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>只用了常数级别的辅助项，所以空间复杂度为O(1)</p>
-<h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><p>因为每次选择最小的和未排序的部分的第一个位置交换，所以可能存在相对次序的改变，所以是不稳定的</p>
-<h3 id="思想总结"><a href="#思想总结" class="headerlink" title="思想总结"></a>思想总结</h3><p>每一次都选择最小的放在未排序的第一个位置</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/28/JavaScript经典排序算法-插入排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yyyx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="0.618:1">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/28/JavaScript经典排序算法-插入排序/" itemprop="url">JavaScript经典排序算法--插入排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T23:34:46+08:00">
-                2017-11-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript经典算法/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript经典算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>时间复杂度O(n^2)，额外空间复杂度O(1)，实现可以做到稳定性</p>
-<h3 id="插入排序过程"><a href="#插入排序过程" class="headerlink" title="插入排序过程"></a>插入排序过程</h3><ul>
-<li>第一轮比较<br>位置0上的数前无比较数组，不动。</li>
-<li>第二轮比较<br>位置1上的数与位置0上的数比较，如果array[1] &lt; array[0]，则交换两者的位置</li>
-<li>第三轮比较<br>位置2上的数与位置1上的数比较，如果array[2] &lt; array[1]，则交换两者的位置。此时，位置1上的数与位置0上的数比较，如果array[1] &lt; array[0]。则交换两者的位置。</li>
-<li>如果在比较的过程中发现，后一个数 &gt;= 前一个数，停止本轮比较</li>
-<li>省略过程</li>
-<li>第 n - 1 轮比较<br>所有数都经过上述的插入过程，整个数组就有序了。</li>
-</ul>
-<h3 id="和冒泡排序的区别"><a href="#和冒泡排序的区别" class="headerlink" title="和冒泡排序的区别"></a>和冒泡排序的区别</h3><p>冒泡排序是将数组中的元素向外冒，每一轮都会确定本次比较范围最大的数。而插入排序的每一轮是将数组中的元素向前面有序的数组中插。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>这里解释我们排序思想的关键部分，详细代码请见我的<a href="https://github.com/Edward-1020/arithmetic/blob/master/InsertSort.js" target="_blank" rel="noopener">GitHub</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//	0位置上的数是不需要插入的，我们从1位置开始插。</span><br><span class="line">//	所以 let i = 1</span><br><span class="line">//	因为最后一次的需要向前面有序数组插排的是 n - 1 位置上的数</span><br><span class="line">//	所以 i &lt; arr.length</span><br><span class="line">//	因为每一轮插排，需要往前插的数的位置，都会往后移一位。 </span><br><span class="line">//	所以i++</span><br><span class="line"></span><br><span class="line">for (let i = 1; i &lt; arr.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">//	i是与其前面的有序数组中的元素进行比较的</span><br><span class="line">//	所以 j 从 i - 1开始， j = i - 1</span><br><span class="line">//	比较到 有序数组的 0 位置</span><br><span class="line">//	所以 j &gt; = 0</span><br><span class="line">//	什么时候交换一次位置？</span><br><span class="line">//	当前一个比后一个 &gt; 时，交换一次位置</span><br><span class="line">//	然后再往前推一位(j--),再次比较交换位置，直到前一个 &lt;= 后一个(不满足 arr[j] &gt; arr[j+1])</span><br><span class="line">//	上述是交换位置应该满足的条件 即 arr[j] &gt; arr[j+1]</span><br><span class="line"></span><br><span class="line">  for (let j = i - 1; j &gt;= 0 &amp;&amp; arr[j] &gt; arr[j+1]; j--) &#123;</span><br><span class="line">    swap(arr, j, j+1)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function swap (arr, i, j) &#123;</span><br><span class="line">  [arr[i], arr[j]] = [arr[j], arr[i]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>这里，数组中每个元素都要和前面的有序数组一个一个比较，所以其时间频度是个等差数列，时间复杂度是O(n^2)</p>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>这里我们用有限的空间去做排序，所以是O(1)</p>
-<h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><p>数组中元素再向前比较时，因为 &lt;= 有序数组中的某一个元素时就停止了，所以相同的元素之间的相对顺序不变，是稳定的。</p>
-<h3 id="思想总结"><a href="#思想总结" class="headerlink" title="思想总结"></a>思想总结</h3><p>类似于插扑克，每一个数和它前面的一组有序的数比较，将其正确的插入有序区。最后，整个数组就有序了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/26/JavaScript经典排序算法-冒泡排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yyyx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="0.618:1">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/26/JavaScript经典排序算法-冒泡排序/" itemprop="url">JavaScript经典排序算法--冒泡排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T11:31:23+08:00">
-                2017-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript经典算法/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript经典算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><h3 id="冒泡排序的过程"><a href="#冒泡排序的过程" class="headerlink" title="冒泡排序的过程"></a>冒泡排序的过程</h3><ul>
-<li>第一轮比较：<br>范围是 0 ~ n - 1。<br>过程是：对于给定的一个数组，第一个数和第二个数比较，哪个大就将该数放在后面。紧接着第二个数和第三个数比较，哪个大就将该数放在后面。依次类推，最大的数就会放在数组最后的位置。</li>
-<li>第二轮比较：<br>范围是 0 ~ n - 2<br>过程是：同上，第二大的数就放在了数组倒数第二个位置</li>
-<li>省略</li>
-<li>第 n - 1 轮比较：<br>重复以上的过程，直到最后一次排序时只剩下一个数，我们就可以得到一个有序的数组了。</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>这里解释我们排序思想的关键部分，详细代码请见我的<a href="https://github.com/Edward-1020/arithmetic/blob/master/BubbleSort.js" target="_blank" rel="noopener">GitHub</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//	外循环确定我们要排的位置, let e = arr.length - 1</span><br><span class="line">//	我们排到只剩下0位置的数时，e &gt; 0 ,结束外循环</span><br><span class="line">//	每次排的数组范围都减少1，因为每次排完最后一个位置一定是本次所排序范围的最大值，e--</span><br><span class="line"></span><br><span class="line">for (let e = arr.length - 1; e &gt; 0; e --) &#123;</span><br><span class="line"></span><br><span class="line">//	从本次要排的范围的第一个位置开始排 let i = 0</span><br><span class="line">//	确定排序范围 i &lt; e</span><br><span class="line">//	排序的基本工程，依次向后比 i ++ </span><br><span class="line"></span><br><span class="line">	for (let i = 0; i &lt; e; i++) &#123;</span><br><span class="line">		if (arr[i] &gt; arr[i+1]) &#123;</span><br><span class="line">			swap(arr, i, i+1)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//	交换</span><br><span class="line">function swap (arr, i, j) &#123;</span><br><span class="line">	[arr[i], arr[j]] = [arr[j], arr[i]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/25/函数式编程是奇淫巧技吗？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yyyx">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="0.618:1">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/25/函数式编程是奇淫巧技吗？/" itemprop="url">函数式编程是奇淫巧技吗？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-25T21:13:27+08:00">
-                2017-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript之美/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript之美</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="函数式编程是奇淫巧技吗？"><a href="#函数式编程是奇淫巧技吗？" class="headerlink" title="函数式编程是奇淫巧技吗？"></a>函数式编程是奇淫巧技吗？</h1><p>JavaScript本身的语法特性以及各种各样函数式库的流行，让函数式编程这个话题越来越热。本文秉承存在即合理的概念，探究函数式编程给我们的代码带来的优点。</p>
-<h3 id="一等公民"><a href="#一等公民" class="headerlink" title="一等公民"></a>一等公民</h3><p>在Javascript的世界里，函数是<strong>一等公民</strong>。那么，一等公民是什么意思呢？一言蔽之，函数在JavaScript中并不是一个特殊的存在，它可以作为参数传递，也可以作为返回值，它的地位是和一个普通对象一样的。<br>下面做个对比来提现一等公民的优势：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//	滥用一等公民特性的做法</span><br><span class="line">//	不必要的对函数做封装</span><br><span class="line">const getServerData = (url) =&gt; &#123;</span><br><span class="line">	return ajaxCall(url)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果哪天我们的回调要增加错误处理，我们便需要修改两个部分：ajaxCall和getServerData。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//	同时我们的ajaxCall函数本身也有添加err</span><br><span class="line">const getServerData = (url) =&gt; &#123;</span><br><span class="line">	return ajaxCall(url, err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>正确的做法应该如此直接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getServerData(url, ajaxCall)</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>当我们使用高阶函数特性时，一定要小心命名，小心定义参数，这可以帮助我们少做修改，毕竟修改导致变化，而变化会导致bug。而命名的科学可以帮我们少造轮子。</p>
-<h3 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h3><p>什么是纯函数，纯函数的意义在哪？在数学上，我们是这么定义一个函数的：对于每一个输入只返回一个特定的输出值。在我们编写程序时，当我们封装的函数内部状态不纯时，我们的输出就会出乎我们的意料。出乎意料就意味着bug，且是难以排查的bug。</p>
-<p>我们举一些可能使函数不纯的操作：</p>
-<ul>
-<li>http请求</li>
-<li>可变的数据</li>
-<li>用户输入</li>
-<li>Dom查询</li>
-</ul>
-<p>例如：当你的函数改变了某个data，而结果不是你想要的。这时你发现另外的一个函数监听这个data做了另一份操作。对，我就是在说Vue的watch，vue的灵活性真是让我又爱又恨。</p>
-<h3 id="一等公民和纯函数的意义"><a href="#一等公民和纯函数的意义" class="headerlink" title="一等公民和纯函数的意义"></a>一等公民和纯函数的意义</h3><p>Javascript中函数的一等公民的特性给与了我们一种思想：将业务分解为一个又一个耦合度小的颗粒，行为，让我们以函数作为载体进行编程。<br>这使得：</p>
-<ul>
-<li>函数命名清晰使得语义化</li>
-<li>函数颗粒度小使得可复用性高</li>
-<li>纯函数行为单一，副作用少</li>
-<li>可维护性更好</li>
-</ul>
-<p>为了引出<strong>柯里化</strong>和<strong>组合</strong>下面让我们来看一个例子：需求是给定一个数，先加2再扩2倍，等到一个新数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//	很简单哦!</span><br><span class="line">let num = arry.map(x =&gt; x + 2)</span><br><span class="line">let newArray = arrayAdd2.map(x =&gt; x * 2)</span><br></pre></td></tr></table></figure></p>
-<p>这个时候，需求变了：先扩2倍再扩加2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let arrayDoubles = array.map(x =&gt; x * 2)</span><br><span class="line">let newArray = arrayDoubles.map(x =&gt; x + 2)</span><br></pre></td></tr></table></figure></p>
-<p>累吗？当然我们的需求不会这么简单</p>
-<h3 id="柯里化（curry）和组合（compose）"><a href="#柯里化（curry）和组合（compose）" class="headerlink" title="柯里化（curry）和组合（compose）"></a>柯里化（curry）和组合（compose）</h3><p>让我们创造一个curry来享受一下函数式编程给我们带来的愉悦享受：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const add = (x) =&gt; (y) =&gt; x + y</span><br><span class="line">const add2 = add(2)</span><br><span class="line">add2(3) //5</span><br><span class="line">const add3 = add(3)</span><br><span class="line">add3(3) //6</span><br></pre></td></tr></table></figure></p>
-<p>从上面这个简单的例子我们可以看出，<strong>柯里化</strong>的概念：只传给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。</p>
-<p>下面让我们来看看组合（compose）,也是一段贴心小代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const compose = (f, g) =&gt; x =&gt; f(g(x))</span><br><span class="line">const f1 = x =&gt; x * 2</span><br><span class="line">const f2 = x =&gt; x + 2</span><br><span class="line">const nice = compose(f1, f2)</span><br><span class="line">nice(3) // 10</span><br></pre></td></tr></table></figure></p>
-<p>这个简单例子向我们阐述了<strong>组合</strong>的概念：f和g是两个功能单一的函数，它们彼此结合产生了一个解决你需求的新函数，而这个x便是数据流通的管道。<br>想象一下没有组合的世界，好像少那么一点美感（可读性）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const f1 = x =&gt; x * 2</span><br><span class="line">const f2 = x =&gt; x + 2</span><br><span class="line">const nice = (x) =&gt; &#123;</span><br><span class="line">	return f1(f2(x))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在这里我们强调一点：我们的数据流动方向是<strong>从右至左</strong>。记得webpack的loader的处理方向么？从右至左。没错，compose的概念。</p>
-<h3 id="使用柯里化和组合优化我们的代码"><a href="#使用柯里化和组合优化我们的代码" class="headerlink" title="使用柯里化和组合优化我们的代码"></a>使用柯里化和组合优化我们的代码</h3><p>还记得我们的需求么？<br>给定一个数，先加2再扩2倍，等到一个新数组。<br>变为了：先扩2倍再加2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const f1 = x =&gt; x * 2</span><br><span class="line">const f2 = x =&gt; x + 2</span><br><span class="line">const perfectFn = (...fns) =&gt; x =&gt; fns.reduceRight((val, fn) =&gt; fn(val))</span><br><span class="line">//	先加2再扩2倍</span><br><span class="line">const resultFn = perfectFn(f1, f2)</span><br><span class="line">resultFn(3) //	10</span><br><span class="line">//	先扩2倍再加2</span><br><span class="line">const resultFn1 = perfectFn(f2, f1)</span><br><span class="line">resultFn1(3)	//	8</span><br></pre></td></tr></table></figure></p>
-<p>其实只改动传入函数的位置而已。这里牵扯到了闭包保存了fns所在的环境，这里不再做解释了。有兴趣的同学可以查一下资料。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>可以看出来函数式编程并不是一个宗教，而是我们应对工程的一种手段。它和面向对象等编程思想并不冲突，都是为了我们能够更好为业务服务。</p>
-
-          
+          选择排序时间复杂度O(n^2)，额外空间复杂度O(1)，实现不可以做到稳定性
+选择排序过程
+第一轮排
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/JavaScript经典排序算法-选择排序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1554,6 +987,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
