@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="堆 时间复杂度是O(N * logN)，额外空间复杂度O(1)，实现不能做到稳定性 关键步骤：heapInsert，heapify，堆的扩大和缩小操作 注意：1. 堆排序中，建立堆的操作O(N)。2. 堆排序的核心数据结构：堆，也可以说是优先级队列。  描述 堆是一棵完全二叉树结构。什么是完全二叉树？即结构是永远是在成">
+<meta name="keywords" content="web前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript经典排序算法--堆排序">
+<meta property="og:url" content="http://yoursite.com/2017/12/07/堆排序/index.html">
+<meta property="og:site_name" content="0.618:1">
+<meta property="og:description" content="堆 时间复杂度是O(N * logN)，额外空间复杂度O(1)，实现不能做到稳定性 关键步骤：heapInsert，heapify，堆的扩大和缩小操作 注意：1. 堆排序中，建立堆的操作O(N)。2. 堆排序的核心数据结构：堆，也可以说是优先级队列。  描述 堆是一棵完全二叉树结构。什么是完全二叉树？即结构是永远是在成为满二叉树的路上或已经成为完全二叉树了。 数组下标与完全二叉树是有逻辑对应的：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-07T05:39:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript经典排序算法--堆排序">
+<meta name="twitter:description" content="堆 时间复杂度是O(N * logN)，额外空间复杂度O(1)，实现不能做到稳定性 关键步骤：heapInsert，heapify，堆的扩大和缩小操作 注意：1. 堆排序中，建立堆的操作O(N)。2. 堆排序的核心数据结构：堆，也可以说是优先级队列。  描述 堆是一棵完全二叉树结构。什么是完全二叉树？即结构是永远是在成为满二叉树的路上或已经成为完全二叉树了。 数组下标与完全二叉树是有逻辑对应的：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/07/堆排序/"/>
+
+
+
+
+
+  <title>JavaScript经典排序算法--堆排序 | 0.618:1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0.618:1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/07/堆排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yyyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0.618:1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript经典排序算法--堆排序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T13:29:25+08:00">
+                2017-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript经典算法/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript经典算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><ul>
+<li>时间复杂度是O(N * logN)，额外空间复杂度O(1)，实现不能做到稳定性</li>
+<li>关键步骤：heapInsert，heapify，堆的扩大和缩小操作</li>
+<li>注意：1. 堆排序中，建立堆的操作O(N)。2. 堆排序的核心数据结构：堆，也可以说是优先级队列。</li>
+</ul>
+<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><ul>
+<li>堆是一棵完全二叉树结构。什么是完全二叉树？即结构是永远是在成为满二叉树的路上或已经成为完全二叉树了。</li>
+<li>数组下标与完全二叉树是有逻辑对应的：</li>
+</ul>
+<ol>
+<li>在数组上，i 的左孩子的下标：2 * i + 1</li>
+<li>i 的右孩子的下标是：2*i + 2</li>
+<li>i 的父节点下标是：( i - 1) / 2</li>
+<li>即在数组上我们可以找到一个节点的父节点 以及 左右孩子。</li>
+</ol>
+<h3 id="大根堆"><a href="#大根堆" class="headerlink" title="大根堆"></a>大根堆</h3><ul>
+<li>概念：1. 大根堆一定是完全二叉树结构。2. 在大根堆中，任何一个节点，都是它下面的整棵树中（包括它自己的那颗树，即以它为头的树），最大的节点。</li>
+<li>堆排首先要将一个数组变成大根堆<br>做法是：1. 对每一个数，看它是否比它的父节点大。大就与父节点交换位置。2. 交换位置后，再看它是否比它的父节点大，大就再交换位置。3. 直到它不再比它的父节点大。</li>
+<li>这样一个大的数再加入二叉树时，会把比它小的父干掉。如此调出来的，一定是一个大根堆。</li>
+</ul>
+<h3 id="关键代码-–-heapInsert（调大根堆的过程）"><a href="#关键代码-–-heapInsert（调大根堆的过程）" class="headerlink" title="关键代码 – heapInsert（调大根堆的过程）"></a>关键代码 – heapInsert（调大根堆的过程）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//	数组一上来，我们考察它的每一个位置，将这个数组调成一个大根堆，这个方式简称为heapInsert</span><br><span class="line">//	数组上的一个元素，往上看，它比它的父大，就换。换完再往上看，重复上过程。</span><br><span class="line">// 如此heapInsert，调成大根堆</span><br><span class="line"></span><br><span class="line">function heapInsert(arr, index) &#123;</span><br><span class="line">	// 这里 “arr[index] &gt; arr[(index - 1) / 2”考虑到了两个关系</span><br><span class="line">	// 1.我是否比我的父要大</span><br><span class="line">	// 2.我到了二叉树的定点，即数组的 0 位置。 （负数 / 2 = 0），我也不满足循环，停止。</span><br><span class="line">	while ( arr[index] &gt; arr[(index - 1) / 2] ) &#123;</span><br><span class="line">		swap(arr, index, (index - 1) / 2)</span><br><span class="line">		index = (index - 1) / 2</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="关键代码-–-heapInsert-的时间复杂度"><a href="#关键代码-–-heapInsert-的时间复杂度" class="headerlink" title="关键代码 – heapInsert 的时间复杂度"></a>关键代码 – heapInsert 的时间复杂度</h3><ul>
+<li>完全二叉树如果有 i 个节点，它的高度是 log(2， i)。例如 7 个节点， 3层。</li>
+<li>1.当1个节点时，heapInsert的代价是log1。<br>2.当2个节点时，heapInsert的代价是log1 + log2<br>3.当n个节点时，heapInsert的代价是 log1 + log2 + log3 + … + logN ，收敛在O(N)<br>4.即建大根堆的过程时间复杂度是 O(N)</li>
+</ul>
+<h3 id="在已知大根堆的基础上排序"><a href="#在已知大根堆的基础上排序" class="headerlink" title="在已知大根堆的基础上排序"></a>在已知大根堆的基础上排序</h3><ul>
+<li>1.在大根堆上，已知堆顶元素是最大值。将这个值放在最后的位置上。2.将最后位置上的值放在头部。3.此时，最后一个位置上的数就排好了。4.拿掉此时，最后一个位置上的数。</li>
+<li>如何 拿掉此时，最后一个位置上的数？<br>用size表示堆的边界，左孩子或者右孩子大于size，即它的左孩子和右孩子不在堆上。因为 我们将 size - 1 ，表示拿掉了此时，最后一个位置上的数。但是，此时 size - 1 大小的堆，不能保证它是大根堆了！</li>
+<li>因为我们上述1，2，3过程破坏了大根堆。所以我们的堆顶要下沉！它与它的左孩子和右孩子比较，它与最大的孩子比较，小于最大的孩子，就下沉。然后，它与此时它的左孩子和右孩子比较，重复上过程。成为大根堆。</li>
+<li>再次进行1，2，3过程。每一轮成为大根堆后，都将堆顶和堆的最后一个元素交换位置。然后将堆的大小减少 1。调整头部，看它沉在哪。</li>
+<li>反复过程，直到整个堆的size 减完，整个数组有序了。</li>
+</ul>
+<h3 id="在大根堆的基础上排序–heapify-代码"><a href="#在大根堆的基础上排序–heapify-代码" class="headerlink" title="在大根堆的基础上排序–heapify 代码"></a>在大根堆的基础上排序–heapify 代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//	从index位置开始往下沉，堆的大小是size</span><br><span class="line">// heapify可以调节任何位置，从任何位置往下沉</span><br><span class="line"></span><br><span class="line">function heapify (arr, index, size) &#123;</span><br><span class="line">	// 先求左孩子下标</span><br><span class="line">	let left = index * 2 + 1</span><br><span class="line">	</span><br><span class="line">	// 循环条件：左孩子的下标是否越界(左孩子越界则右孩子一定越界)</span><br><span class="line">	while (left &lt; size) &#123;</span><br><span class="line">		//  如果我的左右两个孩子都有，那么我选择两个孩子中，大的一个作为我lagest变量的值。</span><br><span class="line">		let lagest = left + 1 &lt; size &amp;&amp; arr[left + 1] &gt; arr[left] ? left + 1 : left</span><br><span class="line">		//  较大的index 孩子的值，是否比我的值要大，大则lagest的值是较大孩子的Index；否则，lagest的值是我自己的Index</span><br><span class="line">		lagest = arr[lagest] &gt; arr[index] ? lagest : index</span><br><span class="line">		//  如果这个最大值的 lagest 就是我，又因为我在大根堆中，所以我比以我为头的树中的所有的值都大，所以过程停止，不动。</span><br><span class="line">		if (largest === index) &#123;</span><br><span class="line">			break</span><br><span class="line">		&#125;</span><br><span class="line">		// 下沉，与较大的那个孩子交换</span><br><span class="line">		swap(arr, largest, index)</span><br><span class="line">		// 我来到了孩子的位置</span><br><span class="line">		index = largest</span><br><span class="line">		// 此时，我的左孩子又向下的一层</span><br><span class="line">		left = index * 2 + 1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>往返以上代码描述的过程！</p>
+<h3 id="总的代码流程"><a href="#总的代码流程" class="headerlink" title="总的代码流程"></a>总的代码流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// for循环将每个节点去建大根堆</span><br><span class="line">for (let i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">	heapInsert(arr, i)</span><br><span class="line">&#125;</span><br><span class="line">// 将0位置（堆顶位置）换到我的最后一个位置</span><br><span class="line">let size = arr.length</span><br><span class="line">swap(arr, 0, --size)</span><br><span class="line">// 此时不是大根堆了，我们就去heapify</span><br><span class="line">while(size &gt; 0) &#123;</span><br><span class="line">	heapify(arr, 0, size)</span><br><span class="line">	// heapify后又是大根堆了，我们再将堆顶和末位交换位置</span><br><span class="line">	swap(arr, o, --size)</span><br><span class="line">&#125;</span><br><span class="line">// 一直往复直到整个堆减完（size = 0），堆排序结束</span><br></pre></td></tr></table></figure>
+<h3 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h3><ul>
+<li>堆排序引入了堆这种结构</li>
+<li>堆排序的两个过程：建立堆和任何一个位置下沉调整的过程</li>
+<li>size–  ，保证不越界</li>
+</ul>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>因为heapInsert的时间复杂度是O(N)；而heapify是一个下沉的过程，其下沉的高度最多是logN级别的；所以说时间复杂度是O(N * logN)</p>
+<h3 id="额外空间复杂度–O-1"><a href="#额外空间复杂度–O-1" class="headerlink" title="额外空间复杂度–O(1)"></a>额外空间复杂度–O(1)</h3><ul>
+<li>一个数 i 是用公式找到左孩子和右孩子</li>
+<li>快排中，断点的位置每一次都是用一个变量记录的，这样我们才能知道左右递归的范围。这样也导致，快排的额外空间省不掉的。</li>
+<li>可以看出来，堆排所有需要排列的位置都是公式告诉我们的。</li>
+<li>但是，堆排的常数项大，我们的指标是O(N * logN)，但是实际运行中，快排的常数项十分小。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web前端/" rel="tag"># web前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/归并排序的扩展（小盒问题）/" rel="next" title="JavaScript经典排序算法--归并排序的扩展">
+                <i class="fa fa-chevron-left"></i> JavaScript经典排序算法--归并排序的扩展
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yyyx</p>
+              <p class="site-description motion-element" itemprop="description">大家好，我是杨小西，这里是我分享和写字的地方。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆"><span class="nav-number">1.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#描述"><span class="nav-number">2.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大根堆"><span class="nav-number">3.</span> <span class="nav-text">大根堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码-–-heapInsert（调大根堆的过程）"><span class="nav-number">4.</span> <span class="nav-text">关键代码 – heapInsert（调大根堆的过程）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码-–-heapInsert-的时间复杂度"><span class="nav-number">5.</span> <span class="nav-text">关键代码 – heapInsert 的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在已知大根堆的基础上排序"><span class="nav-number">6.</span> <span class="nav-text">在已知大根堆的基础上排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在大根堆的基础上排序–heapify-代码"><span class="nav-number">7.</span> <span class="nav-text">在大根堆的基础上排序–heapify 代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总的代码流程"><span class="nav-number">8.</span> <span class="nav-text">总的代码流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键点"><span class="nav-number">9.</span> <span class="nav-text">关键点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度"><span class="nav-number">10.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外空间复杂度–O-1"><span class="nav-number">11.</span> <span class="nav-text">额外空间复杂度–O(1)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yyyx</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  
+    <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+</body>
+</html>
