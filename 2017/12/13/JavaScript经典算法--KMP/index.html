@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="KMP 复杂度是O(N)   title: JavaScript经典算法–KMPdate: 2017-12-13 14:16:10categories:   JavaScript经典算法tags: web前端   KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位">
+<meta name="description" content="KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str1, str2 ) = 3。如果str1 不包含 str2，那么 f1(str1, str2) = -1  笨办法 str1 长度为N">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript经典算法--KMP">
+<meta property="og:title" content="JavaScript经典排序算法--KMP">
 <meta property="og:url" content="http://yoursite.com/2017/12/13/JavaScript经典算法--KMP/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="KMP 复杂度是O(N)   title: JavaScript经典算法–KMPdate: 2017-12-13 14:16:10categories:   JavaScript经典算法tags: web前端   KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str">
+<meta property="og:description" content="KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str1, str2 ) = 3。如果str1 不包含 str2，那么 f1(str1, str2) = -1  笨办法 str1 长度为N，str2 长度为M 从 str1 的0位置开头，配str2 从 str2 的1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-14T00:32:07.000Z">
+<meta property="og:updated_time" content="2017-12-14T03:12:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript经典算法--KMP">
-<meta name="twitter:description" content="KMP 复杂度是O(N)   title: JavaScript经典算法–KMPdate: 2017-12-13 14:16:10categories:   JavaScript经典算法tags: web前端   KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str">
+<meta name="twitter:title" content="JavaScript经典排序算法--KMP">
+<meta name="twitter:description" content="KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str1, str2 ) = 3。如果str1 不包含 str2，那么 f1(str1, str2) = -1  笨办法 str1 长度为N，str2 长度为M 从 str1 的0位置开头，配str2 从 str2 的1">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>JavaScript经典算法--KMP | 0.618:1</title>
+  <title>JavaScript经典排序算法--KMP | 0.618:1</title>
   
 
 
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript经典算法--KMP</h1>
+          <h1 class="post-title" itemprop="name headline">JavaScript经典排序算法--KMP</h1>
         
 
         <div class="post-meta">
@@ -332,17 +332,7 @@
       
 
       
-        <h1 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h1><ul>
-<li>复杂度是O(N)</li>
-</ul>
-<hr>
-<p>title: JavaScript经典算法–KMP<br>date: 2017-12-13 14:16:10<br>categories: </p>
-<ul>
-<li>JavaScript经典算法<br>tags:</li>
-<li>web前端</li>
-</ul>
-<hr>
-<h1 id="KMP-1"><a href="#KMP-1" class="headerlink" title="KMP"></a>KMP</h1><ul>
+        <h3 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h3><ul>
 <li>复杂度是O(N)</li>
 <li>有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。<br>例如：str1是abc123def，str2是123，如果包含 f1(str1, str2 ) = 3。如果str1 不包含 str2，那么 f1(str1, str2) = -1</li>
 </ul>
@@ -654,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KMP"><span class="nav-number">1.</span> <span class="nav-text">KMP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KMP-1"><span class="nav-number">2.</span> <span class="nav-text">KMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#笨办法"><span class="nav-number">2.0.1.</span> <span class="nav-text">笨办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前缀与后缀"><span class="nav-number">2.0.2.</span> <span class="nav-text">前缀与后缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“最大前缀与最大后缀匹配”的概念"><span class="nav-number">2.0.3.</span> <span class="nav-text">“最大前缀与最大后缀匹配”的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组匹配方法"><span class="nav-number">2.0.4.</span> <span class="nav-text">next数组匹配方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的实质"><span class="nav-number">2.0.5.</span> <span class="nav-text">next数组加速配型的实质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的原因"><span class="nav-number">2.0.6.</span> <span class="nav-text">next数组加速配型的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的时间复杂度"><span class="nav-number">2.0.7.</span> <span class="nav-text">next数组加速配型的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型代码过程"><span class="nav-number">2.0.8.</span> <span class="nav-text">next数组加速配型代码过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求解代码过程"><span class="nav-number">2.0.9.</span> <span class="nav-text">next数组求解代码过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求解过程的时间复杂度"><span class="nav-number">2.0.10.</span> <span class="nav-text">next数组求解过程的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度"><span class="nav-number">2.0.11.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#笨办法-1"><span class="nav-number">2.0.12.</span> <span class="nav-text">笨办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前缀与后缀-1"><span class="nav-number">2.0.13.</span> <span class="nav-text">前缀与后缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“最大前缀与最大后缀匹配”的概念-1"><span class="nav-number">2.0.14.</span> <span class="nav-text">“最大前缀与最大后缀匹配”的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组匹配方法-1"><span class="nav-number">2.0.15.</span> <span class="nav-text">next数组匹配方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的实质-1"><span class="nav-number">2.0.16.</span> <span class="nav-text">next数组加速配型的实质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的原因-1"><span class="nav-number">2.0.17.</span> <span class="nav-text">next数组加速配型的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的时间复杂度-1"><span class="nav-number">2.0.18.</span> <span class="nav-text">next数组加速配型的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型代码过程-1"><span class="nav-number">2.0.19.</span> <span class="nav-text">next数组加速配型代码过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求解代码过程-1"><span class="nav-number">2.0.20.</span> <span class="nav-text">next数组求解代码过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求解过程的时间复杂度-1"><span class="nav-number">2.0.21.</span> <span class="nav-text">next数组求解过程的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度-1"><span class="nav-number">2.0.22.</span> <span class="nav-text">时间复杂度</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#KMP"><span class="nav-number">1.</span> <span class="nav-text">KMP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#笨办法"><span class="nav-number">2.</span> <span class="nav-text">笨办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前缀与后缀"><span class="nav-number">3.</span> <span class="nav-text">前缀与后缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“最大前缀与最大后缀匹配”的概念"><span class="nav-number">4.</span> <span class="nav-text">“最大前缀与最大后缀匹配”的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组匹配方法"><span class="nav-number">5.</span> <span class="nav-text">next数组匹配方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的实质"><span class="nav-number">6.</span> <span class="nav-text">next数组加速配型的实质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的原因"><span class="nav-number">7.</span> <span class="nav-text">next数组加速配型的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的时间复杂度"><span class="nav-number">8.</span> <span class="nav-text">next数组加速配型的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型代码过程"><span class="nav-number">9.</span> <span class="nav-text">next数组加速配型代码过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求解代码过程"><span class="nav-number">10.</span> <span class="nav-text">next数组求解代码过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求解过程的时间复杂度"><span class="nav-number">11.</span> <span class="nav-text">next数组求解过程的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度"><span class="nav-number">12.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#笨办法-1"><span class="nav-number">13.</span> <span class="nav-text">笨办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前缀与后缀-1"><span class="nav-number">14.</span> <span class="nav-text">前缀与后缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“最大前缀与最大后缀匹配”的概念-1"><span class="nav-number">15.</span> <span class="nav-text">“最大前缀与最大后缀匹配”的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组匹配方法-1"><span class="nav-number">16.</span> <span class="nav-text">next数组匹配方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的实质-1"><span class="nav-number">17.</span> <span class="nav-text">next数组加速配型的实质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的原因-1"><span class="nav-number">18.</span> <span class="nav-text">next数组加速配型的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型的时间复杂度-1"><span class="nav-number">19.</span> <span class="nav-text">next数组加速配型的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组加速配型代码过程-1"><span class="nav-number">20.</span> <span class="nav-text">next数组加速配型代码过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求解代码过程-1"><span class="nav-number">21.</span> <span class="nav-text">next数组求解代码过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求解过程的时间复杂度-1"><span class="nav-number">22.</span> <span class="nav-text">next数组求解过程的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度-1"><span class="nav-number">23.</span> <span class="nav-text">时间复杂度</span></a></li></ol></div>
             
 
           </div>
