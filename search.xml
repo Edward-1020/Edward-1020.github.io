@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[JavaScript经典算法--KMP算法应用（一）]]></title>
     <url>%2F2017%2F12%2F19%2FJavaScript%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95--KMP%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[KMP算法应用（一）有一个字符串，经过处理，包含两个自己，且开始的位置不一样。怎么添加字符最短？例如：原字符串是aaa，处理过后是aaaa，包含两个aaa。 实质元字符串处理完成后，最大前缀和最大后缀是贴在一起的，例如aaaaa的最大前缀是aaaa不包含最后一个a，最大后缀是aaaa不包含首位置的a。即：这个题目就变成了，原字符串的最大前缀和最大后缀重合多少，不重合的部分添在原字符串的后面即可。例如：abcabc#，#位置的最大前缀和最大后缀的部分匹配值是3。只需要在原字符串后添加2位置后的字符串即可。即在abcabc后再添加一个abc，]]></content>
+    <content type="text"><![CDATA[KMP算法应用（一）有一个字符串，经过处理，包含两个自己，且开始的位置不一样。怎么添加字符最短？例如：原字符串是aaa，处理过后是aaaa，包含两个aaa。 实质元字符串处理完成后，最大前缀和最大后缀是贴在一起的，例如aaaaa的最大前缀是aaaa不包含最后一个a，最大后缀是aaaa不包含首位置的a。即：这个题目就变成了，原字符串的最大前缀和最大后缀重合多少，不重合的部分添在原字符串的后面即可。例如：abcabc-，-位置的最大前缀和最大后缀的部分匹配值是3。只需要在原字符串后添加2位置后的字符串即可。即在abcabc后再添加一个abc，]]></content>
       <categories>
         <category>JavaScript经典算法</category>
       </categories>
