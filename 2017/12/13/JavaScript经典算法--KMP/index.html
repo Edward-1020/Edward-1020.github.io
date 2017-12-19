@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="0.618:1">
 <meta property="og:description" content="KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str1, str2 ) = 3。如果str1 不包含 str2，那么 f1(str1, str2) = -1  笨办法 str1 长度为N，str2 长度为M 从 str1 的0位置开头，配str2 从 str2 的1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-18T04:28:29.265Z">
+<meta property="og:updated_time" content="2017-12-18T05:01:07.377Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript经典排序算法--KMP">
 <meta name="twitter:description" content="KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str1, str2 ) = 3。如果str1 不包含 str2，那么 f1(str1, str2) = -1  笨办法 str1 长度为N，str2 长度为M 从 str1 的0位置开头，配str2 从 str2 的1">
@@ -382,7 +382,7 @@
 <li>如果不是，则不相等。设 b 的indexPreB（最大前缀位置） + 1位置是 c 。</li>
 <li>求 c 的next数组值，即想要知道他的最大前缀和最大后缀匹配值(长度为k的相同前缀与后缀)。看 c 的最大前缀部分匹配值的位置的下一个位置与 c 本身是否相等。相等，则就求出了 a 的next数组值。</li>
 <li>不相等，重复上过程。</li>
-<li>跳到 - 1了，那么next数组的值便是0了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function getNextArray (str2) &#123;</span><br><span class="line">	if (str2.length === 1) &#123;</span><br><span class="line">		return [-1]</span><br><span class="line">	&#125;</span><br><span class="line">	let next = []</span><br><span class="line">	next[0] = -1</span><br><span class="line">	next[1] = 0</span><br><span class="line">	let i = 2</span><br><span class="line">	// cn是上述过程中用于比较的值的指针，指针指向最大前缀位置的下一个位置。</span><br><span class="line">	// 第一次比较时，cn表示next数组中的值是0，即1位置不存在长度为k的前后缀。</span><br><span class="line">	let cn = 0</span><br><span class="line">	while (i &lt; next.length) &#123;</span><br><span class="line">	</span><br><span class="line">		// 如果我 i - 1 位置的字符，与你跳到的位置相等，那么next数组的值便是 i - 1 位置next数组的值 + 1。（）</span><br><span class="line">		</span><br><span class="line">		if (str2[i - 1] === str2[cn]) &#123;</span><br><span class="line">			next[i++] = ++cn</span><br><span class="line">		&#125;else if(cn &gt; 0) &#123;</span><br><span class="line">			//没配上，cn向前跳</span><br><span class="line">			cn = next[cn]</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			//cn跳到0位置了，还没配出最大前缀和最大后缀</span><br><span class="line">			next[i++] = 0</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return next</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>跳到 - 1了，那么next数组的值便是0了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function getNextArray (str2) &#123;</span><br><span class="line">	if (str2.length === 1) &#123;</span><br><span class="line">		return [-1]</span><br><span class="line">	&#125;</span><br><span class="line">	let next = []</span><br><span class="line">	next[0] = -1</span><br><span class="line">	next[1] = 0</span><br><span class="line">	let i = 2</span><br><span class="line">	// cn是上述过程中用于比较的值的指针，指针指向最大前缀位置的下一个位置。</span><br><span class="line">	// 第一次比较时，cn表示next数组中的值是0，即1位置不存在长度为k的前后缀。</span><br><span class="line">	let cn = 0</span><br><span class="line">	while (i &lt; str2.length) &#123;</span><br><span class="line">	</span><br><span class="line">		// 如果我 i - 1 位置的字符，与你跳到的位置相等，那么next数组的值便是 i - 1 位置next数组的值 + 1。（）</span><br><span class="line">		</span><br><span class="line">		if (str2[i - 1] === str2[cn]) &#123;</span><br><span class="line">			next[i++] = ++cn</span><br><span class="line">		&#125;else if(cn &gt; 0) &#123;</span><br><span class="line">			//没配上，cn向前跳	</span><br><span class="line">			cn = next[cn]</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			//cn跳到0位置了，还没配出最大前缀和最大后缀</span><br><span class="line">			next[i++] = 0</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return next</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="next数组求解过程的时间复杂度"><a href="#next数组求解过程的时间复杂度" class="headerlink" title="next数组求解过程的时间复杂度"></a>next数组求解过程的时间复杂度</h3><ul>
@@ -446,6 +446,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/19/JavaScript经典算法--KMP算法应用（一）/" rel="prev" title="JavaScript经典算法--KMP算法应用（一）">
+                JavaScript经典算法--KMP算法应用（一） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -522,7 +526,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
