@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="0.618:1">
 <meta property="og:description" content="KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str1, str2 ) = 3。如果str1 不包含 str2，那么 f1(str1, str2) = -1  笨办法 str1 长度为N，str2 长度为M 从 str1 的0位置开头，配str2 从 str2 的1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-18T05:01:07.377Z">
+<meta property="og:updated_time" content="2017-12-25T06:27:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript经典排序算法--KMP">
 <meta name="twitter:description" content="KMP 复杂度是O(N) 有str1，str2两个字符串，求st1里面是否包含str2?且返回str2的位置。例如：str1是abc123def，str2是123，如果包含 f1(str1, str2 ) = 3。如果str1 不包含 str2，那么 f1(str1, str2) = -1  笨办法 str1 长度为N，str2 长度为M 从 str1 的0位置开头，配str2 从 str2 的1">
@@ -366,6 +366,7 @@
 <h3 id="next数组匹配方法"><a href="#next数组匹配方法" class="headerlink" title="next数组匹配方法"></a>next数组匹配方法</h3><ul>
 <li>对于str2上的每一个字符，我们根据next数组，有了其最大前缀和最大后缀部分匹配值。</li>
 <li>即最大前缀和最大后缀中存在长度为k的相同前缀和后缀,这个值就存在next数组中，表示Str2每个位置的k值。</li>
+<li>对于字符串转化的数组P的q位置的匹配值：next[q] = k 。表示P[q]之前的子串中，存在长度为k的相同前缀和后缀</li>
 <li>举例：对于str1：1234abc1234k 与 str2：1234abc1234a。根据next数组，其最大前缀与最大后缀匹配。第一次配型时，从1开始配，str1与str2比较到a这个位置时，配型失败。那么第二次配型就没必要从2开始配了。从第二个1234开始配，看k和a是否相等即可。</li>
 <li>这样就加速了 笨方法配型。</li>
 </ul>
