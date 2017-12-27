@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Manacher在一个字符串里，怎么找到最长的回文子串？ 易混淆概念 回文：字符串的正序和逆序是一样的。 子串和子数组是连续的，子序列可不连续。例如abc的子串是ab，ac。子序列是ac。 最长的回文子串，例如abc12321de的最长回文子串是12321  笨办法简述 从某一个位置，依次向两边扩。这样只能找到奇回文。">
+<meta name="description" content="Manacher在一个字符串里，怎么找到最长的回文子串？ 易混淆概念 回文：字符串的正序和逆序是一样的。 子串和子数组是连续的，子序列可不连续。例如abc的子串是ab，ac。子序列是ac。 最长的回文子串，例如abc12321de的最长回文子串是12321。  笨办法简述 从某一个位置，依次向两边扩。这样只能找到奇回文">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript经典算法--Manacher">
 <meta property="og:url" content="http://yoursite.com/2017/12/27/JavaScript经典算法-Manacher/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="Manacher在一个字符串里，怎么找到最长的回文子串？ 易混淆概念 回文：字符串的正序和逆序是一样的。 子串和子数组是连续的，子序列可不连续。例如abc的子串是ab，ac。子序列是ac。 最长的回文子串，例如abc12321de的最长回文子串是12321  笨办法简述 从某一个位置，依次向两边扩。这样只能找到奇回文。即长度为奇数的回文。例如：abc12321de，你从3开始向两边扩，可以找到12">
+<meta property="og:description" content="Manacher在一个字符串里，怎么找到最长的回文子串？ 易混淆概念 回文：字符串的正序和逆序是一样的。 子串和子数组是连续的，子序列可不连续。例如abc的子串是ab，ac。子序列是ac。 最长的回文子串，例如abc12321de的最长回文子串是12321。  笨办法简述 从某一个位置，依次向两边扩。这样只能找到奇回文。即长度为奇数的回文。例如：abc12321de，你从3开始向两边扩，可以找到1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-27T05:49:05.341Z">
+<meta property="og:updated_time" content="2017-12-27T05:49:52.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript经典算法--Manacher">
-<meta name="twitter:description" content="Manacher在一个字符串里，怎么找到最长的回文子串？ 易混淆概念 回文：字符串的正序和逆序是一样的。 子串和子数组是连续的，子序列可不连续。例如abc的子串是ab，ac。子序列是ac。 最长的回文子串，例如abc12321de的最长回文子串是12321  笨办法简述 从某一个位置，依次向两边扩。这样只能找到奇回文。即长度为奇数的回文。例如：abc12321de，你从3开始向两边扩，可以找到12">
+<meta name="twitter:description" content="Manacher在一个字符串里，怎么找到最长的回文子串？ 易混淆概念 回文：字符串的正序和逆序是一样的。 子串和子数组是连续的，子序列可不连续。例如abc的子串是ab，ac。子序列是ac。 最长的回文子串，例如abc12321de的最长回文子串是12321。  笨办法简述 从某一个位置，依次向两边扩。这样只能找到奇回文。即长度为奇数的回文。例如：abc12321de，你从3开始向两边扩，可以找到1">
 
 
 
@@ -336,7 +336,7 @@
 <h3 id="易混淆概念"><a href="#易混淆概念" class="headerlink" title="易混淆概念"></a>易混淆概念</h3><ul>
 <li>回文：字符串的正序和逆序是一样的。</li>
 <li>子串和子数组是连续的，子序列可不连续。例如abc的子串是ab，ac。子序列是ac。</li>
-<li>最长的回文子串，例如abc12321de的最长回文子串是12321</li>
+<li>最长的回文子串，例如abc12321de的最长回文子串是12321。</li>
 </ul>
 <h3 id="笨办法简述"><a href="#笨办法简述" class="headerlink" title="笨办法简述"></a>笨办法简述</h3><ul>
 <li>从某一个位置，依次向两边扩。这样只能找到奇回文。即长度为奇数的回文。例如：abc12321de，你从3开始向两边扩，可以找到12321这样的奇回文。但是abc1221de，你是找不到1221这样的偶回文的。</li>
