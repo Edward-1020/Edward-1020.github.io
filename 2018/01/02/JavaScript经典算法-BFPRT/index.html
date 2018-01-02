@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="0.618:1">
 <meta property="og:description" content="BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-02T05:12:50.728Z">
+<meta property="og:updated_time" content="2018-01-02T05:13:28.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript经典算法--BFPRT">
 <meta name="twitter:description" content="BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值">
@@ -338,7 +338,7 @@
 <li>原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在<p的部分，还是>P的部分。这个过程平均下来的时间复杂度是O(N)。</p的部分，还是></li>
 <li>BFPRT：快排的划分值P是随机选的，而BFPRT的算法划分值的选择并不是随机的。</li>
 </ul>
-<h3 id="BFPRT如何选择划分值的？"><a href="#BFPRT如何选择划分值的？" class="headerlink" title="BFPRT如何选择划分值的？"></a>BFPRT如何选择划分值的？</h3><ul>
+<h3 id="BFPRT如何选择划分值的"><a href="#BFPRT如何选择划分值的" class="headerlink" title="BFPRT如何选择划分值的"></a>BFPRT如何选择划分值的</h3><ul>
 <li>相邻的5个数是一组，后面不足5个数的单独一组。 O(1)。</li>
 <li>在一个组的内部，把数排序，排好。组内排序，组与组之间不排序。因为一个组5个数排序，时间复杂度O(1)。有 N / 5 组，所以这个过程 O(1) * N / 5。即时间复杂度是O(N)。</li>
 <li>因为一个组中，数是有序的。我们可以很方便的得到组内的上中位数。（奇数：无上中位数。偶数：例如1234，上中位数是2，下中位数是3）。所以，组内的中位数是第3个数。将每个组的上中位数拿出来组成一个数组newArr，这个数组的大小是N / 5，它的上中位数是第 N / 10 小的数。我们的题要求，求第k小的数，用函数表达为f(arr, k)。自己调用自己求newArr的上中位数，即f(newArr,  N / 10)，可以求出newArr的第 N / 10小的数。</li>
@@ -526,7 +526,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BFPRT"><span class="nav-number">1.</span> <span class="nav-text">BFPRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各个方法优劣分析"><span class="nav-number">2.</span> <span class="nav-text">各个方法优劣分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFPRT如何选择划分值的？"><span class="nav-number">3.</span> <span class="nav-text">BFPRT如何选择划分值的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么时间复杂度是O-N"><span class="nav-number">4.</span> <span class="nav-text">为什么时间复杂度是O(N)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">5.</span> <span class="nav-text">关键代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BFPRT"><span class="nav-number">1.</span> <span class="nav-text">BFPRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各个方法优劣分析"><span class="nav-number">2.</span> <span class="nav-text">各个方法优劣分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFPRT如何选择划分值的"><span class="nav-number">3.</span> <span class="nav-text">BFPRT如何选择划分值的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么时间复杂度是O-N"><span class="nav-number">4.</span> <span class="nav-text">为什么时间复杂度是O(N)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">5.</span> <span class="nav-text">关键代码</span></a></li></ol></div>
             
 
           </div>
