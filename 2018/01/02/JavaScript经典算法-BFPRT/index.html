@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="BFPRT在数组中，求第k小的数？或者求第k大的数 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是">
+<meta name="description" content="BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript经典算法--BFPRT">
 <meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScript经典算法-BFPRT/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="BFPRT在数组中，求第k小的数？或者求第k大的数 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值P">
+<meta property="og:description" content="BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-02T05:08:35.119Z">
+<meta property="og:updated_time" content="2018-01-02T05:10:50.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript经典算法--BFPRT">
-<meta name="twitter:description" content="BFPRT在数组中，求第k小的数？或者求第k大的数 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值P">
+<meta name="twitter:description" content="BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值">
 
 
 
@@ -332,7 +332,7 @@
       
 
       
-        <h3 id="BFPRT"><a href="#BFPRT" class="headerlink" title="BFPRT"></a>BFPRT</h3><p>在数组中，求第k小的数？或者求第k大的数</p>
+        <h3 id="BFPRT"><a href="#BFPRT" class="headerlink" title="BFPRT"></a>BFPRT</h3><p>在数组中，求第k小的数？或者求第k大的数。</p>
 <h3 id="各个方法优劣分析"><a href="#各个方法优劣分析" class="headerlink" title="各个方法优劣分析"></a>各个方法优劣分析</h3><ul>
 <li>如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。</li>
 <li>原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在<p的部分，还是>P的部分。这个过程平均下来的时间复杂度是O(N)。</p的部分，还是></li>
