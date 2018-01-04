@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="0.618:1">
 <meta property="og:description" content="基数排序 假设有 5，23，31， 15， 100。 按照最高位补0，005，023，031，015，100。 准备9个桶。0，1，2，3，4，5，6，7，8，9。 按照个位，放入桶。 0桶：100。 1桶：031。 3桶：023。 5桶：015，005。（先进先出） 从0号桶依次倒出：100，031，023，005，015。 按十位进桶，再倒出。 按百位进桶，再倒出。 排序完成。 先排低位再排高">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-04T05:07:39.769Z">
+<meta property="og:updated_time" content="2018-01-04T05:09:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript经典算法--基数排序（待续）">
 <meta name="twitter:description" content="基数排序 假设有 5，23，31， 15， 100。 按照最高位补0，005，023，031，015，100。 准备9个桶。0，1，2，3，4，5，6，7，8，9。 按照个位，放入桶。 0桶：100。 1桶：031。 3桶：023。 5桶：015，005。（先进先出） 从0号桶依次倒出：100，031，023，005，015。 按十位进桶，再倒出。 按百位进桶，再倒出。 排序完成。 先排低位再排高">
@@ -345,10 +345,11 @@
 <li>按十位进桶，再倒出。</li>
 <li>按百位进桶，再倒出。</li>
 <li>排序完成。</li>
-<li>先排低位再排高位，入桶出桶就排完了。<h3 id="流程改进"><a href="#流程改进" class="headerlink" title="流程改进"></a>流程改进</h3>例如：以374十位上的7为参照，小于等于它的有17个。那么它在十位上的排序为第17位。<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><pre><code>
-</code></pre></li>
+<li>先排低位再排高位，入桶出桶就排完了。</li>
 </ul>
-
+<h3 id="流程改进"><a href="#流程改进" class="headerlink" title="流程改进"></a>流程改进</h3><p>例如：以374十位上的7为参照，小于等于它的有17个。那么它在十位上的排序为第17位。</p>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><pre><code>
+</code></pre>
       
     </div>
     
