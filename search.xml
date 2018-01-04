@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JavaScript经典算法--基数排序（待续）]]></title>
+    <url>%2F2018%2F01%2F04%2FJavaScript%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[基数排序 假设有 5，23，31， 15， 100。 按照最高位补0，005，023，031，015，100。 准备9个桶。0，1，2，3，4，5，6，7，8，9。 按照个位，放入桶。 0桶：100。 1桶：031。 3桶：023。 5桶：015，005。（先进先出） 从0号桶依次倒出：100，031，023，005，015。 按十位进桶，再倒出。 按百位进桶，再倒出。 排序完成。 先排低位再排高位，入桶出桶就排完了。流程改进例如：以374十位上的7为参照，小于等于它的有17个。那么它在十位上的排序为第17位。关键代码]]></content>
+      <categories>
+        <category>JavaScript经典算法</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JavaScript经典算法--BFPRT]]></title>
     <url>%2F2018%2F01%2F02%2FJavaScript%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95-BFPRT%2F</url>
     <content type="text"><![CDATA[BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值P是随机选的，而BFPRT的算法划分值的选择并不是随机的。 BFPRT如何选择划分值的 相邻的5个数是一组，后面不足5个数的单独一组。 O(1)。 在一个组的内部，把数排序，排好。组内排序，组与组之间不排序。因为一个组5个数排序，时间复杂度O(1)。有 N / 5 组，所以这个过程 O(1) * N / 5。即时间复杂度是O(N)。 因为一个组中，数是有序的。我们可以很方便的得到组内的上中位数。（奇数：无上中位数。偶数：例如1234，上中位数是2，下中位数是3）。所以，组内的中位数是第3个数。将每个组的上中位数拿出来组成一个数组newArr，这个数组的大小是N / 5，它的上中位数是第 N / 10 小的数。我们的题要求，求第k小的数，用函数表达为f(arr, k)。自己调用自己求newArr的上中位数，即f(newArr, N / 10)，可以求出newArr的第 N / 10小的数。 总结一下，分组后拿出组内的上中位数组成一个新的数组，再求新数组的上中位数。 将新数组中的上中位数拿去做划分值，做partion过程，看=P的范围是否命中K。没命中，继续递归。 为什么时间复杂度是O(N) 随机划分值，做partion的过程，我们不能确定P部分递归的大小。这个规模你是无法保证。 在新数组中，第 N / 10 位置的数，假设为M。组内中位数组成的新数组的中位数是第 N / 10 位置的数，即至少有 N / 10 个数比M小。 而在原来的每5个位一组的小数组中。某个小数组的中位数比第 N / 10位置上的数小，这个小数组的中位数下，还有2个数也比第 N / 10 位置上的数小。即最少有 3N / 10 个数比M要小。即最多有 7N/10 个数比M大。 对于M来说，最多有 7N/10 个数比它大。 M又是作为partion过程的划分值的，即我们&gt;P过程的递归规模是可以确定的。 即我们可以确定的淘汰掉一定规模的数，因此我们的递归规模收敛到O(N)。 第一步：分组，每5个位一组，O(1)。第二步：组内排序，O（N）。第三步：自己调用自己。原过程递归是T(N)规模，自己调用自己是T（N / 5）的规模，因为新数组的规模是原来数组的1 / 5。第四步：partion，O（N）。第五步：只走一侧递归，最大递归规模是T（7N / 10）。所以整个复杂度是：O(1) + O（N）+ T（N / 5）+ O（N）+ T（7N / 10），这个式子可以收敛到O(N)。 关键代码123456789101112131415161718192021222324252627282930313233343536373839404142function getMinKthByBFPRT (arr, K) &#123; let copyArr = copyArray(arr) // 主流程 return select(copyArr, 0, copyArr.length - 1, K - 1)&#125;// 给定一个数组，给定一个范围[begin, end]，求第i小的数function select (arr, begin, end, i) &#123; if (begin === end) &#123; return arr[begin] &#125; // 求划分值M int pivot = medianOfMedians(arr, begin, end) // 利用求出的划分值去Partition，返回 =M 的区域。 let pivotRange = partition(arr, begin, end, pivot) // 看我们第i小的数是否命中了pivotRange这个区域 if (i &gt;= pivotRange[0] &amp;&amp; i&lt;= pivotRange[1]) &#123; return arr[i] // 如果没命中 = M 区域，那么或者走左边，或者走右边 &#125; else if (i &lt; pivotRange[0]) &#123; return select(arr, beigin, pivotRange[0] - 1, i) &#125; else &#123; return select(arr, pivotRange[1] + 1, end, i) &#125;&#125;// 在一个数组中求划分值Mfunction medianOfMedians (arr, begin, end) &#123; // 在[begin, end]的范围内，有多少个数 let num = end - begin + 1 // 是否有剩余数构成一组 let offset = num % 5 === 0 ? 0 : 1 // 数组mArr是各个组的中位数组成的新数组 let mArr = new Array(num/5 + offset) // for循环每5个数为一组，并排序。从每组中取中位数放入新数组中。 for (int i = 0; i &lt; mArr.length; i++) &#123; let beginI = begin + i * 5 let endI = beginI + 4 mArr[i] = getMedian(arr, beginI, Math.min(end, endI)) &#125; // 新数组递归的调用select求数组自己的上中位数 return select(mArr, 0, mArr.length - 1, mArr.length / 2)&#125;]]></content>
@@ -164,17 +175,6 @@
       <tags>
         <tag>web前端</tag>
         <tag>函数式编程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[JavaScript经典算法--基数排序（待续）]]></title>
-    <url>%2F2017%2F01%2F04%2FJavaScript%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[基数排序 假设有 5，23，31， 15， 100。 按照最高位补0，005，023，031，015，100。 准备9个桶。0，1，2，3，4，5，6，7，8，9。 按照个位，放入桶。 0桶：100。 1桶：031。 3桶：023。 5桶：015，005。（先进先出） 从0号桶依次倒出：100，031，023，005，015。 按十位进桶，再倒出。 按百位进桶，再倒出。 排序完成。 先排低位再排高位，入桶出桶就排完了。流程改进例如：以374十位上的7为参照，小于等于它的有17个。那么它在十位上的排序为第17位。关键代码]]></content>
-      <categories>
-        <category>JavaScript经典算法</category>
-      </categories>
-      <tags>
-        <tag>web前端</tag>
       </tags>
   </entry>
 </search>
