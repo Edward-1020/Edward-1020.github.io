@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k">
+<meta name="description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript经典算法--BFPRT">
-<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScript经典算法-BFPRT/index.html">
+<meta property="og:title" content="经典数据结构--一致性哈希">
+<meta property="og:url" content="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值">
+<meta property="og:description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。 输入域无限，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-02T05:25:08.720Z">
+<meta property="og:updated_time" content="2018-01-11T05:43:34.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript经典算法--BFPRT">
-<meta name="twitter:description" content="BFPRT在数组中，求第k小的数？或者求第k大的数。 各个方法优劣分析 如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。 原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在P的部分。这个过程平均下来的时间复杂度是O(N)。 BFPRT：快排的划分值">
+<meta name="twitter:title" content="经典数据结构--一致性哈希">
+<meta name="twitter:description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。 输入域无限，">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScript经典算法-BFPRT/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/"/>
 
 
 
 
 
-  <title>JavaScript经典算法--BFPRT | 0.618:1</title>
+  <title>经典数据结构--一致性哈希 | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScript经典算法-BFPRT/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript经典算法--BFPRT</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--一致性哈希</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T14:00:10+08:00">
-                2018-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T14:00:10+08:00">
+                2018-01-11
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript经典算法/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript经典算法</span>
+                  <a href="/categories/经典数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">经典数据结构</span>
                   </a>
                 </span>
 
@@ -332,28 +332,49 @@
       
 
       
-        <h3 id="BFPRT"><a href="#BFPRT" class="headerlink" title="BFPRT"></a>BFPRT</h3><p>在数组中，求第k小的数？或者求第k大的数。</p>
-<h3 id="各个方法优劣分析"><a href="#各个方法优劣分析" class="headerlink" title="各个方法优劣分析"></a>各个方法优劣分析</h3><ul>
-<li>如果对数组中的数排序求解，时间复杂度是O(N * logN)。而我们希望的时间复杂度是O(N)。</li>
-<li>原始流程：利用快排partition的过程，比p小的放左边，和p相等的放中间，比p大的放右边。如果相等的部分命中k，那么得出答案。如果未命中，那么看k是在<p的部分，还是>P的部分。这个过程平均下来的时间复杂度是O(N)。</p的部分，还是></li>
-<li>BFPRT：快排的划分值P是随机选的，而BFPRT的算法划分值的选择并不是随机的。</li>
+        <h3 id="函数是哈希函数的要求"><a href="#函数是哈希函数的要求" class="headerlink" title="函数是哈希函数的要求"></a>函数是哈希函数的要求</h3><ul>
+<li>要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。</li>
+<li>为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。</li>
+<li>要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。</li>
+<li>输入域无限，输出域有限，输入参数确定则输出值也确定，这3点会导致，不同的输入会有相同的输出。</li>
+<li>要求三：输入域无穷大，映射到一个较小的范围S（2^64 - 2^ 128）。我们要求：所有的输入值，映射后会均匀的摊在整个S上。例如：输出域S是0，1，2，不管你的输入值如何。如果输入是0，1，2 … 98，我们传进来99个值。则输出值是0的差不多33个，1差不多33个，2差不多33个。</li>
+<li>我们称“要求三”是指：哈希函数的离散性，一个哈希函数设计的好不好就是看它的离散性好不好。</li>
 </ul>
-<h3 id="BFPRT如何选择划分值的"><a href="#BFPRT如何选择划分值的" class="headerlink" title="BFPRT如何选择划分值的"></a>BFPRT如何选择划分值的</h3><ul>
-<li>相邻的5个数是一组，后面不足5个数的单独一组。 O(1)。</li>
-<li>在一个组的内部，把数排序，排好。组内排序，组与组之间不排序。因为一个组5个数排序，时间复杂度O(1)。有 N / 5 组，所以这个过程 O(1) * N / 5。即时间复杂度是O(N)。</li>
-<li>因为一个组中，数是有序的。我们可以很方便的得到组内的上中位数。（奇数：无上中位数。偶数：例如1234，上中位数是2，下中位数是3）。所以，组内的中位数是第3个数。将每个组的上中位数拿出来组成一个数组newArr，这个数组的大小是N / 5，它的上中位数是第 N / 10 小的数。我们的题要求，求第k小的数，用函数表达为f(arr, k)。自己调用自己求newArr的上中位数，即f(newArr,  N / 10)，可以求出newArr的第 N / 10小的数。</li>
-<li>总结一下，分组后拿出组内的上中位数组成一个新的数组，再求新数组的上中位数。</li>
-<li>将新数组中的上中位数拿去做划分值，做partion过程，看=P的范围是否命中K。没命中，继续递归。</li>
+<h3 id="哈希值取模（-）"><a href="#哈希值取模（-）" class="headerlink" title="哈希值取模（%）"></a>哈希值取模（%）</h3><ul>
+<li>一个参数经过哈希函数F后得到一个哈希值去模（%）m。大量的参数经过哈希函数F后得到一个哈希值去%m。最终，得到的返回值会均匀分布在m - 1 上。</li>
+<li>即哈希值在我们的S域上指均摊的，我们将S域给模上M，返回值就均摊在m - 1上。</li>
 </ul>
-<h3 id="为什么时间复杂度是O-N"><a href="#为什么时间复杂度是O-N" class="headerlink" title="为什么时间复杂度是O(N)"></a>为什么时间复杂度是O(N)</h3><ul>
-<li>随机划分值，做partion的过程，我们不能确定<p部分递归的大小，>P部分递归的大小。这个规模你是无法保证。</p部分递归的大小，></li>
-<li>在新数组中，第 N / 10 位置的数，假设为M。组内中位数组成的新数组的中位数是第 N / 10 位置的数，即至少有 N / 10 个数比M小。</li>
-<li>而在原来的每5个位一组的小数组中。某个小数组的中位数比第 N / 10位置上的数小，这个小数组的中位数下，还有2个数也比第 N / 10 位置上的数小。即最少有 3N / 10 个数比M要小。即最多有 7N/10 个数比M大。</li>
-<li>对于M来说，最多有 7N/10 个数比它大。 M又是作为partion过程的划分值的，即我们&gt;P过程的递归规模是可以确定的。</li>
-<li>即我们可以确定的淘汰掉一定规模的数，因此我们的递归规模收敛到O(N)。</li>
-<li>第一步：分组，每5个位一组，O(1)。第二步：组内排序，O（N）。第三步：自己调用自己。原过程递归是T(N)规模，自己调用自己是T（N / 5）的规模，因为新数组的规模是原来数组的1 / 5。第四步：partion，O（N）。第五步：只走一侧递归，最大递归规模是T（7N / 10）。所以整个复杂度是：O(1) + O（N）+ T（N / 5）+ O（N）+ T（7N / 10），这个式子可以收敛到O(N)。</li>
+<h3 id="经典缓存结构"><a href="#经典缓存结构" class="headerlink" title="经典缓存结构"></a>经典缓存结构</h3><ul>
+<li>三台服务器构成的一个服务器集群。上面存key-value形式的信息，我希望这三台服务器负载均衡。</li>
+<li>机器分别为0，1，2。来了个信息A[key, value]。信息A经过哈希，得到的哈希值再经过一个模3。得到的模值，出来0，到机器0上；出来1，到机器1上；出来2，到机器2上。</li>
+<li>插入的逻辑同上，查询的逻辑同理。</li>
+<li>因为哈希函数的特性，我们的信息插入时是均匀分摊在这3台机器上的，我们的查询也是均匀分摊在这三台机器上的。所以，负载均衡。</li>
 </ul>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">function getMinKthByBFPRT (arr, K) &#123;</span><br><span class="line">	let copyArr = copyArray(arr)</span><br><span class="line">	// 主流程</span><br><span class="line">	return select(copyArr, 0, copyArr.length - 1, K - 1)</span><br><span class="line">&#125;</span><br><span class="line">// 给定一个数组，给定一个范围[begin, end]，求第i小的数</span><br><span class="line">function select (arr, begin, end, i) &#123;</span><br><span class="line">	if (begin === end) &#123;</span><br><span class="line">		return arr[begin]</span><br><span class="line">	&#125;</span><br><span class="line">	// 求划分值M</span><br><span class="line">	int pivot = medianOfMedians(arr, begin, end)</span><br><span class="line">	// 利用求出的划分值去Partition，返回 =M 的区域。</span><br><span class="line">	let pivotRange = partition(arr, begin, end, pivot)</span><br><span class="line">	// 看我们第i小的数是否命中了pivotRange这个区域</span><br><span class="line">	if (i &gt;= pivotRange[0] &amp;&amp; i&lt;= pivotRange[1]) &#123;</span><br><span class="line">		return arr[i]</span><br><span class="line">	// 如果没命中 = M 区域，那么或者走左边，或者走右边</span><br><span class="line">	&#125; else if (i &lt; pivotRange[0]) &#123;</span><br><span class="line">		return select(arr, beigin, pivotRange[0] - 1, i)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		return select(arr, pivotRange[1] + 1, end, i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在一个数组中求划分值M</span><br><span class="line">function medianOfMedians (arr, begin, end) &#123;</span><br><span class="line">	// 在[begin, end]的范围内，有多少个数</span><br><span class="line">	let num = end - begin + 1</span><br><span class="line">	// 是否有剩余数构成一组</span><br><span class="line">	let offset = num % 5 === 0 ? 0 : 1</span><br><span class="line">	// 数组mArr是各个组的中位数组成的新数组</span><br><span class="line">	let mArr = new Array(num/5 + offset)</span><br><span class="line">	// for循环每5个数为一组，并排序。从每组中取中位数放入新数组中。</span><br><span class="line">	for (int i = 0; i &lt; mArr.length; i++) &#123;</span><br><span class="line">		let beginI = begin + i * 5</span><br><span class="line">		let endI = beginI + 4</span><br><span class="line">		mArr[i] = getMedian(arr, beginI, Math.min(end, endI))</span><br><span class="line">	&#125;</span><br><span class="line">	// 新数组递归的调用select求数组自己的上中位数</span><br><span class="line">	return select(mArr, 0, mArr.length - 1, mArr.length / 2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="经典缓存结构副作用"><a href="#经典缓存结构副作用" class="headerlink" title="经典缓存结构副作用"></a>经典缓存结构副作用</h3><ul>
+<li>一旦加减机器，我们原来分摊在机器上的数据都需要变化。数据迁移的代价十分高。</li>
+</ul>
+<h3 id="解决方式-一致性哈希"><a href="#解决方式-一致性哈希" class="headerlink" title="解决方式-一致性哈希"></a>解决方式-一致性哈希</h3><ul>
+<li>假设哈希函数f，以下所有的操作使用的哈希函数均一致。</li>
+<li>假设输出域0 ~ 2^128，作为一个环。0~2^128均匀分布在环上，即2^128的下一个位置是0，0的下一个位置是1。</li>
+<li>假设有三台机器:M1，M2，M3，上面有自己的mac地址或其它专有信息。将这个信息生成一个hash值，认为该hash值代表这三台机器。</li>
+<li>此时，这个环上有了3台机器。</li>
+<li>在环上插值时，假设值为A。将A经过哈希得到的哈希值打在环上，哈希值在环上顺时针遇到的第一个机器便是它应该存放的地方。</li>
+<li>此时，每个机器负责环上的某段数据。</li>
+<li>加机器。原来是m1，m2，m3。在环上加入m4（m1，m2，m4，m3），此时不需要将所有的数据都迁移。我们将原本属于m3的部分数据，让它属于m4就可以了。</li>
+<li>m4机器删除，此时将m4上的数据顺时针给到下一个机器m3上，就可以了。<h3 id="如何顺时针找机器"><a href="#如何顺时针找机器" class="headerlink" title="如何顺时针找机器"></a>如何顺时针找机器</h3></li>
+<li>机器是环装结构，假设机器的哈希值分别是1，5，10。在前端，插入一个值，它的哈希值是6。那么它就可以在1-5-10中找到它的位置。</li>
+</ul>
+<h3 id="上面做法的问题"><a href="#上面做法的问题" class="headerlink" title="上面做法的问题"></a>上面做法的问题</h3><ul>
+<li>利用哈希函数的离散性，哈希在分割环时，在数据量很大的情况下，才会出现均摊。数据量小的时候，均分并不明显。</li>
+<li>比如：有一间屋子，打翻一瓶香水，可以充满屋子。但是几个颗粒，就不能。哈希是一个类似的过程。</li>
+<li>即便3台机器负载均衡了，在加入第四台机器时，一定会出现负载不均。</li>
+</ul>
+<h3 id="虚拟节点技术"><a href="#虚拟节点技术" class="headerlink" title="虚拟节点技术"></a>虚拟节点技术</h3><ul>
+<li>真是机器是m1，m2，m3。但是，不使用m1，m2，m3去计算哈希值。分配虚拟路由节点，m1被分配：v1-1，v1-2，一直到v1-1000。</li>
+<li>环上不再放3台机器计算的哈希值，而是放虚拟节点的哈希值。此时m1，m2，m3就可以通过虚拟节点均分整个环了。</li>
+<li>加机器m4，将m4的虚拟节点的哈希值放在环上，虚拟节点会向m1，m2，m3要数据。这样数据就均摊在m1，m2，m3，m4上了。</li>
+<li>即通过虚拟节点，尽可能的将数据均摊。</li>
+</ul>
 
       
     </div>
@@ -384,8 +405,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/27/JavaScript经典算法-Manacher/" rel="next" title="JavaScript经典算法--Manacher">
-                <i class="fa fa-chevron-left"></i> JavaScript经典算法--Manacher
+              <a href="/2018/01/09/经典数据结构-栈与队列/" rel="next" title="经典数据结构--栈与队列">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--栈与队列
               </a>
             
           </div>
@@ -393,10 +414,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/04/JavaScript经典算法-基数排序/" rel="prev" title="JavaScript经典算法--基数排序（待续）">
-                JavaScript经典算法--基数排序（待续） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -530,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BFPRT"><span class="nav-number">1.</span> <span class="nav-text">BFPRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各个方法优劣分析"><span class="nav-number">2.</span> <span class="nav-text">各个方法优劣分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFPRT如何选择划分值的"><span class="nav-number">3.</span> <span class="nav-text">BFPRT如何选择划分值的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么时间复杂度是O-N"><span class="nav-number">4.</span> <span class="nav-text">为什么时间复杂度是O(N)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">5.</span> <span class="nav-text">关键代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数是哈希函数的要求"><span class="nav-number">1.</span> <span class="nav-text">函数是哈希函数的要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希值取模（-）"><span class="nav-number">2.</span> <span class="nav-text">哈希值取模（%）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典缓存结构"><span class="nav-number">3.</span> <span class="nav-text">经典缓存结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典缓存结构副作用"><span class="nav-number">4.</span> <span class="nav-text">经典缓存结构副作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方式-一致性哈希"><span class="nav-number">5.</span> <span class="nav-text">解决方式-一致性哈希</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何顺时针找机器"><span class="nav-number">6.</span> <span class="nav-text">如何顺时针找机器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上面做法的问题"><span class="nav-number">7.</span> <span class="nav-text">上面做法的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟节点技术"><span class="nav-number">8.</span> <span class="nav-text">虚拟节点技术</span></a></li></ol></div>
             
 
           </div>
