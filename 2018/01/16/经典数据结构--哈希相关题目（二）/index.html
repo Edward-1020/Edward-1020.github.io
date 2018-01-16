@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="冒泡排序冒泡排序的过程 第一轮比较：范围是 0 ~ n - 1。过程是：对于给定的一个数组，第一个数和第二个数比较，哪个大就将该数放在后面。紧接着第二个数和第三个数比较，哪个大就将该数放在后面。依次类推，最大的数就会放在数组最后的位置。 第二轮比较：范围是 0 ~ n - 2过程是：同上，第二大的数就放在了数组倒数第二">
+<meta name="description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript经典排序算法--冒泡排序">
-<meta property="og:url" content="http://yoursite.com/2017/11/26/JavaScript经典排序算法-冒泡排序/index.html">
+<meta property="og:title" content="经典数据结构--哈希相关题目（二）">
+<meta property="og:url" content="http://yoursite.com/2018/01/16/经典数据结构--哈希相关题目（二）/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="冒泡排序冒泡排序的过程 第一轮比较：范围是 0 ~ n - 1。过程是：对于给定的一个数组，第一个数和第二个数比较，哪个大就将该数放在后面。紧接着第二个数和第三个数比较，哪个大就将该数放在后面。依次类推，最大的数就会放在数组最后的位置。 第二轮比较：范围是 0 ~ n - 2过程是：同上，第二大的数就放在了数组倒数第二个位置 省略 第 n - 1 轮比较：重复以上的过程，直到最后一次排序时只剩下一">
+<meta property="og:description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列数++，到3 行数++，到3 列数–，到0 行数–，到0  关键代码123456">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-09T08:54:59.000Z">
+<meta property="og:updated_time" content="2018-01-16T05:31:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript经典排序算法--冒泡排序">
-<meta name="twitter:description" content="冒泡排序冒泡排序的过程 第一轮比较：范围是 0 ~ n - 1。过程是：对于给定的一个数组，第一个数和第二个数比较，哪个大就将该数放在后面。紧接着第二个数和第三个数比较，哪个大就将该数放在后面。依次类推，最大的数就会放在数组最后的位置。 第二轮比较：范围是 0 ~ n - 2过程是：同上，第二大的数就放在了数组倒数第二个位置 省略 第 n - 1 轮比较：重复以上的过程，直到最后一次排序时只剩下一">
+<meta name="twitter:title" content="经典数据结构--哈希相关题目（二）">
+<meta name="twitter:description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列数++，到3 行数++，到3 列数–，到0 行数–，到0  关键代码123456">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/26/JavaScript经典排序算法-冒泡排序/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/16/经典数据结构--哈希相关题目（二）/"/>
 
 
 
 
 
-  <title>JavaScript经典排序算法--冒泡排序 | 0.618:1</title>
+  <title>经典数据结构--哈希相关题目（二） | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/26/JavaScript经典排序算法-冒泡排序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/经典数据结构--哈希相关题目（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript经典排序算法--冒泡排序</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--哈希相关题目（二）</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T11:31:23+08:00">
-                2017-11-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T14:10:10+08:00">
+                2018-01-16
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript经典算法/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript经典算法</span>
+                  <a href="/categories/经典数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">经典数据结构</span>
                   </a>
                 </span>
 
@@ -332,14 +332,17 @@
       
 
       
-        <h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><h3 id="冒泡排序的过程"><a href="#冒泡排序的过程" class="headerlink" title="冒泡排序的过程"></a>冒泡排序的过程</h3><ul>
-<li>第一轮比较：<br>范围是 0 ~ n - 1。<br>过程是：对于给定的一个数组，第一个数和第二个数比较，哪个大就将该数放在后面。紧接着第二个数和第三个数比较，哪个大就将该数放在后面。依次类推，最大的数就会放在数组最后的位置。</li>
-<li>第二轮比较：<br>范围是 0 ~ n - 2<br>过程是：同上，第二大的数就放在了数组倒数第二个位置</li>
-<li>省略</li>
-<li>第 n - 1 轮比较：<br>重复以上的过程，直到最后一次排序时只剩下一个数，我们就可以得到一个有序的数组了。</li>
+        <h3 id="转圈打印矩阵"><a href="#转圈打印矩阵" class="headerlink" title="转圈打印矩阵"></a>转圈打印矩阵</h3><p>给定一个整型矩阵matrix，请按照转圈的方式打印它<br>1 2 3 4<br>5 6 7 8<br>9 10 11 12<br>13 14 15 16<br>打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。<br>要求：额外空间复杂度为O(1)。</p>
+<h3 id="不要把视线局限在局部区域变化"><a href="#不要把视线局限在局部区域变化" class="headerlink" title="不要把视线局限在局部区域变化"></a>不要把视线局限在局部区域变化</h3><ul>
+<li>1点（0，0），16点（3，3）。</li>
+<li>列数++，到3</li>
+<li>行数++，到3</li>
+<li>列数–，到0</li>
+<li>行数–，到0</li>
 </ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>这里解释我们排序思想的关键部分，详细代码请见我的<a href="https://github.com/Edward-1020/arithmetic/blob/master/BubbleSort.js" target="_blank" rel="noopener">GitHub</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//	外循环确定我们要排的位置, let e = arr.length - 1</span><br><span class="line">//	我们排到只剩下0位置的数时，e &gt; 0 ,结束外循环</span><br><span class="line">//	每次排的数组范围都减少1，因为每次排完最后一个位置一定是本次所排序范围的最大值，e--</span><br><span class="line"></span><br><span class="line">for (let e = arr.length - 1; e &gt; 0; e --) &#123;</span><br><span class="line"></span><br><span class="line">//	从本次要排的范围的第一个位置开始排 let i = 0</span><br><span class="line">//	确定排序范围 i &lt; e</span><br><span class="line">//	排序的基本工程，依次向后比 i ++ </span><br><span class="line"></span><br><span class="line">	for (let i = 0; i &lt; e; i++) &#123;</span><br><span class="line">		if (arr[i] &gt; arr[i+1]) &#123;</span><br><span class="line">			swap(arr, i, i+1)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//	交换</span><br><span class="line">function swap (arr, i, j) &#123;</span><br><span class="line">	[arr[i], arr[j]] = [arr[j], arr[i]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">// tR，tC，左上角的行数和列数</span><br><span class="line">// dR，dC，右下角的行数和列数</span><br><span class="line">public static void printEdge (init[][] m, int tR, int tC, int dR, int dC) &#123;</span><br><span class="line">	// 只有一行，顺序打印</span><br><span class="line">	if (tR == dR) &#123;</span><br><span class="line">		for (int i = tC; i &lt;= dC; i++) &#123;</span><br><span class="line">		    System.out.print(m[tR][i] + &quot; &quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else if (tC == dC) &#123;</span><br><span class="line">	    // 只有一列，按顺序打印列</span><br><span class="line">		for (int i = tR; i &lt;= dR; i++) &#123;</span><br><span class="line">			System.out.print(m[i][tC] + &quot; &quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		int curC = tC</span><br><span class="line">		int curR = tR</span><br><span class="line">		// 列数不等，列数++</span><br><span class="line">		while (curC != dC) &#123;</span><br><span class="line">			System.out.print(m[tR][curC] + &quot;&quot;)</span><br><span class="line">			curC++</span><br><span class="line">		&#125;</span><br><span class="line">		// 行数不等，行数++</span><br><span class="line">		while (curR != dR) &#123;</span><br><span class="line">			System.out.print(m[curR][dc] + &quot;&quot;)</span><br><span class="line">			curR++</span><br><span class="line">		&#125;</span><br><span class="line">		// 列数不等，列数--</span><br><span class="line">		while (curC != tC) &#123;</span><br><span class="line">			System.out.print(m[dR][curC] + &quot;&quot;)</span><br><span class="line">			curC--</span><br><span class="line">		&#125;</span><br><span class="line">		// 行数不等，行数--</span><br><span class="line">		while (curR != tR) &#123;</span><br><span class="line">			System.out.print(m[curR][tC] + &quot;&quot;)</span><br><span class="line">			curR--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打印完最外层后，左上角向右下方移动，右下角向左上方移动</span><br><span class="line">// 如此，就可以分圈结构的宏观调用</span><br><span class="line">// 一圈，一圈的分圈执行函数</span><br><span class="line">// 左上角的行大于右下角的行，或者左上角的列大于右下角的列，停止</span><br></pre></td></tr></table></figure>
+<h3 id="将原矩阵顺时针转90°"><a href="#将原矩阵顺时针转90°" class="headerlink" title="将原矩阵顺时针转90°"></a>将原矩阵顺时针转90°</h3><p>利用分圈结构写。</p>
+
       
     </div>
     
@@ -369,8 +372,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/25/函数式编程是奇淫巧技吗？/" rel="next" title="函数式编程是奇淫巧技吗？">
-                <i class="fa fa-chevron-left"></i> 函数式编程是奇淫巧技吗？
+              <a href="/2018/01/16/经典数据结构--哈希相关题目（一）/" rel="next" title="经典数据结构--哈希相关题目（一）">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--哈希相关题目（一）
               </a>
             
           </div>
@@ -378,10 +381,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/28/JavaScript经典排序算法-插入排序/" rel="prev" title="JavaScript经典排序算法--插入排序">
-                JavaScript经典排序算法--插入排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -515,7 +514,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序的过程"><span class="nav-number">2.</span> <span class="nav-text">冒泡排序的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#转圈打印矩阵"><span class="nav-number">1.</span> <span class="nav-text">转圈打印矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要把视线局限在局部区域变化"><span class="nav-number">2.</span> <span class="nav-text">不要把视线局限在局部区域变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">3.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将原矩阵顺时针转90°"><span class="nav-number">4.</span> <span class="nav-text">将原矩阵顺时针转90°</span></a></li></ol></div>
             
 
           </div>
