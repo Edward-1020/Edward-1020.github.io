@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[经典数据结构--哈希相关题目（三）]]></title>
+    <url>%2F2018%2F01%2F18%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E5%93%88%E5%B8%8C%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E4%B8%89%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[在行列都排好序的矩阵中找数给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。例如：0 1 2 72 5 6 74 6 7 85 7 8 9如何k为7，返回true；如果k为6，返回false。 要求：时间复杂度为O(N + M)，额外空间复杂度为O(1)。 流程 假设我们寻找5 从右上角开始，从第4列着手。7是该列最小的，比5大，所以5不在该列。 向左移动一列，从第三列着手。2是该行除7外最大的，比5小，所以该行也比11小。 向下移动一行，因为6是比5大的，所以6所在列是不可能的。 所以向左移动，找到了5 显然，从右上角开始，大就向左移动，小就向下移动。 原因是：若该数比k大，则该列无可能。该数比5小，则该行无可能。所以大向左移动，小向下移动。 若是越界了，说明矩阵中没有要找的k值。 我一共最多走 M（行） + N (列)步就能找到k值，所以时间复杂度是O(N + M)。]]></content>
+      <categories>
+        <category>经典数据结构</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[经典数据结构--哈希相关题目（二）]]></title>
     <url>%2F2018%2F01%2F16%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E5%93%88%E5%B8%8C%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
     <content type="text"><![CDATA[转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列数++，到3 行数++，到3 列数–，到0 行数–，到0 关键代码12345678910111213141516171819202122232425262728293031323334353637383940414243// tR，tC，左上角的行数和列数// dR，dC，右下角的行数和列数public static void printEdge (init[][] m, int tR, int tC, int dR, int dC) &#123; // 只有一行，顺序打印 if (tR == dR) &#123; for (int i = tC; i &lt;= dC; i++) &#123; System.out.print(m[tR][i] + &quot; &quot;) &#125; &#125; else if (tC == dC) &#123; // 只有一列，按顺序打印列 for (int i = tR; i &lt;= dR; i++) &#123; System.out.print(m[i][tC] + &quot; &quot;) &#125; &#125; else &#123; int curC = tC int curR = tR // 列数不等，列数++ while (curC != dC) &#123; System.out.print(m[tR][curC] + &quot;&quot;) curC++ &#125; // 行数不等，行数++ while (curR != dR) &#123; System.out.print(m[curR][dc] + &quot;&quot;) curR++ &#125; // 列数不等，列数-- while (curC != tC) &#123; System.out.print(m[dR][curC] + &quot;&quot;) curC-- &#125; // 行数不等，行数-- while (curR != tR) &#123; System.out.print(m[curR][tC] + &quot;&quot;) curR-- &#125; &#125;&#125;// 打印完最外层后，左上角向右下方移动，右下角向左上方移动// 如此，就可以分圈结构的宏观调用// 一圈，一圈的分圈执行函数// 左上角的行大于右下角的行，或者左上角的列大于右下角的列，停止 将原矩阵顺时针转90°利用分圈结构写。]]></content>

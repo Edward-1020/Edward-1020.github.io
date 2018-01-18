@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题1实现一个特殊的栈，在实现栈的基本功能的基础上，再实现返回栈最小元素的操作。要求：1.pop、push、getMin操作的时间复杂度都是O(1)。2.设计的栈类型可以使用现成的栈结构。 设计1 准备两个栈，data栈和help栈。 data栈，压入3。help栈同步压入3。 data栈，压入4。help栈同步压入3">
+<meta name="description" content="在行列都排好序的矩阵中找数给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。例如：0 1 2 72 5 6 74 6 7 85 7 8 9如何k为7，返回true；如果k为6，返回false。 要求：时间复杂度为O(N + M)，">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--栈与队列">
-<meta property="og:url" content="http://yoursite.com/2018/01/09/经典数据结构-栈与队列/index.html">
+<meta property="og:title" content="经典数据结构--哈希相关题目（三）">
+<meta property="og:url" content="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（三）/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="问题1实现一个特殊的栈，在实现栈的基本功能的基础上，再实现返回栈最小元素的操作。要求：1.pop、push、getMin操作的时间复杂度都是O(1)。2.设计的栈类型可以使用现成的栈结构。 设计1 准备两个栈，data栈和help栈。 data栈，压入3。help栈同步压入3。 data栈，压入4。help栈同步压入3。 data栈，压入5。help栈同步压入3。 data栈，压入2。help栈同">
+<meta property="og:description" content="在行列都排好序的矩阵中找数给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。例如：0 1 2 72 5 6 74 6 7 85 7 8 9如何k为7，返回true；如果k为6，返回false。 要求：时间复杂度为O(N + M)，额外空间复杂度为O(1)。 流程 假设我们寻找5 从右上角开始，从第4列着手。7">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T12:52:11.840Z">
+<meta property="og:updated_time" content="2018-01-18T05:03:08.040Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--栈与队列">
-<meta name="twitter:description" content="问题1实现一个特殊的栈，在实现栈的基本功能的基础上，再实现返回栈最小元素的操作。要求：1.pop、push、getMin操作的时间复杂度都是O(1)。2.设计的栈类型可以使用现成的栈结构。 设计1 准备两个栈，data栈和help栈。 data栈，压入3。help栈同步压入3。 data栈，压入4。help栈同步压入3。 data栈，压入5。help栈同步压入3。 data栈，压入2。help栈同">
+<meta name="twitter:title" content="经典数据结构--哈希相关题目（三）">
+<meta name="twitter:description" content="在行列都排好序的矩阵中找数给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。例如：0 1 2 72 5 6 74 6 7 85 7 8 9如何k为7，返回true；如果k为6，返回false。 要求：时间复杂度为O(N + M)，额外空间复杂度为O(1)。 流程 假设我们寻找5 从右上角开始，从第4列着手。7">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/09/经典数据结构-栈与队列/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（三）/"/>
 
 
 
 
 
-  <title>经典数据结构--栈与队列 | 0.618:1</title>
+  <title>经典数据结构--哈希相关题目（三） | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/经典数据结构-栈与队列/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（三）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--栈与队列</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--哈希相关题目（三）</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-09T14:00:10+08:00">
-                2018-01-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T14:10:10+08:00">
+                2018-01-18
               </time>
             
 
@@ -332,76 +332,18 @@
       
 
       
-        <h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p>实现一个特殊的栈，在实现栈的基本功能的基础上，再实现返回栈最小元素的操作。<br>要求：1.pop、push、getMin操作的时间复杂度都是O(1)。2.设计的栈类型可以使用现成的栈结构。</p>
-<h3 id="设计1"><a href="#设计1" class="headerlink" title="设计1"></a>设计1</h3><ul>
-<li>准备两个栈，data栈和help栈。</li>
-<li>data栈，压入3。help栈同步压入3。</li>
-<li>data栈，压入4。help栈同步压入3。</li>
-<li>data栈，压入5。help栈同步压入3。</li>
-<li>data栈，压入2。help栈同步压入2。</li>
-<li>data栈取2，help栈弹出2。</li>
-<li>data栈取5，help栈弹出3。</li>
-<li>即help栈在data栈每次压入新值时，help栈同步压入当前最小值。data栈每次弹出值时，help栈同步弹出栈顶。help栈的栈顶保持是data栈中的最小值。</li>
-</ul>
-<h3 id="设计2"><a href="#设计2" class="headerlink" title="设计2"></a>设计2</h3><ul>
-<li>准备两个栈，data栈和help栈。</li>
-<li>data栈，压入3。help栈同步压入3。</li>
-<li>data栈，压入3。help栈同步压入3。</li>
-<li>data栈，压入4。help栈不压。</li>
-<li>即data栈当前压入的数，小于等于help栈栈顶时，才压入help栈。</li>
-<li>弹出时，data栈当前弹出的数小于等于help栈栈顶时，才弹出。</li>
-</ul>
-<h3 id="问题-2"><a href="#问题-2" class="headerlink" title="问题 2"></a>问题 2</h3><p>怎么用数组结构实现固定大小的栈？</p>
-<h3 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h3><ul>
-<li>数组固定长度为5。size一开始是0。</li>
-<li>在数组的size位置加一个数后，size + 1。</li>
-<li>在数组的size位置取一个数后，size - 1。</li>
-<li>size爆了，报错。</li>
-</ul>
-<h3 id="问题-3"><a href="#问题-3" class="headerlink" title="问题 3"></a>问题 3</h3><p>怎么用数组实现固定大小的队列？</p>
-<h3 id="设计-1"><a href="#设计-1" class="headerlink" title="设计"></a>设计</h3><ul>
-<li>有一个start变量，end变量。</li>
-<li>一开始start和end指向同一个位置。</li>
-<li>增加时，加一个，end指向加进来的数。后续增加的也是如此。</li>
-<li>弹出时，减少一个，start向下移动一个。</li>
-<li>start是去追赶end的。</li>
-<li>start和end谁触底，回到最初位置。</li>
-<li>size用于约束start和end，超了或者减少到底了都报错。</li>
-<li>用size去约束start和end的行为。</li>
-</ul>
-<h3 id="问题4"><a href="#问题4" class="headerlink" title="问题4"></a>问题4</h3><p>如何用栈结构实现队列结构？</p>
-<h3 id="设计-2"><a href="#设计-2" class="headerlink" title="设计"></a>设计</h3><ul>
-<li>设计一个data栈，help栈。</li>
-<li>data栈是1，2，3，4，5。</li>
-<li>help栈是data栈的倒置，5，4，3，2，1。</li>
-<li>data栈进，help栈出。便构成了队列。<h3 id="弹出规则"><a href="#弹出规则" class="headerlink" title="弹出规则"></a>弹出规则</h3></li>
-<li>如果help栈中不为空，data栈一定不要向help栈中放置数据。</li>
-<li>data栈向help栈放元素，一定要将data栈自己所有的元素倒完。</li>
-</ul>
-<h3 id="问题5"><a href="#问题5" class="headerlink" title="问题5"></a>问题5</h3><p> 如何用两个队列实现栈？<br> （一个图的深度遍历，怎么用队列实现？其实用队列做成栈，然后用栈做深度遍历即可）。</p>
-<h3 id="设计-3"><a href="#设计-3" class="headerlink" title="设计"></a>设计</h3><ul>
-<li>例如有队列A中有 1，2，3，4，5</li>
-<li>弹出时，让2，3，4，5进入另一个队列B，队列A仅剩数字1，弹出1。</li>
-<li>现在队列B有 2，3，4，5，队列A空。</li>
-<li>队列B 3，4，5进入队列A。队列B中剩下2，弹出。</li>
-<li>这就是栈。</li>
-<li>这里有个小技巧是swap了A和B引用指向的对象。</li>
-</ul>
-<h3 id="问题6"><a href="#问题6" class="headerlink" title="问题6"></a>问题6</h3><p>实现一种狗猫队列的结构，<br>要求如下:<br>用户可以调用add方法将cat类或dog类的实例放入队列中;<br>用户可以调用pollAll方法，将队列中所有的实例按照进队列的先后顺序依次弹出;<br>用户可以调用pollDog方法，将队列中dog类的实例按照进队列的先后顺序依次弹出;<br>用户可以调用pollCat方法，将队列中cat类的实例按照进队列的先后顺序依次弹出;<br>用户可以调用isEmpty方法，检查队列中是否还有dog或cat的实例;<br>用户可以调用isDogEmpty方法，检查队列中是否有dog类的实例;<br>用户可以调用isCatEmpty方法，检查队列中是否有cat类的实例。</p>
-<h3 id="简单设计"><a href="#简单设计" class="headerlink" title="简单设计"></a>简单设计</h3><ul>
-<li>狗进狗队列，猫进猫队列</li>
-<li>狗的定义改一下，加一个index属性，标注它是第几个进的。猫同理。</li>
-<li>整体弹最早的狗或者猫，就比较他们的position。</li>
-<li>关键在于，我们不能修改上级的数据结构。</li>
-<li>所以，我们定义自己进队列的类。PetEnterQueue，这个类将宠物类封装进去，并增加一个计数项 count。不管进狗还是进猫，count都 ++ 。</li>
-<li>因此，我们的猫狗队列不再封装简单的猫狗对象，而且宠物队列对象。</li>
-<li>这样我们就可以判断猫或者狗在一起弹的时候谁更早一点。</li>
-</ul>
-<h3 id="不正确的设计"><a href="#不正确的设计" class="headerlink" title="不正确的设计"></a>不正确的设计</h3><ul>
-<li>用hashmap记录猫狗进队列，用key,value来做。</li>
-<li>但是同一只宠物，进队列怎么办？</li>
-<li>比如先给第一只猫喂水，再给第二只喂水。然后再给第一只喂水。用map，下一次第一只猫进来的时候，原来的key就丢掉了。</li>
-<li>而上面的方法封装的是自己实现的一个新对象，可以区分同一个宠物多次进队列的情况。</li>
+        <h3 id="在行列都排好序的矩阵中找数"><a href="#在行列都排好序的矩阵中找数" class="headerlink" title="在行列都排好序的矩阵中找数"></a>在行列都排好序的矩阵中找数</h3><p>给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。<br>例如：<br>0 1 2 7<br>2 5 6 7<br>4 6 7 8<br>5 7 8 9<br>如何k为7，返回true；如果k为6，返回false。</p>
+<p>要求：<br>时间复杂度为O(N + M)，额外空间复杂度为O(1)。</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
+<li>假设我们寻找5</li>
+<li>从右上角开始，从第4列着手。7是该列最小的，比5大，所以5不在该列。</li>
+<li>向左移动一列，从第三列着手。2是该行除7外最大的，比5小，所以该行也比11小。</li>
+<li>向下移动一行，因为6是比5大的，所以6所在列是不可能的。</li>
+<li>所以向左移动，找到了5</li>
+<li>显然，从右上角开始，大就向左移动，小就向下移动。</li>
+<li>原因是：若该数比k大，则该列无可能。该数比5小，则该行无可能。所以大向左移动，小向下移动。</li>
+<li>若是越界了，说明矩阵中没有要找的k值。</li>
+<li>我一共最多走 M（行） + N (列)步就能找到k值，所以时间复杂度是O(N + M)。</li>
 </ul>
 
       
@@ -433,8 +375,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/04/JavaScript经典算法-基数排序/" rel="next" title="JavaScript经典算法--基数排序（待续）">
-                <i class="fa fa-chevron-left"></i> JavaScript经典算法--基数排序（待续）
+              <a href="/2018/01/16/经典数据结构--哈希相关题目（二）/" rel="next" title="经典数据结构--哈希相关题目（二）">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--哈希相关题目（二）
               </a>
             
           </div>
@@ -442,10 +384,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/11/经典数据结构-一致性哈希/" rel="prev" title="经典数据结构--哈希">
-                经典数据结构--哈希 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -579,7 +517,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1"><span class="nav-number">1.</span> <span class="nav-text">问题1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计1"><span class="nav-number">2.</span> <span class="nav-text">设计1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计2"><span class="nav-number">3.</span> <span class="nav-text">设计2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题-2"><span class="nav-number">4.</span> <span class="nav-text">问题 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计"><span class="nav-number">5.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题-3"><span class="nav-number">6.</span> <span class="nav-text">问题 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计-1"><span class="nav-number">7.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题4"><span class="nav-number">8.</span> <span class="nav-text">问题4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计-2"><span class="nav-number">9.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弹出规则"><span class="nav-number">10.</span> <span class="nav-text">弹出规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题5"><span class="nav-number">11.</span> <span class="nav-text">问题5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计-3"><span class="nav-number">12.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题6"><span class="nav-number">13.</span> <span class="nav-text">问题6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单设计"><span class="nav-number">14.</span> <span class="nav-text">简单设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不正确的设计"><span class="nav-number">15.</span> <span class="nav-text">不正确的设计</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#在行列都排好序的矩阵中找数"><span class="nav-number">1.</span> <span class="nav-text">在行列都排好序的矩阵中找数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">2.</span> <span class="nav-text">流程</span></a></li></ol></div>
             
 
           </div>
