@@ -25,7 +25,7 @@
   <entry>
     <title><![CDATA[经典数据结构--链表（一）]]></title>
     <url>%2F2018%2F01%2F18%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E9%93%BE%E8%A1%A8%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[“之”字型打印给定两个有序链表的头指针head1和head2，打印两个链表的公共部分 流程 从头开始看两个链表上的值，谁小就往下走一位。 相等就共同向下走一位，并打印想等值 即谁小谁动，相等就一起走。]]></content>
+    <content type="text"><![CDATA[打印链表公共部分给定两个有序链表的头指针head1和head2，打印两个链表的公共部分 流程 从头开始看两个链表上的值，谁小就往下走一位。 相等就共同向下走一位，并打印想等值 即谁小谁动，相等就一起走。]]></content>
       <categories>
         <category>经典数据结构</category>
       </categories>
