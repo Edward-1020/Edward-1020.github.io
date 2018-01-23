@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[经典数据结构--链表（四）]]></title>
+    <url>%2F2018%2F01%2F23%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E9%93%BE%E8%A1%A8%EF%BC%88%E5%9B%9B%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[复制含有随机指针节点的链表题目：一种特殊的链表节点类描述如下：12345678910public class Node &#123; public int value; public Node next; public Node rand; public Node (int data) &#123; this.value = data &#125; &#125;&#125; 即本来 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; null，但是多了个随机指针，1的random指针可能指向3，2的random指针可能指向4等等。需要：拷贝一个这样的链表的结构，并且链表上的node的random指针也要拷贝下来，并返回新的头部。 思路 思路一（使用map）： 使用哈希map，将节点克隆下来：（1，1‘）、（2，2’）、（3，3‘），并在克隆的同时，让1’的next指针指向2‘，2’的next指针指向3‘。 现在我们看各节点random指针指向谁？遍历哈希表：假设拿到（2，2’），看2的random指针指向谁，就让2’的random指针指向谁的克隆节点。 这样遍历下来，就可以设置好所有的random节点，最后返回一个1‘。 思路二（调整链表替代map，不使用额外空间）： 克隆节点，并放在老节点后面，如做成这样的结构：1 -&gt; 1’ -&gt;2 -&gt; 2’ -&gt; 3 -&gt; 3’ -&gt; null。此时1，2，3的random指向没有变化。 此时1’，2‘，3’的random指向为null。 遍历大链表 1 -&gt; 1’ -&gt;2 -&gt; 2’ -&gt; 3 -&gt; 3’ -&gt; null。拿到（1，1‘），1的random我们是知道的，假设为3。此时3的next指向3‘，我们就很容易的将1’的random指针也指向了3‘。 然后将1’，2‘，3’分离出来。利用奇数头和偶数头，遍历时奇数是老链表，偶数是新链表。]]></content>
+      <categories>
+        <category>经典数据结构</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[经典数据结构--链表（三）]]></title>
     <url>%2F2018%2F01%2F22%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E9%93%BE%E8%A1%A8%EF%BC%88%E4%B8%89%EF%BC%89%2F</url>
     <content type="text"><![CDATA[将单向链表按某值划分成左边小、中间相等、右边大的形式题目：给定一个单向链表的头节点head，节点的值类型是整型，再给定一个整数pivot。实现一个调整链表的函数，将链表调整为左部分都是值小于pivot的节点，中间部分都是值等于pivot的节点，右部分都是值大于pivot的节点。除这个要求外，对调整后的节点顺序没有更多的要求。例如：链表 9 -&gt; 0 -&gt; 4 -&gt; 5 -&gt; 1，pivot = 3。调整后链表可以是 1 -&gt; 0 -&gt; 4 -&gt; 9 -&gt; 5，也可以是 0 -&gt; 1 -&gt; 9 -&gt; 5 -&gt; 4。总之，满足左部分都是小于3的节点，中间部分都是等于3的节点（本例中这个部分为空），右部分都是大于3的节点即可。对某部分内部的节点顺序不作要求。 思路 思路一： 3个队列。 小于放小于队列，等于放在等于队列，大于放在大于队列。 队列都倒出来连在一起。 思路二： 第一次遍历链表，找到第一个小于划分值的节点，作为一个头部。 第一次遍历链表，找到第一个等于划分值的节点，作为一个头部。 第一次遍历链表，找到第一个大于划分值的节点，作为一个头部。 第二次遍历链表，将遍历的点挂载到相应的头部后。 将这三个链表首尾相连。 链表题目oj使用容器，快；面试，工程使用内存少，空间少。]]></content>
@@ -34,8 +45,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[经典数据结构--哈希相关题目（四）]]></title>
-    <url>%2F2018%2F01%2F18%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E5%93%88%E5%B8%8C%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E5%9B%9B%EF%BC%89%2F</url>
+    <title><![CDATA[经典数据结构--矩阵相关题目（三）]]></title>
+    <url>%2F2018%2F01%2F18%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E4%B8%89%EF%BC%89%2F</url>
     <content type="text"><![CDATA[“之”字型打印给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：1 2 3 45 6 7 89 10 11 12“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12要求：额外空间复杂度为O(1)。 方案 宏观去想 从1开始建立坐标轴（x, y）。a朝x正坐标方向走，b朝y负坐标方向走。 第一次a到2，b到5，画出对角线：2，5 第二次，a到3，b向下走到9，画出对角线：3，6，9 如此这般，能得到各个对角线。 打印对角线，第一次打印从左下向右上，第二次从右上向左下，第三次从左下向右上。我们提供一个打印函数，给一个布尔值确定打印方向。]]></content>
       <categories>
         <category>经典数据结构</category>
@@ -45,8 +56,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[经典数据结构--哈希相关题目（三）]]></title>
-    <url>%2F2018%2F01%2F18%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E5%93%88%E5%B8%8C%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E4%B8%89%EF%BC%89%2F</url>
+    <title><![CDATA[经典数据结构--矩阵相关题目（二）]]></title>
+    <url>%2F2018%2F01%2F18%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
     <content type="text"><![CDATA[在行列都排好序的矩阵中找数给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。例如：0 1 2 72 5 6 74 6 7 85 7 8 9如何k为7，返回true；如果k为6，返回false。 要求：时间复杂度为O(N + M)，额外空间复杂度为O(1)。 流程 假设我们寻找5 从右上角开始，从第4列着手。7是该列最小的，比5大，所以5不在该列。 向左移动一列，从第三列着手。2是该行除7外最大的，比5小，所以该行也比11小。 向下移动一行，因为6是比5大的，所以6所在列是不可能的。 所以向左移动，找到了5 显然，从右上角开始，大就向左移动，小就向下移动。 原因是：若该数比k大，则该列无可能。该数比5小，则该行无可能。所以大向左移动，小向下移动。 若是越界了，说明矩阵中没有要找的k值。 我一共最多走 M（行） + N (列)步就能找到k值，所以时间复杂度是O(N + M)。]]></content>
       <categories>
         <category>经典数据结构</category>
@@ -56,8 +67,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[经典数据结构--哈希相关题目（二）]]></title>
-    <url>%2F2018%2F01%2F16%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E5%93%88%E5%B8%8C%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
+    <title><![CDATA[经典数据结构--矩阵相关题目（一）]]></title>
+    <url>%2F2018%2F01%2F16%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
     <content type="text"><![CDATA[转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列数++，到3 行数++，到3 列数–，到0 行数–，到0 关键代码12345678910111213141516171819202122232425262728293031323334353637383940414243// tR，tC，左上角的行数和列数// dR，dC，右下角的行数和列数public static void printEdge (init[][] m, int tR, int tC, int dR, int dC) &#123; // 只有一行，顺序打印 if (tR == dR) &#123; for (int i = tC; i &lt;= dC; i++) &#123; System.out.print(m[tR][i] + &quot; &quot;) &#125; &#125; else if (tC == dC) &#123; // 只有一列，按顺序打印列 for (int i = tR; i &lt;= dR; i++) &#123; System.out.print(m[i][tC] + &quot; &quot;) &#125; &#125; else &#123; int curC = tC int curR = tR // 列数不等，列数++ while (curC != dC) &#123; System.out.print(m[tR][curC] + &quot;&quot;) curC++ &#125; // 行数不等，行数++ while (curR != dR) &#123; System.out.print(m[curR][dc] + &quot;&quot;) curR++ &#125; // 列数不等，列数-- while (curC != tC) &#123; System.out.print(m[dR][curC] + &quot;&quot;) curC-- &#125; // 行数不等，行数-- while (curR != tR) &#123; System.out.print(m[curR][tC] + &quot;&quot;) curR-- &#125; &#125;&#125;// 打印完最外层后，左上角向右下方移动，右下角向左上方移动// 如此，就可以分圈结构的宏观调用// 一圈，一圈的分圈执行函数// 左上角的行大于右下角的行，或者左上角的列大于右下角的列，停止 将原矩阵顺时针转90°利用分圈结构写。]]></content>
       <categories>
         <category>经典数据结构</category>
@@ -67,8 +78,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[经典数据结构--哈希相关题目（一）]]></title>
-    <url>%2F2018%2F01%2F16%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E5%93%88%E5%B8%8C%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
+    <title><![CDATA[经典数据结构--哈希相关题目]]></title>
+    <url>%2F2018%2F01%2F16%2F%E7%BB%8F%E5%85%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E5%93%88%E5%B8%8C%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE%2F</url>
     <content type="text"><![CDATA[RandomPool结构设计一种结构，在该结构中有如下三个功能：insert(key)：将某个key加入到该结构，做到不重复加入。delete(key)：将原本在结构中的某个key移除。getRandom()：等概率随机返回结构中的任何一个key。要求：Insert，delete，getRandom方法的时间复杂度是O(1)。 思考 哈希表不负责等概率的随机返回一个key，只保证每个数据域后挂载的数据链是均匀增长的。不能单纯使用哈希表。 结构设计 有两个哈希表：map1和map2。 map1负责记录数据进来的次序index。例如向map1中加入一条数据”A”，则map中存有这么一条数据：(key：A，value：0)，表示数据“A”是进入的第0个数据。 map2负责记录的数据正好与map1相反。map2的key就是0，value就是A。 即map1和map2表示从key查或者从value查都能查到这个数据。 无删除行为（只有加，没有减）等概率随机返回Index对应的数据：假设整个哈希表的大小是26，那么size对应的值就是26。random函数，传进去26，等概率的返回[0，25]中的某个随机数。用这个随机数作为index，从map2中查出返回值。 含删除行为例如[0，1000]，共1001个数。[0，999]个给删除掉了。那么按照我们上述方法去随机取值，很大概率会random到空值。所以我们能够向上述这么做的前提是，所有Index都连在一起，没有空值。 例如 map1：（a, 0），（b, 1），（c, 2），（d, 3）。map2：（0, a），（1, b），（2, c），（3, d）。 删除 “b”，怎么删？将“d”，放在原来的(b, 1)的位置上，然后删掉最后一行。 这样，我们的index区域始终连续。 关键代码12345678910111213141516171819202122232425262728293031323334// 插入public void insert (K key) &#123; // 从keyIndexMap中先查是否存在这个数 if (!this.keyIndexMap.containsKey(key)) &#123; // 不存在，就将这个数加进去 this.keyIndexMap.put(key, this.size) this.indexKeyMap.put(this.size++, key) &#125;&#125;// 随机取public K getRandom () &#123; if (this.size === 0) &#123; return null &#125; // 从indexKeyMap中随机取 randomIndex = (int)(Math.random() * this.size) return this.indexKeyMap.get(randomIndex)&#125;// 删除行为// 通过size找最后一个元素// 将要删的放最后，最后的放要删的位置，删除最后一个public void delete (K key) &#123; if (this.keyIndexMap.containsKey(key)) &#123; int deleteIndex = this.keyIndexMap.get(key) int lastIndex = --this.size K lastKey = this.indexKeyMap.get(lastIndex) this.keyIndexMap.put(lastKey, deleteIndex) this.indexKeyMap.put(deleteIndex, lastKey) this.keyIndexMap.remove(key) this.indexKeyMap.remove(lastIndex) &#125;&#125;]]></content>
       <categories>
         <category>经典数据结构</category>

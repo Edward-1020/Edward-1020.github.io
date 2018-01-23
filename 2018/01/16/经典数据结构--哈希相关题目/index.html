@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在行列都排好序的矩阵中找数给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。例如：0 1 2 72 5 6 74 6 7 85 7 8 9如何k为7，返回true；如果k为6，返回false。 要求：时间复杂度为O(N + M)，">
+<meta name="description" content="RandomPool结构设计一种结构，在该结构中有如下三个功能：insert(key)：将某个key加入到该结构，做到不重复加入。delete(key)：将原本在结构中的某个key移除。getRandom()：等概率随机返回结构中的任何一个key。要求：Insert，delete，getRandom方法的时间复杂度是O">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--哈希相关题目（三）">
-<meta property="og:url" content="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（三）/index.html">
+<meta property="og:title" content="经典数据结构--哈希相关题目">
+<meta property="og:url" content="http://yoursite.com/2018/01/16/经典数据结构--哈希相关题目/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="在行列都排好序的矩阵中找数给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。例如：0 1 2 72 5 6 74 6 7 85 7 8 9如何k为7，返回true；如果k为6，返回false。 要求：时间复杂度为O(N + M)，额外空间复杂度为O(1)。 流程 假设我们寻找5 从右上角开始，从第4列着手。7">
+<meta property="og:description" content="RandomPool结构设计一种结构，在该结构中有如下三个功能：insert(key)：将某个key加入到该结构，做到不重复加入。delete(key)：将原本在结构中的某个key移除。getRandom()：等概率随机返回结构中的任何一个key。要求：Insert，delete，getRandom方法的时间复杂度是O(1)。 思考 哈希表不负责等概率的随机返回一个key，只保证每个数据域后挂载的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-22T05:47:17.384Z">
+<meta property="og:updated_time" content="2018-01-23T05:40:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--哈希相关题目（三）">
-<meta name="twitter:description" content="在行列都排好序的矩阵中找数给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。例如：0 1 2 72 5 6 74 6 7 85 7 8 9如何k为7，返回true；如果k为6，返回false。 要求：时间复杂度为O(N + M)，额外空间复杂度为O(1)。 流程 假设我们寻找5 从右上角开始，从第4列着手。7">
+<meta name="twitter:title" content="经典数据结构--哈希相关题目">
+<meta name="twitter:description" content="RandomPool结构设计一种结构，在该结构中有如下三个功能：insert(key)：将某个key加入到该结构，做到不重复加入。delete(key)：将原本在结构中的某个key移除。getRandom()：等概率随机返回结构中的任何一个key。要求：Insert，delete，getRandom方法的时间复杂度是O(1)。 思考 哈希表不负责等概率的随机返回一个key，只保证每个数据域后挂载的">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（三）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/16/经典数据结构--哈希相关题目/"/>
 
 
 
 
 
-  <title>经典数据结构--哈希相关题目（三） | 0.618:1</title>
+  <title>经典数据结构--哈希相关题目 | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（三）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/经典数据结构--哈希相关题目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--哈希相关题目（三）</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--哈希相关题目</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T14:00:10+08:00">
-                2018-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T14:00:10+08:00">
+                2018-01-16
               </time>
             
 
@@ -332,20 +332,24 @@
       
 
       
-        <h3 id="在行列都排好序的矩阵中找数"><a href="#在行列都排好序的矩阵中找数" class="headerlink" title="在行列都排好序的矩阵中找数"></a>在行列都排好序的矩阵中找数</h3><p>给定一个N * M的整型矩阵matrix和一个整数K，matrix的每一行和每一个列都是排好序的。实现一个函数，判断K是否在matrix中。<br>例如：<br>0 1 2 7<br>2 5 6 7<br>4 6 7 8<br>5 7 8 9<br>如何k为7，返回true；如果k为6，返回false。</p>
-<p>要求：<br>时间复杂度为O(N + M)，额外空间复杂度为O(1)。</p>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
-<li>假设我们寻找5</li>
-<li>从右上角开始，从第4列着手。7是该列最小的，比5大，所以5不在该列。</li>
-<li>向左移动一列，从第三列着手。2是该行除7外最大的，比5小，所以该行也比11小。</li>
-<li>向下移动一行，因为6是比5大的，所以6所在列是不可能的。</li>
-<li>所以向左移动，找到了5</li>
-<li>显然，从右上角开始，大就向左移动，小就向下移动。</li>
-<li>原因是：若该数比k大，则该列无可能。该数比5小，则该行无可能。所以大向左移动，小向下移动。</li>
-<li>若是越界了，说明矩阵中没有要找的k值。</li>
-<li>我一共最多走 M（行） + N (列)步就能找到k值，所以时间复杂度是O(N + M)。</li>
+        <h3 id="RandomPool结构"><a href="#RandomPool结构" class="headerlink" title="RandomPool结构"></a>RandomPool结构</h3><p>设计一种结构，在该结构中有如下三个功能：<br>insert(key)：将某个key加入到该结构，做到不重复加入。<br>delete(key)：将原本在结构中的某个key移除。<br>getRandom()：等概率随机返回结构中的任何一个key。<br>要求：<br>Insert，delete，getRandom方法的时间复杂度是O(1)。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ul>
+<li>哈希表不负责等概率的随机返回一个key，只保证每个数据域后挂载的数据链是均匀增长的。不能单纯使用哈希表。</li>
 </ul>
-
+<h3 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h3><ul>
+<li>有两个哈希表：map1和map2。</li>
+<li>map1负责记录数据进来的次序index。例如向map1中加入一条数据”A”，则map中存有这么一条数据：(key：A，value：0)，表示数据“A”是进入的第0个数据。</li>
+<li>map2负责记录的数据正好与map1相反。map2的key就是0，value就是A。</li>
+<li>即map1和map2表示从key查或者从value查都能查到这个数据。</li>
+</ul>
+<h3 id="无删除行为（只有加，没有减）"><a href="#无删除行为（只有加，没有减）" class="headerlink" title="无删除行为（只有加，没有减）"></a>无删除行为（只有加，没有减）</h3><p>等概率随机返回Index对应的数据：假设整个哈希表的大小是26，那么size对应的值就是26。random函数，传进去26，等概率的返回[0，25]中的某个随机数。用这个随机数作为index，从map2中查出返回值。</p>
+<h3 id="含删除行为"><a href="#含删除行为" class="headerlink" title="含删除行为"></a>含删除行为</h3><p>例如[0，1000]，共1001个数。[0，999]个给删除掉了。那么按照我们上述方法去随机取值，很大概率会random到空值。所以我们能够向上述这么做的前提是，所有Index都连在一起，没有空值。 </p>
+<ul>
+<li>例如 map1：（a, 0），（b, 1），（c, 2），（d, 3）。map2：（0, a），（1, b），（2, c），（3, d）。</li>
+<li>删除 “b”，怎么删？将“d”，放在原来的(b, 1)的位置上，然后删掉最后一行。</li>
+<li>这样，我们的index区域始终连续。</li>
+</ul>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">// 插入</span><br><span class="line">public void insert (K key) &#123;</span><br><span class="line">	// 从keyIndexMap中先查是否存在这个数</span><br><span class="line">	if (!this.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">		// 不存在，就将这个数加进去</span><br><span class="line">		this.keyIndexMap.put(key, this.size)</span><br><span class="line">		this.indexKeyMap.put(this.size++, key)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 随机取</span><br><span class="line">public K getRandom () &#123;</span><br><span class="line">	if (this.size === 0) &#123;</span><br><span class="line">		return null</span><br><span class="line">	&#125;</span><br><span class="line">	// 从indexKeyMap中随机取</span><br><span class="line">	randomIndex = (int)(Math.random() * this.size)</span><br><span class="line">	return this.indexKeyMap.get(randomIndex)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 删除行为</span><br><span class="line">// 通过size找最后一个元素</span><br><span class="line">// 将要删的放最后，最后的放要删的位置，删除最后一个</span><br><span class="line">public void delete (K key) &#123;</span><br><span class="line">	if (this.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">		int deleteIndex = this.keyIndexMap.get(key)</span><br><span class="line">		int lastIndex = --this.size</span><br><span class="line">		K lastKey = this.indexKeyMap.get(lastIndex)</span><br><span class="line">		this.keyIndexMap.put(lastKey, deleteIndex)</span><br><span class="line">		this.indexKeyMap.put(deleteIndex, lastKey)</span><br><span class="line">		this.keyIndexMap.remove(key)</span><br><span class="line">		this.indexKeyMap.remove(lastIndex)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -375,8 +379,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/16/经典数据结构--哈希相关题目（二）/" rel="next" title="经典数据结构--哈希相关题目（二）">
-                <i class="fa fa-chevron-left"></i> 经典数据结构--哈希相关题目（二）
+              <a href="/2018/01/11/经典数据结构-一致性哈希/" rel="next" title="经典数据结构--哈希">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--哈希
               </a>
             
           </div>
@@ -385,8 +389,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/18/经典数据结构--哈希相关题目（四）/" rel="prev" title="经典数据结构--哈希相关题目（四）">
-                经典数据结构--哈希相关题目（四） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/16/经典数据结构--矩阵相关题目（一）/" rel="prev" title="经典数据结构--矩阵相关题目（一）">
+                经典数据结构--矩阵相关题目（一） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -464,7 +468,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -521,7 +525,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#在行列都排好序的矩阵中找数"><span class="nav-number">1.</span> <span class="nav-text">在行列都排好序的矩阵中找数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">2.</span> <span class="nav-text">流程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RandomPool结构"><span class="nav-number">1.</span> <span class="nav-text">RandomPool结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构设计"><span class="nav-number">3.</span> <span class="nav-text">结构设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无删除行为（只有加，没有减）"><span class="nav-number">4.</span> <span class="nav-text">无删除行为（只有加，没有减）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#含删除行为"><span class="nav-number">5.</span> <span class="nav-text">含删除行为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">6.</span> <span class="nav-text">关键代码</span></a></li></ol></div>
             
 
           </div>

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="“之”字型打印给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：1 2     3   45 6     7   89 10 11 12“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12要求：额外空间复杂度为O(1)。 方案 宏观去想 从1开始建立坐标轴（x, y）。a朝x正坐">
+<meta name="description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--哈希相关题目（四）">
-<meta property="og:url" content="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（四）/index.html">
+<meta property="og:title" content="经典数据结构--矩阵相关题目（一）">
+<meta property="og:url" content="http://yoursite.com/2018/01/16/经典数据结构--矩阵相关题目（一）/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="“之”字型打印给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：1 2     3   45 6     7   89 10 11 12“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12要求：额外空间复杂度为O(1)。 方案 宏观去想 从1开始建立坐标轴（x, y）。a朝x正坐标方向走，b朝y负坐标方向走。 第一次a到2，b到5，画出对角线：2，5 第二次">
+<meta property="og:description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列数++，到3 行数++，到3 列数–，到0 行数–，到0  关键代码123456">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-18T05:31:59.000Z">
+<meta property="og:updated_time" content="2018-01-23T05:39:34.442Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--哈希相关题目（四）">
-<meta name="twitter:description" content="“之”字型打印给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：1 2     3   45 6     7   89 10 11 12“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12要求：额外空间复杂度为O(1)。 方案 宏观去想 从1开始建立坐标轴（x, y）。a朝x正坐标方向走，b朝y负坐标方向走。 第一次a到2，b到5，画出对角线：2，5 第二次">
+<meta name="twitter:title" content="经典数据结构--矩阵相关题目（一）">
+<meta name="twitter:description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列数++，到3 行数++，到3 列数–，到0 行数–，到0  关键代码123456">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（四）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/16/经典数据结构--矩阵相关题目（一）/"/>
 
 
 
 
 
-  <title>经典数据结构--哈希相关题目（四） | 0.618:1</title>
+  <title>经典数据结构--矩阵相关题目（一） | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/经典数据结构--哈希相关题目（四）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/经典数据结构--矩阵相关题目（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--哈希相关题目（四）</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--矩阵相关题目（一）</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T14:10:10+08:00">
-                2018-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T14:10:10+08:00">
+                2018-01-16
               </time>
             
 
@@ -332,15 +332,16 @@
       
 
       
-        <h3 id="“之”字型打印"><a href="#“之”字型打印" class="headerlink" title="“之”字型打印"></a>“之”字型打印</h3><p>给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：<br>1 2     3   4<br>5 6     7   8<br>9 10 11 12<br>“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12<br>要求：<br>额外空间复杂度为O(1)。</p>
-<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ul>
-<li>宏观去想</li>
-<li>从1开始建立坐标轴（x, y）。a朝x正坐标方向走，b朝y负坐标方向走。</li>
-<li>第一次a到2，b到5，画出对角线：2，5</li>
-<li>第二次，a到3，b向下走到9，画出对角线：3，6，9</li>
-<li>如此这般，能得到各个对角线。</li>
-<li>打印对角线，第一次打印从左下向右上，第二次从右上向左下，第三次从左下向右上。我们提供一个打印函数，给一个布尔值确定打印方向。</li>
+        <h3 id="转圈打印矩阵"><a href="#转圈打印矩阵" class="headerlink" title="转圈打印矩阵"></a>转圈打印矩阵</h3><p>给定一个整型矩阵matrix，请按照转圈的方式打印它<br>1 2 3 4<br>5 6 7 8<br>9 10 11 12<br>13 14 15 16<br>打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。<br>要求：额外空间复杂度为O(1)。</p>
+<h3 id="不要把视线局限在局部区域变化"><a href="#不要把视线局限在局部区域变化" class="headerlink" title="不要把视线局限在局部区域变化"></a>不要把视线局限在局部区域变化</h3><ul>
+<li>1点（0，0），16点（3，3）。</li>
+<li>列数++，到3</li>
+<li>行数++，到3</li>
+<li>列数–，到0</li>
+<li>行数–，到0</li>
 </ul>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">// tR，tC，左上角的行数和列数</span><br><span class="line">// dR，dC，右下角的行数和列数</span><br><span class="line">public static void printEdge (init[][] m, int tR, int tC, int dR, int dC) &#123;</span><br><span class="line">	// 只有一行，顺序打印</span><br><span class="line">	if (tR == dR) &#123;</span><br><span class="line">		for (int i = tC; i &lt;= dC; i++) &#123;</span><br><span class="line">		    System.out.print(m[tR][i] + &quot; &quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else if (tC == dC) &#123;</span><br><span class="line">	    // 只有一列，按顺序打印列</span><br><span class="line">		for (int i = tR; i &lt;= dR; i++) &#123;</span><br><span class="line">			System.out.print(m[i][tC] + &quot; &quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		int curC = tC</span><br><span class="line">		int curR = tR</span><br><span class="line">		// 列数不等，列数++</span><br><span class="line">		while (curC != dC) &#123;</span><br><span class="line">			System.out.print(m[tR][curC] + &quot;&quot;)</span><br><span class="line">			curC++</span><br><span class="line">		&#125;</span><br><span class="line">		// 行数不等，行数++</span><br><span class="line">		while (curR != dR) &#123;</span><br><span class="line">			System.out.print(m[curR][dc] + &quot;&quot;)</span><br><span class="line">			curR++</span><br><span class="line">		&#125;</span><br><span class="line">		// 列数不等，列数--</span><br><span class="line">		while (curC != tC) &#123;</span><br><span class="line">			System.out.print(m[dR][curC] + &quot;&quot;)</span><br><span class="line">			curC--</span><br><span class="line">		&#125;</span><br><span class="line">		// 行数不等，行数--</span><br><span class="line">		while (curR != tR) &#123;</span><br><span class="line">			System.out.print(m[curR][tC] + &quot;&quot;)</span><br><span class="line">			curR--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打印完最外层后，左上角向右下方移动，右下角向左上方移动</span><br><span class="line">// 如此，就可以分圈结构的宏观调用</span><br><span class="line">// 一圈，一圈的分圈执行函数</span><br><span class="line">// 左上角的行大于右下角的行，或者左上角的列大于右下角的列，停止</span><br></pre></td></tr></table></figure>
+<h3 id="将原矩阵顺时针转90°"><a href="#将原矩阵顺时针转90°" class="headerlink" title="将原矩阵顺时针转90°"></a>将原矩阵顺时针转90°</h3><p>利用分圈结构写。</p>
 
       
     </div>
@@ -371,8 +372,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/18/经典数据结构--哈希相关题目（三）/" rel="next" title="经典数据结构--哈希相关题目（三）">
-                <i class="fa fa-chevron-left"></i> 经典数据结构--哈希相关题目（三）
+              <a href="/2018/01/16/经典数据结构--哈希相关题目/" rel="next" title="经典数据结构--哈希相关题目">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--哈希相关题目
               </a>
             
           </div>
@@ -381,8 +382,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/18/经典数据结构--链表（一）/" rel="prev" title="经典数据结构--链表（一）">
-                经典数据结构--链表（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/18/经典数据结构--矩阵相关题目（二）/" rel="prev" title="经典数据结构--矩阵相关题目（二）">
+                经典数据结构--矩阵相关题目（二） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -460,7 +461,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +518,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#“之”字型打印"><span class="nav-number">1.</span> <span class="nav-text">“之”字型打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案"><span class="nav-number">2.</span> <span class="nav-text">方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#转圈打印矩阵"><span class="nav-number">1.</span> <span class="nav-text">转圈打印矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要把视线局限在局部区域变化"><span class="nav-number">2.</span> <span class="nav-text">不要把视线局限在局部区域变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">3.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将原矩阵顺时针转90°"><span class="nav-number">4.</span> <span class="nav-text">将原矩阵顺时针转90°</span></a></li></ol></div>
             
 
           </div>
