@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="归并排序的扩展（小盒问题）什么是小盒问题？[3, 5, 1, 4, 6]。3的左边比3小的是0；5的左边比5小的是3；1的左边比1小的是0；4的左边比4小的是3；6的左边比6小的是3、5、1、4。那么小盒为0 + 3 + 0 + 3 + （3 + 5 + 1 + 4） = 20。即每个数的左边比它本身小的数的值累加起来">
+<meta name="description" content="贪心问题题目：一块金条切成两半，是需要花费和长度数值一样的铜板的。比如长度为20的金条，不管切成长度多大的两半，都要花费20个铜板。一群人想整分整块金条，怎么分最省铜板？ 例如，给定数组[10, 20, 30]，代表一共三个人，整块金条长度为10 + 20 + 30 = 60.金条要分成10, 20, 30三个部分。如">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript经典排序算法--归并排序的扩展">
-<meta property="og:url" content="http://yoursite.com/2017/12/04/归并排序的扩展（小盒问题）/index.html">
+<meta property="og:title" content="经典数据结构--堆的应用（二）">
+<meta property="og:url" content="http://yoursite.com/2018/01/30/经典数据结构--堆的应用（二）/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="归并排序的扩展（小盒问题）什么是小盒问题？[3, 5, 1, 4, 6]。3的左边比3小的是0；5的左边比5小的是3；1的左边比1小的是0；4的左边比4小的是3；6的左边比6小的是3、5、1、4。那么小盒为0 + 3 + 0 + 3 + （3 + 5 + 1 + 4） = 20。即每个数的左边比它本身小的数的值累加起来。 笨方法看每个数左边有哪些比它小的数，累加起来。是一个时间复杂度为O(n ^">
+<meta property="og:description" content="贪心问题题目：一块金条切成两半，是需要花费和长度数值一样的铜板的。比如长度为20的金条，不管切成长度多大的两半，都要花费20个铜板。一群人想整分整块金条，怎么分最省铜板？ 例如，给定数组[10, 20, 30]，代表一共三个人，整块金条长度为10 + 20 + 30 = 60.金条要分成10, 20, 30三个部分。如果，先把长度60的金条分成10和50，花费60。再把长度50的金条分成20和30">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-23T05:15:32.000Z">
+<meta property="og:image" content="https://i.loli.net/2018/01/30/5a6ffc98d26e8.png">
+<meta property="og:updated_time" content="2018-01-30T05:29:26.193Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript经典排序算法--归并排序的扩展">
-<meta name="twitter:description" content="归并排序的扩展（小盒问题）什么是小盒问题？[3, 5, 1, 4, 6]。3的左边比3小的是0；5的左边比5小的是3；1的左边比1小的是0；4的左边比4小的是3；6的左边比6小的是3、5、1、4。那么小盒为0 + 3 + 0 + 3 + （3 + 5 + 1 + 4） = 20。即每个数的左边比它本身小的数的值累加起来。 笨方法看每个数左边有哪些比它小的数，累加起来。是一个时间复杂度为O(n ^">
+<meta name="twitter:title" content="经典数据结构--堆的应用（二）">
+<meta name="twitter:description" content="贪心问题题目：一块金条切成两半，是需要花费和长度数值一样的铜板的。比如长度为20的金条，不管切成长度多大的两半，都要花费20个铜板。一群人想整分整块金条，怎么分最省铜板？ 例如，给定数组[10, 20, 30]，代表一共三个人，整块金条长度为10 + 20 + 30 = 60.金条要分成10, 20, 30三个部分。如果，先把长度60的金条分成10和50，花费60。再把长度50的金条分成20和30">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/30/5a6ffc98d26e8.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/04/归并排序的扩展（小盒问题）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/30/经典数据结构--堆的应用（二）/"/>
 
 
 
 
 
-  <title>JavaScript经典排序算法--归并排序的扩展 | 0.618:1</title>
+  <title>经典数据结构--堆的应用（二） | 0.618:1</title>
   
 
 
@@ -243,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/04/归并排序的扩展（小盒问题）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/经典数据结构--堆的应用（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript经典排序算法--归并排序的扩展</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--堆的应用（二）</h1>
         
 
         <div class="post-meta">
@@ -272,8 +274,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T23:50:37+08:00">
-                2017-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T13:14:13+08:00">
+                2018-01-30
               </time>
             
 
@@ -295,8 +297,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript经典算法/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript经典算法</span>
+                  <a href="/categories/经典数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">经典数据结构</span>
                   </a>
                 </span>
 
@@ -332,26 +334,34 @@
       
 
       
-        <h3 id="归并排序的扩展（小盒问题）"><a href="#归并排序的扩展（小盒问题）" class="headerlink" title="归并排序的扩展（小盒问题）"></a>归并排序的扩展（小盒问题）</h3><h3 id="什么是小盒问题？"><a href="#什么是小盒问题？" class="headerlink" title="什么是小盒问题？"></a>什么是小盒问题？</h3><p>[3, 5, 1, 4, 6]。3的左边比3小的是0；5的左边比5小的是3；1的左边比1小的是0；4的左边比4小的是3；6的左边比6小的是3、5、1、4。那么小盒为0 + 3 + 0 + 3 + （3 + 5 + 1 + 4） = 20。<br>即每个数的左边比它本身小的数的值累加起来。</p>
-<h3 id="笨方法"><a href="#笨方法" class="headerlink" title="笨方法"></a>笨方法</h3><p>看每个数左边有哪些比它小的数，累加起来。是一个时间复杂度为O(n ^ 2) 的问题。</p>
-<h3 id="改写归并排序解小盒问题-–-举个例子："><a href="#改写归并排序解小盒问题-–-举个例子：" class="headerlink" title="改写归并排序解小盒问题 – 举个例子："></a>改写归并排序解小盒问题 – 举个例子：</h3><ul>
-<li>例子1：[3,4,5,2,6,7] =&gt; 3 | 4 | 5 | 2 | 6 | 7<br>3 | 4 merge =&gt; 产生小盒  3<br>34 | 5 merge =&gt; 产生小盒 4 5</li>
-<li>由例子1 引出 例子2：3 4 5 6 | 7 8 9 10 ，两组数 merge</li>
+        <h3 id="贪心问题"><a href="#贪心问题" class="headerlink" title="贪心问题"></a>贪心问题</h3><p>题目：<br>一块金条切成两半，是需要花费和长度数值一样的铜板的。比如长度为20的金条，不管切成长度多大的两半，都要花费20个铜板。一群人想整分整块金条，怎么分最省铜板？</p>
+<p>例如，给定数组[10, 20, 30]，代表一共三个人，整块金条长度为10 + 20 + 30 = 60.金条要分成10, 20, 30三个部分。<br>如果，先把长度60的金条分成10和50，花费60。<br>再把长度50的金条分成20和30，花费50。<br>一共花费110铜板。</p>
+<p>但是，如果<br>先把长度60的金条分成30和30，花费60。<br>再把长度30的金条分成10和20，花费30。<br>一共花费90铜板。</p>
+<p>输入一个数组，返回分割的最小代价。</p>
+<h3 id="实质"><a href="#实质" class="headerlink" title="实质"></a>实质</h3><ul>
+<li>怎样生成一棵树，堆顶的值最小？</li>
+<li>一棵树堆顶的代价，是左孩子 + 右孩子。</li>
+<li>例如：60的金条要分成10, 20, 30三个部分。用树表示开销最小的方式是：</li>
+<li><img src="https://i.loli.net/2018/01/30/5a6ffc98d26e8.png" alt=""></li>
+<li>那么整个的代价就是非叶节点的代价，60 + 30 = 90。</li>
+<li>即：把所有的数组成一个小根堆，每次弹两个。这弹出的两个生成一个新的节点加回去。再弹出两个，再生成一个新的节点加回去。</li>
+<li>即这个小根堆，最小的两个节点先合，再合大的。</li>
+<li>这就是哈弗曼树生成。</li>
 </ul>
-<ol>
-<li>两组数merge，因为3 比 7 小，所以3 一定比4个数小！<br>因此有一个小盒是  4 * 3</li>
-<li>此时放入help[]数组中一个3</li>
-<li>即整个问题变成了看看在merge的过程中，看左边与右边比较时，右边有多少个比左边的这个数大。就有多少个小盒，就可求值。</li>
-</ol>
-<ul>
-<li>上述做法正确的原因？<br>在每一次merge的时候，两个数字比较之后会放在同一区域内，下一次不会再相遇。</li>
+<h3 id="生成哈弗曼树举例"><a href="#生成哈弗曼树举例" class="headerlink" title="生成哈弗曼树举例"></a>生成哈弗曼树举例</h3><ul>
+<li>堆：1，3，6，9，15。</li>
+<li>弹出1，3；生成节点4。</li>
+<li>将4放回堆中。</li>
+<li>4，6，9，15。</li>
+<li>弹出4，6；生成节点10。</li>
+<li>将10放回堆中。</li>
+<li>9，10，15。</li>
+<li>19，15</li>
+<li>34</li>
+<li>最终得到的代价一定是最低的。</li>
 </ul>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function mergeSort (arr, l, r) &#123;</span><br><span class="line">	if (l === r) &#123;</span><br><span class="line">		return 0</span><br><span class="line">	&#125;</span><br><span class="line">	let mid = l + (r - l) &gt;&gt; 1</span><br><span class="line">	//左边的小盒 + 右边的小盒 + 整个的小盒</span><br><span class="line">	return mergeSort(arr, l, mid) + mergeSort(arr, mid + 1, r) + merge(arr, l, mid, r)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function merge(arr, l, mid ,r) &#123;</span><br><span class="line">	let help = []</span><br><span class="line">	let i = 0</span><br><span class="line">	let p1 = l</span><br><span class="line">	let p2 = m + 1</span><br><span class="line">	let res = 0</span><br><span class="line">	while(p1 &lt;= m &amp;&amp; p2 &lt;= r) &#123;</span><br><span class="line">		//如果右边的比左边的大，那有右边有多少个比左边的大，就有多少个小盒</span><br><span class="line">		res += arr[p1] &lt; arr[p2] ? (r - p2 + 1) * arr[p1] : 0</span><br><span class="line">		help[i++] =  arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++]</span><br><span class="line">	&#125;</span><br><span class="line">	while(p1 &lt;= m) &#123;</span><br><span class="line">		help[i++] =  arr[p1++]</span><br><span class="line">	&#125;</span><br><span class="line">	while(p2 &lt;= r) &#123;</span><br><span class="line">		help[i++] = arr[p2++]</span><br><span class="line">	&#125;</span><br><span class="line">	for (i = 0; i &lt; help.length; i++) &#123;</span><br><span class="line">		arr[l + i] = help[i]	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="扩展2：逆序对问题"><a href="#扩展2：逆序对问题" class="headerlink" title="扩展2：逆序对问题"></a>扩展2：逆序对问题</h3><ul>
-<li>什么是逆序对问题？<br>在一个数组中，存在多少对，前面的数比后面的数大？<br>例如：[4, 3, 5, 7, 0]，4和3，4和0，3和0，5和0，7和0是一对。</li>
-<li>所以逆序对问题是：右边有多少个数比自己小？本质和小盒问题是一样的。</li>
-</ul>
-
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>合并的时候不分顺序，使用哈夫曼编码。</p>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// pQ树的size大于1，小于等于1无法抛出两个节点合并</span><br><span class="line">while (pQ.size() &gt; 1) &#123;</span><br><span class="line">	// pQ树抛出两次</span><br><span class="line">	cur = pQ.poll() + pQ.poll()</span><br><span class="line">	// 代价是非叶节点的值，所以加上</span><br><span class="line">	sum += cur</span><br><span class="line">	// 新的值扔回pQ</span><br><span class="line">	pQ.add(cur)</span><br><span class="line">&#125;</span><br><span class="line">return sum</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -381,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/04/归并排序/" rel="next" title="JavaScript经典排序算法--归并排序">
-                <i class="fa fa-chevron-left"></i> JavaScript经典排序算法--归并排序
+              <a href="/2018/01/29/经典数据结构--堆的应用（一）/" rel="next" title="经典数据结构--堆的应用(一)">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--堆的应用(一)
               </a>
             
           </div>
@@ -390,10 +400,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/07/堆排序/" rel="prev" title="JavaScript经典排序算法--堆排序">
-                JavaScript经典排序算法--堆排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -527,7 +533,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序的扩展（小盒问题）"><span class="nav-number">1.</span> <span class="nav-text">归并排序的扩展（小盒问题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是小盒问题？"><span class="nav-number">2.</span> <span class="nav-text">什么是小盒问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#笨方法"><span class="nav-number">3.</span> <span class="nav-text">笨方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改写归并排序解小盒问题-–-举个例子："><span class="nav-number">4.</span> <span class="nav-text">改写归并排序解小盒问题 – 举个例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">5.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展2：逆序对问题"><span class="nav-number">6.</span> <span class="nav-text">扩展2：逆序对问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心问题"><span class="nav-number">1.</span> <span class="nav-text">贪心问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实质"><span class="nav-number">2.</span> <span class="nav-text">实质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成哈弗曼树举例"><span class="nav-number">3.</span> <span class="nav-text">生成哈弗曼树举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">4.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">5.</span> <span class="nav-text">关键代码</span></a></li></ol></div>
             
 
           </div>
