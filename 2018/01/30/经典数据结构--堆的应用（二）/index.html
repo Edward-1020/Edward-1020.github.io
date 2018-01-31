@@ -88,7 +88,7 @@
 <meta property="og:description" content="贪心问题题目：一块金条切成两半，是需要花费和长度数值一样的铜板的。比如长度为20的金条，不管切成长度多大的两半，都要花费20个铜板。一群人想整分整块金条，怎么分最省铜板？ 例如，给定数组[10, 20, 30]，代表一共三个人，整块金条长度为10 + 20 + 30 = 60.金条要分成10, 20, 30三个部分。如果，先把长度60的金条分成10和50，花费60。再把长度50的金条分成20和30">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/01/30/5a6ffc98d26e8.png">
-<meta property="og:updated_time" content="2018-01-30T05:29:26.193Z">
+<meta property="og:updated_time" content="2018-01-31T04:44:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="经典数据结构--堆的应用（二）">
 <meta name="twitter:description" content="贪心问题题目：一块金条切成两半，是需要花费和长度数值一样的铜板的。比如长度为20的金条，不管切成长度多大的两半，都要花费20个铜板。一群人想整分整块金条，怎么分最省铜板？ 例如，给定数组[10, 20, 30]，代表一共三个人，整块金条长度为10 + 20 + 30 = 60.金条要分成10, 20, 30三个部分。如果，先把长度60的金条分成10和50，花费60。再把长度50的金条分成20和30">
@@ -362,6 +362,8 @@
 </ul>
 <h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>合并的时候不分顺序，使用哈夫曼编码。</p>
 <h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// pQ树的size大于1，小于等于1无法抛出两个节点合并</span><br><span class="line">while (pQ.size() &gt; 1) &#123;</span><br><span class="line">	// pQ树抛出两次</span><br><span class="line">	cur = pQ.poll() + pQ.poll()</span><br><span class="line">	// 代价是非叶节点的值，所以加上</span><br><span class="line">	sum += cur</span><br><span class="line">	// 新的值扔回pQ</span><br><span class="line">	pQ.add(cur)</span><br><span class="line">&#125;</span><br><span class="line">return sum</span><br></pre></td></tr></table></figure>
+<p>注意，优先级队列默认是小根堆，利用比较器可将小根堆转换为大根堆。当生成优先级队列时，将你的comparator扔进去，它就会按照你的想法组织是大根堆还是小根堆。</p>
+
       
     </div>
     
@@ -400,6 +402,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/31/经典数据结构--堆的应用（三）/" rel="prev" title="经典数据结构--堆的应用（二）">
+                经典数据结构--堆的应用（二） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -476,7 +482,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
