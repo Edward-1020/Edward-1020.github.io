@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="打印折痕题目：纸条，由下到上对折三次，折痕方向为：1：下2：下上3：下上下上。这是一棵树，头节点是下折痕，每一棵左子树头节点都是下折痕，每一棵右子树头节点都是上折痕。打印所有子树，就是先左再中再右的中序遍历。 关键代码1234567891011121314151617public static void printAl">
+<meta name="description" content="题目二叉树先序、中序、后序递归遍历 ###二叉树 先序遍历（递归） 对于每个节点。先打印当前节点，再打印左子树，再打印右子树。 递归的将函数的所有信息压栈，系统就能清楚的知道函数执行到哪一行，变量是什么。12345678910public static void preOrderRecur(Node head) &am">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--二叉树：打印折痕">
-<meta property="og:url" content="http://yoursite.com/2018/02/01/经典数据结构--二叉树：打印折痕/index.html">
+<meta property="og:title" content="经典数据结构--二叉树：遍历（递归）">
+<meta property="og:url" content="http://yoursite.com/2018/02/02/经典数据结构--二叉树：递归遍历/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="打印折痕题目：纸条，由下到上对折三次，折痕方向为：1：下2：下上3：下上下上。这是一棵树，头节点是下折痕，每一棵左子树头节点都是下折痕，每一棵右子树头节点都是上折痕。打印所有子树，就是先左再中再右的中序遍历。 关键代码1234567891011121314151617public static void printAllFolds (int N) &amp;#123;	printProcess(1, N,">
+<meta property="og:description" content="题目二叉树先序、中序、后序递归遍历 ###二叉树 先序遍历（递归） 对于每个节点。先打印当前节点，再打印左子树，再打印右子树。 递归的将函数的所有信息压栈，系统就能清楚的知道函数执行到哪一行，变量是什么。12345678910public static void preOrderRecur(Node head) &amp;#123;	if (head == null) &amp;#123;		return;	&amp;#">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2018/02/01/5a72a472d4936.png">
-<meta property="og:image" content="https://i.loli.net/2018/02/02/5a73ea560cb49.png">
-<meta property="og:updated_time" content="2018-02-02T04:51:54.000Z">
+<meta property="og:updated_time" content="2018-02-02T05:14:54.053Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--二叉树：打印折痕">
-<meta name="twitter:description" content="打印折痕题目：纸条，由下到上对折三次，折痕方向为：1：下2：下上3：下上下上。这是一棵树，头节点是下折痕，每一棵左子树头节点都是下折痕，每一棵右子树头节点都是上折痕。打印所有子树，就是先左再中再右的中序遍历。 关键代码1234567891011121314151617public static void printAllFolds (int N) &amp;#123;	printProcess(1, N,">
-<meta name="twitter:image" content="https://i.loli.net/2018/02/01/5a72a472d4936.png">
+<meta name="twitter:title" content="经典数据结构--二叉树：遍历（递归）">
+<meta name="twitter:description" content="题目二叉树先序、中序、后序递归遍历 ###二叉树 先序遍历（递归） 对于每个节点。先打印当前节点，再打印左子树，再打印右子树。 递归的将函数的所有信息压栈，系统就能清楚的知道函数执行到哪一行，变量是什么。12345678910public static void preOrderRecur(Node head) &amp;#123;	if (head == null) &amp;#123;		return;	&amp;#">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/01/经典数据结构--二叉树：打印折痕/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/02/经典数据结构--二叉树：递归遍历/"/>
 
 
 
 
 
-  <title>经典数据结构--二叉树：打印折痕 | 0.618:1</title>
+  <title>经典数据结构--二叉树：遍历（递归） | 0.618:1</title>
   
 
 
@@ -246,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/01/经典数据结构--二叉树：打印折痕/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/经典数据结构--二叉树：递归遍历/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -263,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--二叉树：打印折痕</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--二叉树：遍历（递归）</h1>
         
 
         <div class="post-meta">
@@ -275,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-01T13:14:13+08:00">
-                2018-02-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-02T13:14:13+08:00">
+                2018-02-02
               </time>
             
 
@@ -335,29 +332,15 @@
       
 
       
-        <h3 id="打印折痕"><a href="#打印折痕" class="headerlink" title="打印折痕"></a>打印折痕</h3><p>题目：<br>纸条，由下到上对折三次，折痕方向为：<br>1：下<br>2：下上<br>3：下上下上。<br>这是一棵树，头节点是下折痕，每一棵左子树头节点都是下折痕，每一棵右子树头节点都是上折痕。<br>打印所有子树，就是先左再中再右的中序遍历。</p>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static void printAllFolds (int N) &#123;</span><br><span class="line">	printProcess(1, N, true)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void printProcess(int i, int N, boolean down) &#123;</span><br><span class="line">	// 当前节点是第i层，总共是n层</span><br><span class="line">	// 当前节点是下折痕嘛？是 down为true，不是 down为false</span><br><span class="line">	// 先进入true树，返回当前节点打印。再进入false树，返回当前节点打印。在返回true树。。。</span><br><span class="line">	// 即这是一个遍历二叉树的过程。</span><br><span class="line">	// 这也是为什么我们总结：这是一棵树，头节点是下折痕，每一棵左子树头节点都是下折痕，每一棵右子树头节点都是上折痕。</span><br><span class="line">	if (i &gt; N) &#123;</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line">	printProcess(i + 1, N, true)</span><br><span class="line">	System.out.println(down ? &quot;down&quot; : &quot;up&quot;)</span><br><span class="line">	printProcess(i + 1，N, false)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="递归的优势"><a href="#递归的优势" class="headerlink" title="递归的优势"></a>递归的优势</h3><ul>
-<li>我们从当前true1树，先进入true2树，在返回当前true1树的过程中,true2树所占用的空间被垃圾收集掉。</li>
-<li><img src="https://i.loli.net/2018/02/01/5a72a472d4936.png" alt=""></li>
-<li>如图所示，我们所占用的空间永远是常数级，是二叉树的高度。</li>
-<li>这种递归的遍历二叉树，可以极大的减少我们空间的损耗。</li>
-<li>而如果我们准备一个超大数组，去填下down或up，数组会爆栈。</li>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>二叉树先序、中序、后序递归遍历</p>
+<p>###二叉树</p>
+<h3 id="先序遍历（递归）"><a href="#先序遍历（递归）" class="headerlink" title="先序遍历（递归）"></a>先序遍历（递归）</h3><ul>
+<li>对于每个节点。先打印当前节点，再打印左子树，再打印右子树。</li>
+<li>递归的将函数的所有信息压栈，系统就能清楚的知道函数执行到哪一行，变量是什么。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void preOrderRecur(Node head) &#123;</span><br><span class="line">	if (head == null) &#123;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	System.out.print(head.value + &quot; &quot;);</span><br><span class="line">	// 递归左子树</span><br><span class="line">	preOrderRecur(head.left);</span><br><span class="line">	// 递归右子树</span><br><span class="line">	preOrderRecur(head.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>###非递归</p>
-<ul>
-<li><img src="https://i.loli.net/2018/02/02/5a73ea560cb49.png" alt=""></li>
-<li>自己做个栈压true或者false</li>
-<li>到达第一个true，1，L1（第一层），压入</li>
-<li>到达第二个true，1，L2（第二层），压入</li>
-<li>到达第三个true，1，L3（第三层），压入</li>
-<li>到达第四个true，1，L4（第四层），压入，但是return了，所以弹出。</li>
-<li>返回第三个true，2（第二次碰到它）,L3。打印</li>
-<li>达到第四个false，弹出。</li>
-<li>返回第三个true，2（第三次碰到它）,L3。弹出。</li>
-<li>再到第二个true，2（第二次碰到它）,L2。打印。</li>
-<li>非递归其实就是自己给自己压栈出栈。</li>
-</ul>
+<h3 id="中序遍历（递归）"><a href="#中序遍历（递归）" class="headerlink" title="中序遍历（递归）"></a>中序遍历（递归）</h3><p>先左，再中，再右<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void inOrderRecur(Node head) &#123;</span><br><span class="line">	if (head == null) &#123;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	inOrderRecur(head.left);</span><br><span class="line">	System.out.print(head.value + &quot; &quot;);</span><br><span class="line">	inOrderRecur(head.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="后序遍历（递归）"><a href="#后序遍历（递归）" class="headerlink" title="后序遍历（递归）"></a>后序遍历（递归）</h3><p>先左，再右，再中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void posOrderRecur(Node head) &#123;</span><br><span class="line">	if (head == null) &#123;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	posOrderRecur(head.left);</span><br><span class="line">	posOrderRecur(head.right);</span><br><span class="line">	System.out.print(head.value + &quot; &quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -388,8 +371,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/31/经典数据结构--堆的应用（三）/" rel="next" title="经典数据结构--堆的应用（三）">
-                <i class="fa fa-chevron-left"></i> 经典数据结构--堆的应用（三）
+              <a href="/2018/02/01/经典数据结构--二叉树：打印折痕/" rel="next" title="经典数据结构--二叉树：打印折痕">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--二叉树：打印折痕
               </a>
             
           </div>
@@ -397,10 +380,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/02/经典数据结构--二叉树：递归遍历/" rel="prev" title="经典数据结构--二叉树：遍历（递归）">
-                经典数据结构--二叉树：遍历（递归） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -534,7 +513,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#打印折痕"><span class="nav-number">1.</span> <span class="nav-text">打印折痕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">2.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归的优势"><span class="nav-number">3.</span> <span class="nav-text">递归的优势</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先序遍历（递归）"><span class="nav-number">2.</span> <span class="nav-text">先序遍历（递归）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中序遍历（递归）"><span class="nav-number">3.</span> <span class="nav-text">中序遍历（递归）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后序遍历（递归）"><span class="nav-number">4.</span> <span class="nav-text">后序遍历（递归）</span></a></li></ol></div>
             
 
           </div>
