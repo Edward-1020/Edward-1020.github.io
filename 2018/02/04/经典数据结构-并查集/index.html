@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="并查集概念 一开始N个节点自成一个集合，即 N个集合。 并查集有find函数，find(a, b)，find节点a,b,并查集告诉你这两个点是不是属于同一个集合的。  unit函数，unit(a, b)，a所在的集合和b所在的集合合并。  并查集的单个集合的结构 是一个单链表类型。 每个节点自己构成一个集合，就是节点上">
+<meta name="keywords" content="web前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="经典数据结构--并查集">
+<meta property="og:url" content="http://yoursite.com/2018/02/04/经典数据结构-并查集/index.html">
+<meta property="og:site_name" content="0.618:1">
+<meta property="og:description" content="并查集概念 一开始N个节点自成一个集合，即 N个集合。 并查集有find函数，find(a, b)，find节点a,b,并查集告诉你这两个点是不是属于同一个集合的。  unit函数，unit(a, b)，a所在的集合和b所在的集合合并。  并查集的单个集合的结构 是一个单链表类型。 每个节点自己构成一个集合，就是节点上的指针指向自己。 如果一个集合上有多个节点，例如：集合中有a和c，a的指针指向c">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-03T19:38:03.333Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="经典数据结构--并查集">
+<meta name="twitter:description" content="并查集概念 一开始N个节点自成一个集合，即 N个集合。 并查集有find函数，find(a, b)，find节点a,b,并查集告诉你这两个点是不是属于同一个集合的。  unit函数，unit(a, b)，a所在的集合和b所在的集合合并。  并查集的单个集合的结构 是一个单链表类型。 每个节点自己构成一个集合，就是节点上的指针指向自己。 如果一个集合上有多个节点，例如：集合中有a和c，a的指针指向c">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/04/经典数据结构-并查集/"/>
+
+
+
+
+
+  <title>经典数据结构--并查集 | 0.618:1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0.618:1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/04/经典数据结构-并查集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yyyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0.618:1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">经典数据结构--并查集</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T03:37:13+08:00">
+                2018-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/经典数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">经典数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="并查集概念"><a href="#并查集概念" class="headerlink" title="并查集概念"></a>并查集概念</h3><ul>
+<li>一开始N个节点自成一个集合，即 N个集合。</li>
+<li>并查集有find函数，find(a, b)，find节点a,b,并查集告诉你这两个点是不是属于同一个集合的。 </li>
+<li>unit函数，unit(a, b)，a所在的集合和b所在的集合合并。</li>
+</ul>
+<h3 id="并查集的单个集合的结构"><a href="#并查集的单个集合的结构" class="headerlink" title="并查集的单个集合的结构"></a>并查集的单个集合的结构</h3><ul>
+<li>是一个单链表类型。</li>
+<li>每个节点自己构成一个集合，就是节点上的指针指向自己。</li>
+<li>如果一个集合上有多个节点，例如：集合中有a和c，a的指针指向c，c的指针指向自己。我们查找a属于哪个集合，就顺着a的指针向上找，找到了一个节点的指针指向了自己，即c。那么c就是这个集合的代表节点。</li>
+<li>如果我想查a和b是否属于一个集合。a找到自己集合的代表节点，b找到自己集合的代表节点，看看这两个节点是否是一个节点，是，则属于一个集合。</li>
+<li>并查集在fin的过程中有一个优化：a -&gt; b -&gt; c -&gt; d -&gt; e，e指向自己。在找a和c是否属于一个节点时，会将该链表扁平化。变为a -&gt; e，b -&gt; e，c -&gt; e，d -&gt; e。<br>-合并：假设一个并查集是A，另外一个并查集是B。如何SizeA &gt; SizeB，B就挂在A底下，反之A就挂在B底下。</li>
+<li>综上所致，便是并查集</li>
+</ul>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><p>用HashMap实现了单向链表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">public static class DisjointSets &#123;</span><br><span class="line">	// key是一个node，value是这个node的father</span><br><span class="line">	public HashMap&lt;Node, Node&gt; fatherMap;</span><br><span class="line">	// 一个节点node，所在集合的大小</span><br><span class="line">	public HashMap&lt;Node, Integer&gt; rankMap;</span><br><span class="line">	</span><br><span class="line">	// 建立一个fatherMap和rankMap</span><br><span class="line">	public DisjointSets () &#123;</span><br><span class="line">		fatherMap = new HashMap(Node, Node)();</span><br><span class="line">		rankMap = new HashMap(Node, Integer)();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 初始化</span><br><span class="line">	public void makeSets(List&lt;Node&gt; nodes) &#123;</span><br><span class="line">		fatherMap.clear()</span><br><span class="line">		rankMap.clear()</span><br><span class="line">		// 针对每一个node</span><br><span class="line">		for (Node node : nodes) &#123;</span><br><span class="line">			// 将每一个node的父，设为自己</span><br><span class="line">			fatherMap.put(node, node)</span><br><span class="line">			// 则，自己所在的集合size就是1</span><br><span class="line">			rankMap.put(node, 1)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Node findFather(Node n) &#123;</span><br><span class="line">		// 在fatherMap中拿到节点n的father</span><br><span class="line">		Node father = fatherMap.get(n)</span><br><span class="line">		// father是不是自己</span><br><span class="line">		if (father != n) &#123;</span><br><span class="line">			// 找father的fahter，即不断向上查找</span><br><span class="line">			father = findFather(father)</span><br><span class="line">		&#125;</span><br><span class="line">		// 将当前节点n的father设为不断向上查找后的father</span><br><span class="line">		fatherMap.put(n, father)</span><br><span class="line">		return father</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 在使用isSameSet和union两个方法时，请保证输入的方法时maSet过的</span><br><span class="line">	// 节点a,节点b是否在同一个集合</span><br><span class="line">	public boolean isSameSet(Node a, Node b) &#123;</span><br><span class="line">		return findFather(a) == findFather(b)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 合并</span><br><span class="line">	public void union(Node a, Node b) &#123;</span><br><span class="line">		if (a == null || b == null) &#123;</span><br><span class="line">			return</span><br><span class="line">		&#125;</span><br><span class="line">		// 拿到a节点所在结合的代表节点</span><br><span class="line">		Node aFather = findFather(a)</span><br><span class="line">		// 拿到b节点所在结合的代表节点</span><br><span class="line">		Node bFather = findFather(b)</span><br><span class="line">		if (aFather != bFather) &#123;</span><br><span class="line">			// 拿到集合的size</span><br><span class="line">			int aFrank = rankMap.get(aFather)</span><br><span class="line">			int bFrank = rankMap.get(bFather)</span><br><span class="line">			// 如果aFrank代表的集合的size小，a就挂在b下面</span><br><span class="line">			if (aFrank &lt;= bFrank) &#123;</span><br><span class="line">				// 如果aFather的father节点改为bFather</span><br><span class="line">				fatherMap.put(aFather, bFather)</span><br><span class="line">				// 且，bFather所代表的集合的size变大</span><br><span class="line">				rankMap.put(bFather, aFrank + bFrank)</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				fatherMap.put(bFather, aFather)</span><br><span class="line">				rankMap.put(aFather, aFrank + bFrank)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ul>
+<li>如果你有N个节点，你想查a，b两个节点是否在同一个集合这个操作，这个操作执行了k次，集合合并的这个操作的次数是f。并且k + f （使用并查集的次数是k + f）是O(n)级别的情况下，则单次时间复杂度是O（1）。</li>
+<li>即，你使用并查集查两节点是否是在同一集合的次数是1，不保证时间复杂度是O(1)。但是次数如果多了，则单次时间复杂度是O（1）。</li>
+<li>即，并查集的方法调用次数上去了，单次时间复杂度平均下来是O（1）。</li>
+</ul>
+<h3 id="应用范围"><a href="#应用范围" class="headerlink" title="应用范围"></a>应用范围</h3><ul>
+<li>所有节点Node必须建立成集合</li>
+<li>要查询的两个节点来自这些成立的集合</li>
+<li>两个集合快速合并和两个节点是否来自于同一个集合，这两个操作的次数上去了O(N)，单次操作（快速合并和两个节点是否来自于同一个集合）时间复杂度是O（1）。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web前端/" rel="tag"># web前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/03/经典数据结构--查找后继节点/" rel="next" title="经典数据结构--查找后继节点">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--查找后继节点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yyyx</p>
+              <p class="site-description motion-element" itemprop="description">iezzuyoung@gmail.com</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集概念"><span class="nav-number">1.</span> <span class="nav-text">并查集概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集的单个集合的结构"><span class="nav-number">2.</span> <span class="nav-text">并查集的单个集合的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.</span> <span class="nav-text">实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用范围"><span class="nav-number">5.</span> <span class="nav-text">应用范围</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yyyx</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  
+    <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+</body>
+</html>

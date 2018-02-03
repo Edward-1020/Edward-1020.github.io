@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目 二叉树先序、中序、后序递归遍历。 非递归版本非常重要，弄懂细节。  ###二叉树的递归行为理解  例如先序：递归是打印以head为头的整棵树，但是打印的方式是先打印当前，再打印左子树，再打印右子树。 那么先序遍历改为非递归，即先将我的头部加到栈里去。先加右，再加左。再拿出一个打印。一次循环。 中序遍历，是将节点的">
+<meta name="description" content="题目 二叉树先序、中序、后序递归遍历。 非递归版本非常重要，弄懂细节。  二叉树的递归行为理解 例如先序：递归是打印以head为头的整棵树，但是打印的方式是先打印当前，再打印左子树，再打印右子树。 那么先序遍历改为非递归，即先将我的头部加到栈里去。先加右，再加左。再拿出一个打印。一次循环。 中序遍历，是将节点的所有左边">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="经典数据结构--二叉树：遍历（非递归）">
 <meta property="og:url" content="http://yoursite.com/2018/02/03/经典数据结构--二叉树：非递归遍历/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="题目 二叉树先序、中序、后序递归遍历。 非递归版本非常重要，弄懂细节。  ###二叉树的递归行为理解  例如先序：递归是打印以head为头的整棵树，但是打印的方式是先打印当前，再打印左子树，再打印右子树。 那么先序遍历改为非递归，即先将我的头部加到栈里去。先加右，再加左。再拿出一个打印。一次循环。 中序遍历，是将节点的所有左边界加入到栈里去，然后弹出栈。1.当head来到null，就弹出，弹出后，">
+<meta property="og:description" content="题目 二叉树先序、中序、后序递归遍历。 非递归版本非常重要，弄懂细节。  二叉树的递归行为理解 例如先序：递归是打印以head为头的整棵树，但是打印的方式是先打印当前，再打印左子树，再打印右子树。 那么先序遍历改为非递归，即先将我的头部加到栈里去。先加右，再加左。再拿出一个打印。一次循环。 中序遍历，是将节点的所有左边界加入到栈里去，然后弹出栈。1.当head来到null，就弹出，弹出后，head">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-03T05:52:35.000Z">
+<meta property="og:updated_time" content="2018-02-03T08:07:22.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="经典数据结构--二叉树：遍历（非递归）">
-<meta name="twitter:description" content="题目 二叉树先序、中序、后序递归遍历。 非递归版本非常重要，弄懂细节。  ###二叉树的递归行为理解  例如先序：递归是打印以head为头的整棵树，但是打印的方式是先打印当前，再打印左子树，再打印右子树。 那么先序遍历改为非递归，即先将我的头部加到栈里去。先加右，再加左。再拿出一个打印。一次循环。 中序遍历，是将节点的所有左边界加入到栈里去，然后弹出栈。1.当head来到null，就弹出，弹出后，">
+<meta name="twitter:description" content="题目 二叉树先序、中序、后序递归遍历。 非递归版本非常重要，弄懂细节。  二叉树的递归行为理解 例如先序：递归是打印以head为头的整棵树，但是打印的方式是先打印当前，再打印左子树，再打印右子树。 那么先序遍历改为非递归，即先将我的头部加到栈里去。先加右，再加左。再拿出一个打印。一次循环。 中序遍历，是将节点的所有左边界加入到栈里去，然后弹出栈。1.当head来到null，就弹出，弹出后，head">
 
 
 
@@ -336,8 +336,7 @@
 <li>二叉树先序、中序、后序递归遍历。</li>
 <li>非递归版本非常重要，弄懂细节。</li>
 </ul>
-<p>###二叉树的递归行为理解</p>
-<ul>
+<h3 id="二叉树的递归行为理解"><a href="#二叉树的递归行为理解" class="headerlink" title="二叉树的递归行为理解"></a>二叉树的递归行为理解</h3><ul>
 <li>例如先序：递归是打印以head为头的整棵树，但是打印的方式是先打印当前，再打印左子树，再打印右子树。</li>
 <li>那么先序遍历改为非递归，即先将我的头部加到栈里去。先加右，再加左。再拿出一个打印。一次循环。</li>
 <li>中序遍历，是将节点的所有左边界加入到栈里去，然后弹出栈。1.当head来到null，就弹出，弹出后，head就指向右孩子。2.head不为null，就加左边界，同时head再指向左。</li>
@@ -471,7 +470,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -528,7 +527,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先序遍历（非递归）"><span class="nav-number">2.</span> <span class="nav-text">先序遍历（非递归）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中序遍历（非递归）"><span class="nav-number">3.</span> <span class="nav-text">中序遍历（非递归）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后序遍历（非递归）"><span class="nav-number">4.</span> <span class="nav-text">后序遍历（非递归）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的递归行为理解"><span class="nav-number">2.</span> <span class="nav-text">二叉树的递归行为理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先序遍历（非递归）"><span class="nav-number">3.</span> <span class="nav-text">先序遍历（非递归）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中序遍历（非递归）"><span class="nav-number">4.</span> <span class="nav-text">中序遍历（非递归）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后序遍历（非递归）"><span class="nav-number">5.</span> <span class="nav-text">后序遍历（非递归）</span></a></li></ol></div>
             
 
           </div>
