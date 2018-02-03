@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目输入：参数1，正数数组costs参数2，正数数组profits参数3，正数k参数4，正数m costs[i]表示i号项目的花费profits[i]表示i号项目在扣除花费之后还能挣到的钱（利润）k表示你不能并行，只能串行的最多做k个项目m表示你初始的资金 说明：你每做完一个项目，马上获得的收益，可以支持你去做下一个项">
+<meta name="description" content="题目在二叉树中找到一个节点的后继节点现在有一种新的二叉树节点类型如下：12345678910public class Node &amp;#123;	public int value;	public Node left;	public Node right;	public Node parent;	public Nod">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--堆的应用（三）">
-<meta property="og:url" content="http://yoursite.com/2018/01/31/经典数据结构--堆的应用（三）/index.html">
+<meta property="og:title" content="经典数据结构--查找后继节点">
+<meta property="og:url" content="http://yoursite.com/2018/02/03/经典数据结构--查找后继节点/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="题目输入：参数1，正数数组costs参数2，正数数组profits参数3，正数k参数4，正数m costs[i]表示i号项目的花费profits[i]表示i号项目在扣除花费之后还能挣到的钱（利润）k表示你不能并行，只能串行的最多做k个项目m表示你初始的资金 说明：你每做完一个项目，马上获得的收益，可以支持你去做下一个项目。 输出：你最后获得的最大钱数。 举例 有项目[1000，500，200，10">
+<meta property="og:description" content="题目在二叉树中找到一个节点的后继节点现在有一种新的二叉树节点类型如下：12345678910public class Node &amp;#123;	public int value;	public Node left;	public Node right;	public Node parent;	public Node(int data) &amp;#123;		this.value = data;    &amp;#">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-31T06:09:15.924Z">
+<meta property="og:updated_time" content="2018-02-03T06:40:58.441Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--堆的应用（三）">
-<meta name="twitter:description" content="题目输入：参数1，正数数组costs参数2，正数数组profits参数3，正数k参数4，正数m costs[i]表示i号项目的花费profits[i]表示i号项目在扣除花费之后还能挣到的钱（利润）k表示你不能并行，只能串行的最多做k个项目m表示你初始的资金 说明：你每做完一个项目，马上获得的收益，可以支持你去做下一个项目。 输出：你最后获得的最大钱数。 举例 有项目[1000，500，200，10">
+<meta name="twitter:title" content="经典数据结构--查找后继节点">
+<meta name="twitter:description" content="题目在二叉树中找到一个节点的后继节点现在有一种新的二叉树节点类型如下：12345678910public class Node &amp;#123;	public int value;	public Node left;	public Node right;	public Node parent;	public Node(int data) &amp;#123;		this.value = data;    &amp;#">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/31/经典数据结构--堆的应用（三）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/03/经典数据结构--查找后继节点/"/>
 
 
 
 
 
-  <title>经典数据结构--堆的应用（三） | 0.618:1</title>
+  <title>经典数据结构--查找后继节点 | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/31/经典数据结构--堆的应用（三）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/03/经典数据结构--查找后继节点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--堆的应用（三）</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--查找后继节点</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-31T13:30:13+08:00">
-                2018-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T14:51:13+08:00">
+                2018-02-03
               </time>
             
 
@@ -332,28 +332,32 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>输入：<br>参数1，正数数组costs<br>参数2，正数数组profits<br>参数3，正数k<br>参数4，正数m</p>
-<p>costs[i]表示i号项目的花费<br>profits[i]表示i号项目在扣除花费之后还能挣到的钱（利润）<br>k表示你不能并行，只能串行的最多做k个项目<br>m表示你初始的资金</p>
-<p>说明：你每做完一个项目，马上获得的收益，可以支持你去做下一个项目。</p>
-<p>输出：你最后获得的最大钱数。</p>
-<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><ul>
-<li>有项目[1000，500，200，100，50，10]，有本金[100]。</li>
-<li>此时你能做的项目是[100，50，10]。那么你选择收益最大的项目做。</li>
-<li>例如，你做完50的项目收益最大，做完你的总钱数变成200。</li>
-<li>即：总钱数去解锁你可以做的项目，解锁的项目中选择利润最大的，加入你的总钱数。继续解锁，再选择再做。</li>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>在二叉树中找到一个节点的后继节点<br>现在有一种新的二叉树节点类型如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Node &#123;</span><br><span class="line">	public int value;</span><br><span class="line">	public Node left;</span><br><span class="line">	public Node right;</span><br><span class="line">	public Node parent;</span><br><span class="line"></span><br><span class="line">	public Node(int data) &#123;</span><br><span class="line">		this.value = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="后继节点"><a href="#后继节点" class="headerlink" title="后继节点"></a>后继节点</h3><ul>
+<li>如果一棵树中，按照中序遍历得到一个序列。</li>
+<li>那么，一个节点的后继节点。是在这个序列中，这个节点的下一个节点。</li>
+<li>例如:<br>1<br>2 3<br>4 5 6 7</li>
+<li>中序遍历为：4251637。</li>
+<li>2的后继节点是5。</li>
 </ul>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">public class Node &#123;</span><br><span class="line">	// 利润</span><br><span class="line">	public int p</span><br><span class="line">	// 花费</span><br><span class="line">	public int c</span><br><span class="line">	public Node (int p, int c) &#123;</span><br><span class="line">		this.p = p</span><br><span class="line">		this.c = c</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 第一个比较器，按照花费最低组成一个小根堆</span><br><span class="line">// 即谁的花费小放在最上面</span><br><span class="line">public static class MinCostComparator implements Comparator&lt;Node&gt; &#123;</span><br><span class="line">	public int compare(Node o1, Node o2) &#123;</span><br><span class="line">		return o1.c - o2.c</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 按照收益最大，组成大根堆</span><br><span class="line">// 即谁的收益大放在最上面</span><br><span class="line">public static class MaxProfitComparator implements Comparator&lt;Node&gt; &#123;</span><br><span class="line">	public int compare(Node o1, Node o2) &#123;</span><br><span class="line">		return o2.p - o1.p</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 开始做项目</span><br><span class="line">public static int findMaximizedCapital(int k, int w, int [] Profits, int[] Capital) &#123;</span><br><span class="line">	// 将所有的项目收益和花费组成新的node放入数组中</span><br><span class="line">	Node[] nodes = new Node[Profits.length]</span><br><span class="line">	for (int i = 0; i &lt; Profits.length; i++) &#123;</span><br><span class="line">		nodes[i] = new Node(Profits[i], Capital[i])</span><br><span class="line">	&#125;</span><br><span class="line">	// 生成一个代价小就往上的小根堆</span><br><span class="line">	PriorityQueue&lt;Node&gt; minCostQ = new PriorityQueue&lt;&gt;(new MinCostComparator())</span><br><span class="line">	// 生成一个收益大就往上的大根堆</span><br><span class="line">	PriorityQueue&lt;Node&gt; maxProfitQ = new PriorityQueue&lt;&gt;(new MaxProfitComparator())</span><br><span class="line">	// 根据代价建立小根堆</span><br><span class="line">	for (int i = 0; i &lt; nodes.length; i++) &#123;</span><br><span class="line">		minCostQ.add(nodes[i])</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i = 0; i &lt; k; i++) &#123;</span><br><span class="line">		// 如果小根堆，堆顶项目的花费小于我的总资金w</span><br><span class="line">		while (!minCostQ.isEmpty() &amp;&amp; minCostQ.peek().c &lt;= w) &#123;</span><br><span class="line">		//那么这个项目从我的小根堆里弹出，放在我的大根堆中</span><br><span class="line">		// 但是这个大根堆是按照收益排的</span><br><span class="line">		// 这是一个解锁池，堆顶是收益最大的项目</span><br><span class="line">		maxProfitQ.add(minCostQ.poll())</span><br><span class="line">		&#125;</span><br><span class="line">		// 解锁池为空，无项目可解锁，无项目可干，返回</span><br><span class="line">		if (maxProfitQ.isEmpty()) &#123;</span><br><span class="line">			return w</span><br><span class="line">		&#125;</span><br><span class="line">		// 选择一个收益最大的做（堆顶），累计收益</span><br><span class="line">		w += maxProfitQ.poll().p</span><br><span class="line">	&#125;</span><br><span class="line">	return w</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><ul>
+<li>一定要中序遍历才能知道后继节点吗？</li>
+<li><ol>
+<li>例如节点S,如果有右子树，那它的后继节点一定是其右子树最左的边界。</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>如果无右子树。如果S是节点T的左孩子。那么根据中序遍历，左中右，需要打印T，即T是S的后继节点，T是S的父节点，S是T的左孩子。</li>
+<li>如果无右子树。如果S是节点T的右孩子，且T也是右孩子，S找T，T找他的父，如果他的父也只右孩子，继续向上找。如果找到一个节点A，A是我父的左孩子，那么A的父是S的后继节点。</li>
+</ol>
 <ul>
-<li>即总资金去解锁项目放入解锁池，做完以后。总资金再去解锁项目放入解锁池，再做。</li>
-<li>即锁池只关注代价最小，解锁池只关注代价最大。<h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3></li>
-<li><p>建所有项目O(N)。</p>
-</li>
-<li><p>建立小根堆O(N)。</p>
-</li>
-<li><p>从小根堆弹，进入大根堆O(logN)。</p>
-</li>
-<li><p>总的复杂度：O(N*logN)。</p>
-</li>
+<li>上述情况中的S,其实本质是某个父节点的左子树的终结点，所以我们要找到这个某个父节点。它就是S的后继节点。</li>
+<li>这样的找法，不需要遍历二叉树，你的代价仅仅是当前节点距离这个节点的距离。</li>
+</ul>
+<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public static Node getSuccessorNode (Node node) &#123;</span><br><span class="line">	if (node === null) &#123;</span><br><span class="line">		return node</span><br><span class="line">	&#125;</span><br><span class="line">	// 说明节点有右子树，后继节点在右子树的左边界</span><br><span class="line">	if (node.right != null) &#123;</span><br><span class="line">		return getLeftMost(node.right)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		// 找到父</span><br><span class="line">		Node parent = node.parent</span><br><span class="line">		// 节点是不是父节点的左孩子，不是，向上循环找到一个节点是父节点的左孩子。后继节点就是这个节点的父节点</span><br><span class="line">		// 节点是左孩子，后继节点就是这个节点的父节点</span><br><span class="line">		// parent不为null，是因为有的节点没有后继节点。例如一棵树的最后一个节点。</span><br><span class="line">		while (parent != null &amp;&amp; parent.left != node) &#123;</span><br><span class="line">			node = parent</span><br><span class="line">			parent = node.parent</span><br><span class="line">		&#125;</span><br><span class="line">		return parent</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 一个节点最左的节点</span><br><span class="line">public static Node getLeftMost (Node node) &#123;</span><br><span class="line">	if (node === null) &#123;</span><br><span class="line">		return node</span><br><span class="line">	&#125;</span><br><span class="line">	while (node.left != null) &#123;</span><br><span class="line">		node = node.left</span><br><span class="line">	&#125;</span><br><span class="line">	return parent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其实我们可以看出来，一个二叉树结构定了，一切都定了。我们只是规定如何去遍历它（先中后序），如果找一些概念上的节点（后继节点）。</li>
 </ul>
 
       
@@ -385,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/30/经典数据结构--堆的应用（二）/" rel="next" title="经典数据结构--堆的应用（二）">
-                <i class="fa fa-chevron-left"></i> 经典数据结构--堆的应用（二）
+              <a href="/2018/02/03/经典数据结构--二叉树：非递归遍历/" rel="next" title="经典数据结构--二叉树：遍历（非递归）">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--二叉树：遍历（非递归）
               </a>
             
           </div>
@@ -394,10 +398,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/01/经典数据结构--二叉树：打印折痕/" rel="prev" title="经典数据结构--二叉树：打印折痕">
-                经典数据结构--二叉树：打印折痕 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -531,7 +531,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-number">2.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">3.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度"><span class="nav-number">4.</span> <span class="nav-text">复杂度</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后继节点"><span class="nav-number">2.</span> <span class="nav-text">后继节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">3.</span> <span class="nav-text">解题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">4.</span> <span class="nav-text">关键代码</span></a></li></ol></div>
             
 
           </div>
