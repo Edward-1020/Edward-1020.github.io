@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值">
+<meta name="description" content="概念 A是一个大的系统，100亿个网页，每个url占用64个字节。B也是一个系统，里面也有url。我想要查询B中的url是否在A中。 最差：将A中的url都做成哈希表，需要大量的空间。 布隆过滤器可以看做一个集合，集合很省空间，可以用于查询。 布隆过滤器有失误率。如果url是A集合的，布隆过滤器一定返回true。如果u">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--一致性哈希">
-<meta property="og:url" content="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/index.html">
+<meta property="og:title" content="经典数据结构--布隆过滤器">
+<meta property="og:url" content="http://yoursite.com/2018/02/04/经典数据结构-布隆过滤器/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。 输入域无限，">
+<meta property="og:description" content="概念 A是一个大的系统，100亿个网页，每个url占用64个字节。B也是一个系统，里面也有url。我想要查询B中的url是否在A中。 最差：将A中的url都做成哈希表，需要大量的空间。 布隆过滤器可以看做一个集合，集合很省空间，可以用于查询。 布隆过滤器有失误率。如果url是A集合的，布隆过滤器一定返回true。如果url不属于A集合，布隆过滤器也可能返回true。 100G内存，利用布隆过滤器2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-23T05:43:47.802Z">
+<meta property="og:updated_time" content="2018-02-04T13:15:51.610Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--一致性哈希">
-<meta name="twitter:description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。 输入域无限，">
+<meta name="twitter:title" content="经典数据结构--布隆过滤器">
+<meta name="twitter:description" content="概念 A是一个大的系统，100亿个网页，每个url占用64个字节。B也是一个系统，里面也有url。我想要查询B中的url是否在A中。 最差：将A中的url都做成哈希表，需要大量的空间。 布隆过滤器可以看做一个集合，集合很省空间，可以用于查询。 布隆过滤器有失误率。如果url是A集合的，布隆过滤器一定返回true。如果url不属于A集合，布隆过滤器也可能返回true。 100G内存，利用布隆过滤器2">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/04/经典数据结构-布隆过滤器/"/>
 
 
 
 
 
-  <title>经典数据结构--一致性哈希 | 0.618:1</title>
+  <title>经典数据结构--布隆过滤器 | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/04/经典数据结构-布隆过滤器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--一致性哈希</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--布隆过滤器</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T14:00:10+08:00">
-                2018-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T20:37:13+08:00">
+                2018-02-04
               </time>
             
 
@@ -332,56 +332,38 @@
       
 
       
-        <h3 id="函数是哈希函数的要求"><a href="#函数是哈希函数的要求" class="headerlink" title="函数是哈希函数的要求"></a>函数是哈希函数的要求</h3><ul>
-<li>要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。</li>
-<li>为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。</li>
-<li>要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。</li>
-<li>输入域无限，输出域有限，输入参数确定则输出值也确定，这3点会导致，不同的输入会有相同的输出。</li>
-<li>要求三：输入域无穷大，映射到一个较小的范围S（2^64 - 2^ 128）。我们要求：所有的输入值，映射后会均匀的摊在整个S上。例如：输出域S是0，1，2，不管你的输入值如何。如果输入是0，1，2 … 98，我们传进来99个值。则输出值是0的差不多33个，1差不多33个，2差不多33个。</li>
-<li>我们称“要求三”是指：哈希函数的离散性，一个哈希函数设计的好不好就是看它的离散性好不好。</li>
+        <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>A是一个大的系统，100亿个网页，每个url占用64个字节。B也是一个系统，里面也有url。我想要查询B中的url是否在A中。</li>
+<li>最差：将A中的url都做成哈希表，需要大量的空间。</li>
+<li>布隆过滤器可以看做一个集合，集合很省空间，可以用于查询。</li>
+<li>布隆过滤器有失误率。如果url是A集合的，布隆过滤器一定返回true。如果url不属于A集合，布隆过滤器也可能返回true。</li>
+<li>100G内存，利用布隆过滤器20G可以放下，失误率只有十万分之一。</li>
 </ul>
-<h3 id="哈希值取模（-）"><a href="#哈希值取模（-）" class="headerlink" title="哈希值取模（%）"></a>哈希值取模（%）</h3><ul>
-<li>一个参数经过哈希函数F后得到一个哈希值去模（%）m。大量的参数经过哈希函数F后得到一个哈希值去%m。最终，得到的返回值会均匀分布在m - 1 上。</li>
-<li>即哈希值在我们的S域上指均摊的，我们将S域给模上M，返回值就均摊在m - 1上。</li>
+<h3 id="谈布隆过滤器一定有这几个参数"><a href="#谈布隆过滤器一定有这几个参数" class="headerlink" title="谈布隆过滤器一定有这几个参数"></a>谈布隆过滤器一定有这几个参数</h3><ul>
+<li>1.样本量N。2.失误率的上限P。</li>
+<li>有N和P，就可以设计一个布隆过滤器。与单样本无关。</li>
 </ul>
-<h3 id="经典缓存结构"><a href="#经典缓存结构" class="headerlink" title="经典缓存结构"></a>经典缓存结构</h3><ul>
-<li>三台服务器构成的一个服务器集群。上面存key-value形式的信息，我希望这三台服务器负载均衡。</li>
-<li>机器分别为0，1，2。来了个信息A[key, value]。信息A经过哈希，得到的哈希值再经过一个模3。得到的模值，出来0，到机器0上；出来1，到机器1上；出来2，到机器2上。</li>
-<li>插入的逻辑同上，查询的逻辑同理。</li>
-<li>因为哈希函数的特性，我们的信息插入时是均匀分摊在这3台机器上的，我们的查询也是均匀分摊在这三台机器上的。所以，负载均衡。</li>
+<h3 id="一个样本添加到布隆过滤器的过程"><a href="#一个样本添加到布隆过滤器的过程" class="headerlink" title="一个样本添加到布隆过滤器的过程"></a>一个样本添加到布隆过滤器的过程</h3><ul>
+<li>布隆过滤器大小是m，每一位就是1bit信息。1字节byte是8bit，布隆过滤器是bit组成的数组。m/8是布隆过滤器所需要的字节数byte（实际统计的空间）。</li>
+<li>一个单样本通过一个哈希函数，算出一个返回值A。这个返回值A去模上m所得到的数B。这个B代表这个单样本在布隆过滤器的某个位置上。</li>
+<li>如果一个样本经过k个哈希函数，得到k个返回值，均模上m得到相应的结果。这些结果都在布隆过滤器上的占据一个位置。</li>
 </ul>
-<h3 id="经典缓存结构副作用"><a href="#经典缓存结构副作用" class="headerlink" title="经典缓存结构副作用"></a>经典缓存结构副作用</h3><ul>
-<li>一旦加减机器，我们原来分摊在机器上的数据都需要变化。数据迁移的代价十分高。</li>
+<h3 id="如何检查某个样本是否在布隆过滤器上"><a href="#如何检查某个样本是否在布隆过滤器上" class="headerlink" title="如何检查某个样本是否在布隆过滤器上"></a>如何检查某个样本是否在布隆过滤器上</h3><ul>
+<li>一个样本经过同样的k个哈希函数得到的返回值再模上m，得到这些值在布隆过滤器上占有的位置和它应该占有的位置相同，则在。如果有一个位置不同，则不在。</li>
 </ul>
-<h3 id="解决方式-一致性哈希"><a href="#解决方式-一致性哈希" class="headerlink" title="解决方式-一致性哈希"></a>解决方式-一致性哈希</h3><ul>
-<li>假设哈希函数f，以下所有的操作使用的哈希函数均一致。</li>
-<li>假设输出域0 ~ 2^128，作为一个环。0~2^128均匀分布在环上，即2^128的下一个位置是0，0的下一个位置是1。</li>
-<li>假设有三台机器:M1，M2，M3，上面有自己的mac地址或其它专有信息。将这个信息生成一个hash值，认为该hash值代表这三台机器。</li>
-<li>此时，这个环上有了3台机器。</li>
-<li>在环上插值时，假设值为A。将A经过哈希得到的哈希值打在环上，哈希值在环上顺时针遇到的第一个机器便是它应该存放的地方。</li>
-<li>此时，每个机器负责环上的某段数据。</li>
-<li>加机器。原来是m1，m2，m3。在环上加入m4（m1，m2，m4，m3），此时不需要将所有的数据都迁移。我们将原本属于m3的部分数据，让它属于m4就可以了。</li>
-<li>m4机器删除，此时将m4上的数据顺时针给到下一个机器m3上，就可以了。<h3 id="如何顺时针找机器"><a href="#如何顺时针找机器" class="headerlink" title="如何顺时针找机器"></a>如何顺时针找机器</h3></li>
-<li>机器是环装结构，假设机器的哈希值分别是1，5，10。在前端，插入一个值，它的哈希值是6。那么它就可以在1-5-10中找到它的位置。</li>
+<h3 id="布隆过滤器的局限性"><a href="#布隆过滤器的局限性" class="headerlink" title="布隆过滤器的局限性"></a>布隆过滤器的局限性</h3><ul>
+<li>布隆过滤器的m很小，无法判断。</li>
+<li>m很大，则准确性极高。</li>
+<li>即哈希函数的个数和布隆过滤器的大小是哈希函数的关键。</li>
 </ul>
-<h3 id="上面做法的问题"><a href="#上面做法的问题" class="headerlink" title="上面做法的问题"></a>上面做法的问题</h3><ul>
-<li>利用哈希函数的离散性，哈希在分割环时，在数据量很大的情况下，才会出现均摊。数据量小的时候，均分并不明显。</li>
-<li>比如：有一间屋子，打翻一瓶香水，可以充满屋子。但是几个颗粒，就不能。哈希是一个类似的过程。</li>
-<li>即便3台机器负载均衡了，在加入第四台机器时，一定会出现负载不均。</li>
+<h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3><ul>
+<li>布隆过滤器的大小： m = （n <em> lnP / ln2 ）</em> （-1）。</li>
+<li>哈希函数k的个数：k = 0.7 * (m / n)。</li>
+<li>因为m和k可能是小数，所以会四舍五入或者直接取1000等好算的数。这个时候p就会变。此时p如何计算？<br>-真实失误率p： (1-e^(-n * k / m))^k</li>
 </ul>
-<h3 id="虚拟节点技术"><a href="#虚拟节点技术" class="headerlink" title="虚拟节点技术"></a>虚拟节点技术</h3><ul>
-<li>真是机器是m1，m2，m3。但是，不使用m1，m2，m3去计算哈希值。分配虚拟路由节点，m1被分配：v1-1，v1-2，一直到v1-1000。</li>
-<li>环上不再放3台机器计算的哈希值，而是放虚拟节点的哈希值。此时m1，m2，m3就可以通过虚拟节点均分整个环了。</li>
-<li>加机器m4，将m4的虚拟节点的哈希值放在环上，虚拟节点会向m1，m2，m3要数据。这样数据就均摊在m1，m2，m3，m4上了。</li>
-<li>即通过虚拟节点，尽可能的将数据均摊。</li>
-</ul>
-<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><ul>
-<li>哈希表：有一个数组[0，1，3，4，5]，数组中的5个数代表5个数据域。每个数据域连着一个链表，链表上有数据。</li>
-<li>将一个(key，value)加入一个hashmap。value不用管，key经过hash以后会打到对应数据域上。例如（a, 31），a 经过哈希以后，再模上6。打到了数据域4上，4后面的链表就加一个节点（a, 31）。</li>
-<li>这么一个结构。当我有大量数据打到这个[1，2，3，4，5]上。其每个数据域后面的链表因为哈希一致性的性质，链表长度能够均匀增长（数据均摊）。</li>
-<li>hash表要扩容，增长到12，每个链表数据减半。</li>
-<li>新结构：每个数据域后面不跟链表，而跟一个红黑树，相同哈希值根据红黑树区分不同。扩容行为更新频率低，因红黑树的有序结构。</li>
-<li>使用哈希表的增删改查的时间复杂度都是O(1)。</li>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
+<li>黑名单系统</li>
+<li>大数据时，有一定的失误率，不影响普遍结果，但是节省了大量空间。</li>
 </ul>
 
       
@@ -413,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/09/经典数据结构-栈与队列/" rel="next" title="经典数据结构--栈与队列">
-                <i class="fa fa-chevron-left"></i> 经典数据结构--栈与队列
+              <a href="/2018/02/04/经典数据结构-并查集/" rel="next" title="经典数据结构--并查集">
+                <i class="fa fa-chevron-left"></i> 经典数据结构--并查集
               </a>
             
           </div>
@@ -422,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/16/经典数据结构--哈希相关题目/" rel="prev" title="经典数据结构--哈希相关题目">
-                经典数据结构--哈希相关题目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,7 +537,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数是哈希函数的要求"><span class="nav-number">1.</span> <span class="nav-text">函数是哈希函数的要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希值取模（-）"><span class="nav-number">2.</span> <span class="nav-text">哈希值取模（%）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典缓存结构"><span class="nav-number">3.</span> <span class="nav-text">经典缓存结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典缓存结构副作用"><span class="nav-number">4.</span> <span class="nav-text">经典缓存结构副作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方式-一致性哈希"><span class="nav-number">5.</span> <span class="nav-text">解决方式-一致性哈希</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何顺时针找机器"><span class="nav-number">6.</span> <span class="nav-text">如何顺时针找机器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上面做法的问题"><span class="nav-number">7.</span> <span class="nav-text">上面做法的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟节点技术"><span class="nav-number">8.</span> <span class="nav-text">虚拟节点技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希表"><span class="nav-number">9.</span> <span class="nav-text">哈希表</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谈布隆过滤器一定有这几个参数"><span class="nav-number">2.</span> <span class="nav-text">谈布隆过滤器一定有这几个参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个样本添加到布隆过滤器的过程"><span class="nav-number">3.</span> <span class="nav-text">一个样本添加到布隆过滤器的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何检查某个样本是否在布隆过滤器上"><span class="nav-number">4.</span> <span class="nav-text">如何检查某个样本是否在布隆过滤器上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布隆过滤器的局限性"><span class="nav-number">5.</span> <span class="nav-text">布隆过滤器的局限性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公式"><span class="nav-number">6.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">7.</span> <span class="nav-text">应用</span></a></li></ol></div>
             
 
           </div>
