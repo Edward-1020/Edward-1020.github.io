@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="0.618:1">
 <meta property="og:description" content="css性能让javascript变慢？ css的加载与解析是阻塞页面渲染的，js的加载与解析也是阻塞页面渲染的。 有时，js死循环，页面卡死了。 一个线程负责Javascript解析，一个线程负责UI渲染，那么为何javascript会阻塞页面的渲染。原因：javascript是可能在代码中去获取当前的dom的，即渲染的结果。所以，渲染前与渲染后，javascript获取的渲染的dom结果是不一样">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-08T14:33:55.613Z">
+<meta property="og:updated_time" content="2018-02-08T14:38:12.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web前端性能优化（三）- CSS、JS与回流重绘">
 <meta name="twitter:description" content="css性能让javascript变慢？ css的加载与解析是阻塞页面渲染的，js的加载与解析也是阻塞页面渲染的。 有时，js死循环，页面卡死了。 一个线程负责Javascript解析，一个线程负责UI渲染，那么为何javascript会阻塞页面的渲染。原因：javascript是可能在代码中去获取当前的dom的，即渲染的结果。所以，渲染前与渲染后，javascript获取的渲染的dom结果是不一样">
@@ -391,7 +391,7 @@
 <li>不要使用table布局，可能很小的一个小改动会造成整个table的重新布局。当我们table特别大时，一个小改动会造成很大的layout(回流和重布局)性能损耗。而使用Div，div仅仅会影响后面元素的layout，不会影响前面不相干的元素。</li>
 <li>动画实现速度的选择。因为UI的渲染线程和JS的执行线程是相互阻塞的，因为动画会触发回流，回流频率过高，一直在重新渲染，使得JS的执行被阻塞了，就会造成页面卡顿。这种情况需要具体分析，例如10ms改变一下元素位置创建动画一定比100ms改一次更平滑，但是100ms的layout和paint的次数多，影响性能。</li>
 <li>对于动画新建图层。当我们使用canvas或者video标签时，chrome知道这里会频繁的layout。所以，chrome会自发的为其新建图层。对于我们自己写的动画，chrome并不了解这个事情，需要我们手动将动画建立图层，这样保证我们的回流和重绘影响面小一点。</li>
-<li>启用GPU加速，GPU的计算能力强，是一个并行运算的运算单元。缺点：1.GPU加速可能会导致图层过多，而图层合成也会造成大量的性能消耗。2.因为数据要通过CPU走总线到GPU上，GPU才能运算。当数据量大，传输损耗也是巨大的。</li>
+<li>启用GPU加速，GPU的计算能力强，是一个并行运算的运算单元。缺点：1.开启GPU加速很简单，使用translate3d或其它属性即可。但是，这种加速也是有相应的缺点的：1.GPU加速可能会导致图层过多，从而导致图层合成（Composite Layers）也会造成大量的性能消耗。2.因为数据要通过CPU走总线到GPU上，GPU才能运算。当数据量大，传输损耗也是巨大的。</li>
 </ul>
 <h3 id="量化分析"><a href="#量化分析" class="headerlink" title="量化分析"></a>量化分析</h3><ul>
 <li>性能优化是必须针对场景case的。性能优化前后的指标是可以通过chrome的performance工具量化分析的。实践出真知。</li>
