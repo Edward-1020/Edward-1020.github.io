@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="KMP算法应用（一）有一个字符串，经过处理，包含两个自己，且开始的位置不一样。怎么添加字符最短？例如：原字符串是aaa，处理过后是aaaa，包含两个aaa。 实质元字符串处理完成后，最大前缀和最大后缀是贴在一起的，例如aaaaa的最大前缀是aaaa不包含最后一个a，最大后缀是aaaa不包含首位置的a。即：这个题目就变成">
+<meta name="description" content="一般意义的二分对于一个有序数组，每次二分寻找。所以时间复杂度为O(logN)。 找到首次出的k 对于一个有序数组，二分之后查找左部。 未找到，对于左边部分再去二分。  求局部最小值 首部：如果0位置的数比1位置的数小，0位置的数叫做局部最小值。 尾部：如果N-2位置的数比N-1位置的数小，N-2位置的数叫做局部最小值。">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript经典算法--KMP算法应用（一）">
-<meta property="og:url" content="http://yoursite.com/2017/12/19/JavaScript经典算法--KMP算法应用（一）/index.html">
+<meta property="og:title" content="经典数据结构--二分搜索">
+<meta property="og:url" content="http://yoursite.com/2018/02/09/经典数据结构-二分搜索/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="KMP算法应用（一）有一个字符串，经过处理，包含两个自己，且开始的位置不一样。怎么添加字符最短？例如：原字符串是aaa，处理过后是aaaa，包含两个aaa。 实质元字符串处理完成后，最大前缀和最大后缀是贴在一起的，例如aaaaa的最大前缀是aaaa不包含最后一个a，最大后缀是aaaa不包含首位置的a。即：这个题目就变成了，原字符串的最大前缀和最大后缀重合多少，不重合的部分添在原字符串的后面即可。例">
+<meta property="og:description" content="一般意义的二分对于一个有序数组，每次二分寻找。所以时间复杂度为O(logN)。 找到首次出的k 对于一个有序数组，二分之后查找左部。 未找到，对于左边部分再去二分。  求局部最小值 首部：如果0位置的数比1位置的数小，0位置的数叫做局部最小值。 尾部：如果N-2位置的数比N-1位置的数小，N-2位置的数叫做局部最小值。 中间：对于中间某位置，设为mid位置的数，一定要比mid-1位置，及比mid+">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-19T05:29:06.819Z">
+<meta property="og:updated_time" content="2018-02-09T04:51:00.262Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript经典算法--KMP算法应用（一）">
-<meta name="twitter:description" content="KMP算法应用（一）有一个字符串，经过处理，包含两个自己，且开始的位置不一样。怎么添加字符最短？例如：原字符串是aaa，处理过后是aaaa，包含两个aaa。 实质元字符串处理完成后，最大前缀和最大后缀是贴在一起的，例如aaaaa的最大前缀是aaaa不包含最后一个a，最大后缀是aaaa不包含首位置的a。即：这个题目就变成了，原字符串的最大前缀和最大后缀重合多少，不重合的部分添在原字符串的后面即可。例">
+<meta name="twitter:title" content="经典数据结构--二分搜索">
+<meta name="twitter:description" content="一般意义的二分对于一个有序数组，每次二分寻找。所以时间复杂度为O(logN)。 找到首次出的k 对于一个有序数组，二分之后查找左部。 未找到，对于左边部分再去二分。  求局部最小值 首部：如果0位置的数比1位置的数小，0位置的数叫做局部最小值。 尾部：如果N-2位置的数比N-1位置的数小，N-2位置的数叫做局部最小值。 中间：对于中间某位置，设为mid位置的数，一定要比mid-1位置，及比mid+">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/19/JavaScript经典算法--KMP算法应用（一）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/09/经典数据结构-二分搜索/"/>
 
 
 
 
 
-  <title>JavaScript经典算法--KMP算法应用（一） | 0.618:1</title>
+  <title>经典数据结构--二分搜索 | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/19/JavaScript经典算法--KMP算法应用（一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/09/经典数据结构-二分搜索/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript经典算法--KMP算法应用（一）</h1>
+          <h1 class="post-title" itemprop="name headline">经典数据结构--二分搜索</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-19T13:17:26+08:00">
-                2017-12-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T20:37:13+08:00">
+                2018-02-09
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript经典算法/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript经典算法</span>
+                  <a href="/categories/经典数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">经典数据结构</span>
                   </a>
                 </span>
 
@@ -332,8 +332,23 @@
       
 
       
-        <h3 id="KMP算法应用（一）"><a href="#KMP算法应用（一）" class="headerlink" title="KMP算法应用（一）"></a>KMP算法应用（一）</h3><p>有一个字符串，经过处理，包含两个自己，且开始的位置不一样。怎么添加字符最短？例如：原字符串是aaa，处理过后是aaaa，包含两个aaa。</p>
-<h3 id="实质"><a href="#实质" class="headerlink" title="实质"></a>实质</h3><p>元字符串处理完成后，最大前缀和最大后缀是贴在一起的，例如aaaaa的最大前缀是aaaa不包含最后一个a，最大后缀是aaaa不包含首位置的a。<br>即：这个题目就变成了，原字符串的最大前缀和最大后缀重合多少，不重合的部分添在原字符串的后面即可。<br>例如：abcabc-，-位置的最大前缀和最大后缀的部分匹配值是3。只需要在原字符串后添加2位置后的字符串即可。即在abcabc后再添加一个abc，</p>
+        <h3 id="一般意义的二分"><a href="#一般意义的二分" class="headerlink" title="一般意义的二分"></a>一般意义的二分</h3><p>对于一个有序数组，每次二分寻找。所以时间复杂度为O(logN)。</p>
+<h3 id="找到首次出的k"><a href="#找到首次出的k" class="headerlink" title="找到首次出的k"></a>找到首次出的k</h3><ul>
+<li>对于一个有序数组，二分之后查找左部。</li>
+<li>未找到，对于左边部分再去二分。</li>
+</ul>
+<h3 id="求局部最小值"><a href="#求局部最小值" class="headerlink" title="求局部最小值"></a>求局部最小值</h3><ul>
+<li>首部：如果0位置的数比1位置的数小，0位置的数叫做局部最小值。</li>
+<li>尾部：如果N-2位置的数比N-1位置的数小，N-2位置的数叫做局部最小值。</li>
+<li>中间：对于中间某位置，设为mid位置的数，一定要比mid-1位置，及比mid+1位置的数小，才是局部最小值。</li>
+<li>求数组中的一个局部最小值，且数组相邻数不相等。</li>
+</ul>
+<h4 id="局部最小值二分解法（不一定有序才能二分）"><a href="#局部最小值二分解法（不一定有序才能二分）" class="headerlink" title="局部最小值二分解法（不一定有序才能二分）"></a>局部最小值二分解法（不一定有序才能二分）</h4><ul>
+<li>如果0位置比1位置大，N-1位置比N-2位置大，即首尾均呈下降趋势。那么数组的中间部分一定会出现局部最小。即从2位置起，后面某个位置的数稍微上扬，就一定会有局部最小。</li>
+<li>此时，二分。取一个mid，观察mid是不是局部最小。</li>
+<li>mid比其左边的数大，即首部和mid之间一定存在局部最小。那么mid右边可以不考虑。</li>
+<li>如此这般二分，一定能找到局部最小。</li>
+</ul>
 
       
     </div>
@@ -364,8 +379,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/13/JavaScript经典算法--KMP/" rel="next" title="JavaScript经典排序算法--KMP">
-                <i class="fa fa-chevron-left"></i> JavaScript经典排序算法--KMP
+              <a href="/2018/02/08/web前端性能优化（三）-  CSS、JS与回流重绘/" rel="next" title="web前端性能优化（三）- CSS、JS与回流重绘">
+                <i class="fa fa-chevron-left"></i> web前端性能优化（三）- CSS、JS与回流重绘
               </a>
             
           </div>
@@ -373,10 +388,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/19/JavaScript经典算法--KMP算法应用（二）/" rel="prev" title="JavaScript经典算法--KMP算法应用（二）">
-                JavaScript经典算法--KMP算法应用（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -510,7 +521,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#KMP算法应用（一）"><span class="nav-number">1.</span> <span class="nav-text">KMP算法应用（一）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实质"><span class="nav-number">2.</span> <span class="nav-text">实质</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般意义的二分"><span class="nav-number">1.</span> <span class="nav-text">一般意义的二分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到首次出的k"><span class="nav-number">2.</span> <span class="nav-text">找到首次出的k</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求局部最小值"><span class="nav-number">3.</span> <span class="nav-text">求局部最小值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部最小值二分解法（不一定有序才能二分）"><span class="nav-number">3.1.</span> <span class="nav-text">局部最小值二分解法（不一定有序才能二分）</span></a></li></ol></li></ol></div>
             
 
           </div>
