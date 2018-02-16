@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[深入浅出WebPack（一）- 前端们为何从刀耕火种走向工程化]]></title>
-    <url>%2F2018%2F02%2F15%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebPack%EF%BC%88%E4%B8%80%EF%BC%89-%20%E5%89%8D%E7%AB%AF%E4%BB%AC%E4%B8%BA%E4%BD%95%E4%BB%8E%E5%88%80%E8%80%95%E7%81%AB%E7%A7%8D%E8%B5%B0%E5%90%91%E5%B7%A5%E7%A8%8B%E5%8C%96%2F</url>
-    <content type="text"><![CDATA[开发分工变化 曾经：前端完成View(视图，即静态页面)，View Logic(视图上的逻辑，即交互、动画等)。后端拿到这些静态页面以后，通过脚本语言php，jsp去填写静态数据，路由，渲染。 现在：前端不再是静态的页面了，有了自己的路由、数据逻辑、渲染逻辑，大量的业务逻辑从后端转移到前端。 因此，前端越来越复杂，项目也需要一定的分层结构，需要构建。 框架的变化前端的武器增加了：JS库（主要解决兼容性问题）-&gt; MVC（backbone引领了分层思想）&gt; MVVM（ng，react，vue）。 CSS语言的变化 某些css属性需要带有浏览器前缀名。 sass、less、stylus等预处理语言。 JS语言的变化通过babel打包编译，我们可以使用JS的许多超前特性。 环境的变化代码同构：Node、浏览器、native移动端。一份代码跑在三端。 社区的变化 github npm 通过npm命令管理本地仓库，更进一步管理项目的第三方库构建，进行打包上线。 工具的变化 grunt、gulp（流式管理）、fis webpack、rollup 总结：前端为何需要构建？ 开发复杂化后端业务逻辑大量前移。 框架去中心化之前的库都是大而全的，如今现在的前端库专注于解决单个的问题。因此，库越来越零散，需要打包处理。 语言编译化 开发模块化]]></content>
+    <title><![CDATA[深入浅出WebPack（二）- 模块化的变迁]]></title>
+    <url>%2F2018%2F02%2F17%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebPack%EF%BC%88%E4%BA%8C%EF%BC%89-%20%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%8F%98%E8%BF%81%2F</url>
+    <content type="text"><![CDATA[模块化开发 JS模块化 命名空间 -&gt; commonjs(Node社区，只能用于服务端) -&gt; AMD/CMD/UMD -&gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &#123;&#125;NameSpace.type = NameSpace.type || &#123;&#125;NameSpace.type.method = function () &#123;&#125; CommonJS一个文件，是一个模块。模块内的文件，外界无法访问。只能模块内部通过module.exports暴露模块接口，才能被外界访问到。外界通过require引入模块，但是模块的加载是同步执行的。 AMDAsync Module Definition，异步模块定义。使用define定义模块，使用require加载模块。特点：依赖前置，提前执行。在初始化一个模块时，需要提前声明你初始化需要的所有模块，这些模块会提前全部执行初始化。 CMDCommon Module Definition。一个文件为一个模块。使用define定义模块，require来加载模块。特点：尽可能懒执行。在AMD某个模块执行初始化时，该模块的所有依赖是前置执行完成的。CMD不是，只有需要时，才会去执行，尽可能的懒执行。 UMDUniversal Module Definition。通用模块定义。首先判断是否支持AMD，其次判断是否支持CommonJS，都不支持就直接定义为全局变量。 ESM一个文件是一个模块。通过export/import输出输入模块 CSS模块化 CSS模块化说的更多的是一种设计模式。 例如oocss、smacss、atomic css、mcss、amcss、BEM、css modules]]></content>
       <categories>
         <category>深入浅出WebPack</category>
       </categories>
@@ -13,9 +13,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[深入浅出WebPack（二）- 从模块化变迁看什么是模块化]]></title>
-    <url>%2F2018%2F02%2F15%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebPack%EF%BC%88%E4%BA%8C%EF%BC%89-%20%E4%BB%8E%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8F%98%E8%BF%81%E7%9C%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9D%97%E5%8C%96%2F</url>
-    <content type="text"><![CDATA[模块化开发 JS模块化 命名空间 -&gt; commonjs(Node社区，只能用于服务端) -&gt; AMD/CMD/UMD -&gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &#123;&#125;NameSpace.type = NameSpace.type || &#123;&#125;NameSpace.type.method = function () &#123;&#125; CommonJS一个文件，是一个模块。模块内的文件，外界无法访问。只能模块内部通过module.exports暴露模块接口，才能被外界访问到。外界通过require引入模块，但是模块的加载是同步执行的。 AMDAsync Module Definition，异步模块定义。使用define定义模块，使用require加载模块。特点：依赖前置，提前执行。在初始化一个模块时，需要提前声明你初始化需要的所有模块，这些模块会提前全部执行初始化。 CMDCommon Module Definition。一个文件为一个模块。使用define定义模块，require来加载模块。特点：尽可能懒执行。在AMD某个模块执行初始化时，该模块的所有依赖是前置执行完成的。CMD不是，只有需要时，才会去执行，尽可能的懒执行。 UMDUniversal Module Definition。通用模块定义。首先判断是否支持AMD，其次判断是否支持CommonJS，都不支持就直接定义为全局变量。 ESM一个文件是一个模块。通过export/import输出输入模块 CSS模块化 CSS模块化说的更多的是一种设计模式。 例如oocss、smacss、atomic css、mcss、amcss、BEM、css modules]]></content>
+    <title><![CDATA[深入浅出WebPack（一）- 从刀耕火种走向工程化]]></title>
+    <url>%2F2018%2F02%2F17%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebPack%EF%BC%88%E4%B8%80%EF%BC%89-%20%E4%BB%8E%E5%88%80%E8%80%95%E7%81%AB%E7%A7%8D%E8%B5%B0%E5%90%91%E5%B7%A5%E7%A8%8B%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[开发分工变化 曾经：前端完成View(视图，即静态页面)，View Logic(视图上的逻辑，即交互、动画等)。后端拿到这些静态页面以后，通过脚本语言php，jsp去填写静态数据，路由，渲染。 现在：前端不再是静态的页面了，有了自己的路由、数据逻辑、渲染逻辑，大量的业务逻辑从后端转移到前端。 因此，前端越来越复杂，项目也需要一定的分层结构，需要构建。 框架的变化前端的武器增加了：JS库（主要解决兼容性问题）-&gt; MVC（backbone引领了分层思想）&gt; MVVM（ng，react，vue）。 CSS语言的变化 某些css属性需要带有浏览器前缀名。 sass、less、stylus等预处理语言。 JS语言的变化通过babel打包编译，我们可以使用JS的许多超前特性。 环境的变化代码同构：Node、浏览器、native移动端。一份代码跑在三端。 社区的变化 github npm 通过npm命令管理本地仓库，更进一步管理项目的第三方库构建，进行打包上线。 工具的变化 grunt、gulp（流式管理）、fis webpack、rollup 总结：前端为何需要构建？ 开发复杂化后端业务逻辑大量前移。 框架去中心化之前的库都是大而全的，如今现在的前端库专注于解决单个的问题。因此，库越来越零散，需要打包处理。 语言编译化 开发模块化]]></content>
       <categories>
         <category>深入浅出WebPack</category>
       </categories>
