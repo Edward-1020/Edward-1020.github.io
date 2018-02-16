@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[深入浅出WebPack（一）- 前端们为何从刀耕火种走向工程化]]></title>
+    <url>%2F2018%2F02%2F15%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebPack%EF%BC%88%E4%B8%80%EF%BC%89-%20%E5%89%8D%E7%AB%AF%E4%BB%AC%E4%B8%BA%E4%BD%95%E4%BB%8E%E5%88%80%E8%80%95%E7%81%AB%E7%A7%8D%E8%B5%B0%E5%90%91%E5%B7%A5%E7%A8%8B%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[开发分工变化 曾经：前端完成View(视图，即静态页面)，View Logic(视图上的逻辑，即交互、动画等)。后端拿到这些静态页面以后，通过脚本语言php，jsp去填写静态数据，路由，渲染。 现在：前端不再是静态的页面了，有了自己的路由、数据逻辑、渲染逻辑，大量的业务逻辑从后端转移到前端。 因此，前端越来越复杂，项目也需要一定的分层结构，需要构建。 框架的变化前端的武器增加了：JS库（主要解决兼容性问题）-&gt; MVC（backbone引领了分层思想）&gt; MVVM（ng，react，vue）。 CSS语言的变化 某些css属性需要带有浏览器前缀名。 sass、less、stylus等预处理语言。 JS语言的变化通过babel打包编译，我们可以使用JS的许多超前特性。 环境的变化代码同构：Node、浏览器、native移动端。一份代码跑在三端。 社区的变化 github npm 通过npm命令管理本地仓库，更进一步管理项目的第三方库构建，进行打包上线。 工具的变化 grunt、gulp（流式管理）、fis webpack、rollup 总结：前端为何需要构建？ 开发复杂化后端业务逻辑大量前移。 框架去中心化之前的库都是大而全的，如今现在的前端库专注于解决单个的问题。因此，库越来越零散，需要打包处理。 语言编译化 开发模块化]]></content>
+      <categories>
+        <category>深入浅出WebPack</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+        <tag>深入浅出WebPack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深入浅出WebPack（二）- 从模块化变迁看什么是模块化]]></title>
+    <url>%2F2018%2F02%2F15%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebPack%EF%BC%88%E4%BA%8C%EF%BC%89-%20%E4%BB%8E%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8F%98%E8%BF%81%E7%9C%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9D%97%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[模块化开发 JS模块化 命名空间 -&gt; commonjs(Node社区，只能用于服务端) -&gt; AMD/CMD/UMD -&gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &#123;&#125;NameSpace.type = NameSpace.type || &#123;&#125;NameSpace.type.method = function () &#123;&#125; CommonJS一个文件，是一个模块。模块内的文件，外界无法访问。只能模块内部通过module.exports暴露模块接口，才能被外界访问到。外界通过require引入模块，但是模块的加载是同步执行的。 AMDAsync Module Definition，异步模块定义。使用define定义模块，使用require加载模块。特点：依赖前置，提前执行。在初始化一个模块时，需要提前声明你初始化需要的所有模块，这些模块会提前全部执行初始化。 CMDCommon Module Definition。一个文件为一个模块。使用define定义模块，require来加载模块。特点：尽可能懒执行。在AMD某个模块执行初始化时，该模块的所有依赖是前置执行完成的。CMD不是，只有需要时，才会去执行，尽可能的懒执行。 UMDUniversal Module Definition。通用模块定义。首先判断是否支持AMD，其次判断是否支持CommonJS，都不支持就直接定义为全局变量。 ESM一个文件是一个模块。通过export/import输出输入模块 CSS模块化 CSS模块化说的更多的是一种设计模式。 例如oocss、smacss、atomic css、mcss、amcss、BEM、css modules]]></content>
+      <categories>
+        <category>深入浅出WebPack</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+        <tag>深入浅出WebPack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[web前端性能优化（五）- 基于Http的缓存策略]]></title>
     <url>%2F2018%2F02%2F15%2Fweb%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%88%E4%BA%94%EF%BC%89-%20%E5%9F%BA%E4%BA%8EHttp%E7%9A%84%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%2F</url>
     <content type="text"><![CDATA[基于Http的缓存策略在大规模系统中，我们希望有一个自动的缓存策略，而不是手动的通过localstorage去缓存。通过服务端和浏览器端基于http请求头的协商的方式，形成一个通用的缓存文件的策略。 httpheader Cache-Control：Cache-Control可以出现在Response的Header中，也可以出现在Request的Header中。 Cache-Control具有以下属性： max-age：指定缓存的最大有效时间。max-age可以让浏览器在规定的时间段内，不向服务端发起一个请求。因为max-age表示，服务端告诉浏览器，在这段时间内，这个资源都是有效的，都是不会过期的。这个属性比expires的优先级要高。 s-maxage、public、private: 也是指定缓存的有效时间，但仅仅是指定public的缓存。缓存设备有很多，例如：CDN作为一种缓存设备。缓存设备有两种情况：1.是private的缓存设备。例如：客户端浏览器缓存的信息，只有客户端浏览器才能使用，这种缓存便是private。2.另一种是public的缓存设备，能被很多用户去访问，读取信息。总结一下，s-maxage的优先级是高于max-age的，同时它也只对public缓存设备生效。实例来说，一个资源被设置了s-maxage，那么它会去public的缓存设备（CDN）去读有效信息。也就是说，规定了s-maxage的资源，它不是去浏览器去拿数据，而是去cdn去拿数据，cdn是我们的public缓存设备。这个请求发往我们的cdn，cdn下发一个缓存状态和缓存信息。对于公共的cdn设备来说，在s-maxage这一段时间内，这个缓存资源是不会过期的。等超过了s-maxage，我们的cdn才会去源服务器去更新它存的资源，是一个回源的动作。 no-cache：no-cache一般与max-age搭配使用，no-cache表示，会询问浏览器是否有该资源的缓存策略，文件是否过期。而不是像max-age直接将该资源从浏览器的缓存读出。它会发送请求到服务端，服务端发送类似于last-modify的信息，去进一步判断当前浏览器端缓存是否过期。所以，no-cache能让所有请求都到服务端。 no-store：不存，完全不使用缓存。 Expires 缓存过期时间，用来指定资源到期的时间，是服务端的具体的时间点。 告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。 max-age和expires之间的关系：max-age的优先级高于expires。expires出自于http1.0，max-age出自于http1.1。在http1.1版本中，我们希望hash的管理是通过一个统一的header去管理，所以增加了cache-control去控制max-age。当存在max-age时，expires实际上时被忽略的。 max-age和Expires 是一个强浏览器缓存策略，当Response Header设置了max-age和Expires后。当http请求中的这两个请求头生效时，浏览器不会向服务器去发起任何请求，而是直接从浏览器缓存中读取相应的数据。 因此，当我的服务端的资源更新时，设置了这两个请求头的前提下，我们的客户端浏览器是无法感知到的。 last-modified/if-modified-since 是基于客户端和服务端协商的缓存机制。 当浏览器向服务端发送http请求。 服务端在返回的response中，种下last-modified的响应头字段。 浏览器拿到这个字段以后，会将其存储。也就是说，浏览器拿到了服务端资源的最新的更新时间。 浏览器存储当前已知的资源最新更新时间是使用字段if-modified-since。 当浏览器再针对这个url发送请求时，会带上这个if-modified-since。 服务端接收到这个header。此时客户端告诉服务端我拿到的是你某个时间点的资源版本，服务端验证资源是否已经更新过了。如果没有更新，返回一个304的状态以及last-modified，告诉客户端，资源没有更新，你可以使用这个资源在客户端的缓存。浏览器根据这个304的状态去客户端的缓存中，读取这个文件使用。 如果服务端发现客户端发送的是老版本时间，就返回一个200的状态以及最新的last-modified，告诉客户端，不能使用缓存，使用我最新发给你的资源。 last-modified/if-modified-since 实质是服务端和客户端的缓存协商机制。 last-modified/if-modified-since 要和cache-control联合使用。因为cache-control存在max-age的情况，且max-age还没有过期，浏览器以max-age为准，直接从浏览器缓存中读取资源。max-age过期以后，浏览器才会使用这种协商机制。 last-modified/if-modified-since 和 max-age都是服务端控制的缓存策略。 last-modified/if-modified-since存在的问题：1.某些服务端不能获取精确的修改时间。2.文件修改时间改了，但文件内容没有变。这种情况下的缓存失效，是资源浪费。 Etag/If-None-Match Etag是文件内容的hash值，也需要与cache-control共同使用。 Etag是服务端通过response header下发的响应头。 if-None-Match会将下发的Etag的hash值通过request 带到服务端去。 这个协商机制比 last-modified/if-modified-since 的时间机制更加精确，是基于文件内容的。当文件内容改变时，会直接反映在Etag上。 etag 的优先级比 last-modified 的优先级更高。 分级缓存策略 针对大量的静态资源，服务端基于http header配置缓存策略。]]></content>

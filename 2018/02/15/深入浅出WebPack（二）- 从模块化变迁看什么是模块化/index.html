@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="web前端," />
+  <meta name="keywords" content="web前端,深入浅出WebPack," />
 
 
 
@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列">
-<meta name="keywords" content="web前端">
+<meta name="description" content="模块化开发 JS模块化   命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave">
+<meta name="keywords" content="web前端,深入浅出WebPack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--矩阵相关题目（一）">
-<meta property="og:url" content="http://yoursite.com/2018/01/16/经典数据结构--矩阵相关题目（一）/index.html">
+<meta property="og:title" content="深入浅出WebPack（二）- 从模块化变迁看什么是模块化">
+<meta property="og:url" content="http://yoursite.com/2018/02/15/深入浅出WebPack（二）- 从模块化变迁看什么是模块化/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列数++，到3 行数++，到3 列数–，到0 行数–，到0  关键代码123456">
+<meta property="og:description" content="模块化开发 JS模块化   命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &amp;#123;&amp;#125;NameSpace.type = NameSpace.type || &amp;#">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-23T05:39:34.442Z">
+<meta property="og:image" content="https://i.loli.net/2018/02/16/5a8688fc2c0dc.png">
+<meta property="og:image" content="https://i.loli.net/2018/02/16/5a86894e55e6f.png">
+<meta property="og:image" content="https://i.loli.net/2018/02/16/5a86897a05c2d.png">
+<meta property="og:image" content="https://i.loli.net/2018/02/16/5a868a099d607.png">
+<meta property="og:updated_time" content="2018-02-16T16:08:20.896Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--矩阵相关题目（一）">
-<meta name="twitter:description" content="转圈打印矩阵给定一个整型矩阵matrix，请按照转圈的方式打印它1 2 3 45 6 7 89 10 11 1213 14 15 16打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。要求：额外空间复杂度为O(1)。 不要把视线局限在局部区域变化 1点（0，0），16点（3，3）。 列数++，到3 行数++，到3 列数–，到0 行数–，到0  关键代码123456">
+<meta name="twitter:title" content="深入浅出WebPack（二）- 从模块化变迁看什么是模块化">
+<meta name="twitter:description" content="模块化开发 JS模块化   命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &amp;#123;&amp;#125;NameSpace.type = NameSpace.type || &amp;#">
+<meta name="twitter:image" content="https://i.loli.net/2018/02/16/5a8688fc2c0dc.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/16/经典数据结构--矩阵相关题目（一）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/15/深入浅出WebPack（二）- 从模块化变迁看什么是模块化/"/>
 
 
 
 
 
-  <title>经典数据结构--矩阵相关题目（一） | 0.618:1</title>
+  <title>深入浅出WebPack（二）- 从模块化变迁看什么是模块化 | 0.618:1</title>
   
 
 
@@ -243,7 +248,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/经典数据结构--矩阵相关题目（一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/15/深入浅出WebPack（二）- 从模块化变迁看什么是模块化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +265,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--矩阵相关题目（一）</h1>
+          <h1 class="post-title" itemprop="name headline">深入浅出WebPack（二）- 从模块化变迁看什么是模块化</h1>
         
 
         <div class="post-meta">
@@ -272,8 +277,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T14:10:10+08:00">
-                2018-01-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-15T11:20:00+08:00">
+                2018-02-15
               </time>
             
 
@@ -295,8 +300,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/经典数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">经典数据结构</span>
+                  <a href="/categories/深入浅出WebPack/" itemprop="url" rel="index">
+                    <span itemprop="name">深入浅出WebPack</span>
                   </a>
                 </span>
 
@@ -332,16 +337,32 @@
       
 
       
-        <h3 id="转圈打印矩阵"><a href="#转圈打印矩阵" class="headerlink" title="转圈打印矩阵"></a>转圈打印矩阵</h3><p>给定一个整型矩阵matrix，请按照转圈的方式打印它<br>1 2 3 4<br>5 6 7 8<br>9 10 11 12<br>13 14 15 16<br>打印结果为：1，2，3，4，8，12，16，15，14，13，9，5，6，7，11。<br>要求：额外空间复杂度为O(1)。</p>
-<h3 id="不要把视线局限在局部区域变化"><a href="#不要把视线局限在局部区域变化" class="headerlink" title="不要把视线局限在局部区域变化"></a>不要把视线局限在局部区域变化</h3><ul>
-<li>1点（0，0），16点（3，3）。</li>
-<li>列数++，到3</li>
-<li>行数++，到3</li>
-<li>列数–，到0</li>
-<li>行数–，到0</li>
+        <h3 id="模块化开发"><a href="#模块化开发" class="headerlink" title="模块化开发"></a>模块化开发</h3><ul>
+<li>JS模块化</li>
 </ul>
-<h3 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">// tR，tC，左上角的行数和列数</span><br><span class="line">// dR，dC，右下角的行数和列数</span><br><span class="line">public static void printEdge (init[][] m, int tR, int tC, int dR, int dC) &#123;</span><br><span class="line">	// 只有一行，顺序打印</span><br><span class="line">	if (tR == dR) &#123;</span><br><span class="line">		for (int i = tC; i &lt;= dC; i++) &#123;</span><br><span class="line">		    System.out.print(m[tR][i] + &quot; &quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else if (tC == dC) &#123;</span><br><span class="line">	    // 只有一列，按顺序打印列</span><br><span class="line">		for (int i = tR; i &lt;= dR; i++) &#123;</span><br><span class="line">			System.out.print(m[i][tC] + &quot; &quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		int curC = tC</span><br><span class="line">		int curR = tR</span><br><span class="line">		// 列数不等，列数++</span><br><span class="line">		while (curC != dC) &#123;</span><br><span class="line">			System.out.print(m[tR][curC] + &quot;&quot;)</span><br><span class="line">			curC++</span><br><span class="line">		&#125;</span><br><span class="line">		// 行数不等，行数++</span><br><span class="line">		while (curR != dR) &#123;</span><br><span class="line">			System.out.print(m[curR][dc] + &quot;&quot;)</span><br><span class="line">			curR++</span><br><span class="line">		&#125;</span><br><span class="line">		// 列数不等，列数--</span><br><span class="line">		while (curC != tC) &#123;</span><br><span class="line">			System.out.print(m[dR][curC] + &quot;&quot;)</span><br><span class="line">			curC--</span><br><span class="line">		&#125;</span><br><span class="line">		// 行数不等，行数--</span><br><span class="line">		while (curR != tR) &#123;</span><br><span class="line">			System.out.print(m[curR][tC] + &quot;&quot;)</span><br><span class="line">			curR--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打印完最外层后，左上角向右下方移动，右下角向左上方移动</span><br><span class="line">// 如此，就可以分圈结构的宏观调用</span><br><span class="line">// 一圈，一圈的分圈执行函数</span><br><span class="line">// 左上角的行大于右下角的行，或者左上角的列大于右下角的列，停止</span><br></pre></td></tr></table></figure>
-<h3 id="将原矩阵顺时针转90°"><a href="#将原矩阵顺时针转90°" class="headerlink" title="将原矩阵顺时针转90°"></a>将原矩阵顺时针转90°</h3><p>利用分圈结构写。</p>
+<ol>
+<li>命名空间 -&gt; commonjs(Node社区，只能用于服务端) -&gt; AMD/CMD/UMD -&gt; ES6 module</li>
+<li><p>命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var NameSpave = &#123;&#125;</span><br><span class="line">NameSpace.type = NameSpace.type || &#123;&#125;</span><br><span class="line">NameSpace.type.method = function () &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CommonJS<br>一个文件，是一个模块。模块内的文件，外界无法访问。只能模块内部通过module.exports暴露模块接口，才能被外界访问到。外界通过require引入模块，但是模块的加载是同步执行的。<br><img src="https://i.loli.net/2018/02/16/5a8688fc2c0dc.png" alt=""></p>
+</li>
+<li><p>AMD<br>Async Module Definition，异步模块定义。使用define定义模块，使用require加载模块。特点：依赖前置，提前执行。在初始化一个模块时，需要提前声明你初始化需要的所有模块，这些模块会提前全部执行初始化。<br><img src="https://i.loli.net/2018/02/16/5a86894e55e6f.png" alt=""></p>
+</li>
+<li><p>CMD<br>Common Module Definition。一个文件为一个模块。使用define定义模块，require来加载模块。特点：尽可能懒执行。在AMD某个模块执行初始化时，该模块的所有依赖是前置执行完成的。CMD不是，只有需要时，才会去执行，尽可能的懒执行。<br><img src="https://i.loli.net/2018/02/16/5a86897a05c2d.png" alt=""></p>
+</li>
+<li><p>UMD<br>Universal Module Definition。通用模块定义。首先判断是否支持AMD，其次判断是否支持CommonJS，都不支持就直接定义为全局变量。<br><img src="https://i.loli.net/2018/02/16/5a868a099d607.png" alt=""></p>
+</li>
+<li><p>ESM<br>一个文件是一个模块。通过export/import输出输入模块</p>
+</li>
+</ol>
+<ul>
+<li>CSS模块化</li>
+</ul>
+<ol>
+<li>CSS模块化说的更多的是一种设计模式。</li>
+<li>例如oocss、smacss、atomic css、mcss、amcss、BEM、css modules</li>
+</ol>
 
       
     </div>
@@ -361,6 +382,8 @@
           
             <a href="/tags/web前端/" rel="tag"># web前端</a>
           
+            <a href="/tags/深入浅出WebPack/" rel="tag"># 深入浅出WebPack</a>
+          
         </div>
       
 
@@ -372,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/16/经典数据结构--哈希相关题目/" rel="next" title="经典数据结构--哈希相关题目">
-                <i class="fa fa-chevron-left"></i> 经典数据结构--哈希相关题目
+              <a href="/2018/02/15/web前端性能优化（五）- 基于Http的缓存策略/" rel="next" title="web前端性能优化（五）- 基于Http的缓存策略">
+                <i class="fa fa-chevron-left"></i> web前端性能优化（五）- 基于Http的缓存策略
               </a>
             
           </div>
@@ -382,8 +405,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/18/经典数据结构--矩阵相关题目（二）/" rel="prev" title="经典数据结构--矩阵相关题目（二）">
-                经典数据结构--矩阵相关题目（二） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/15/深入浅出WebPack（一）- 前端们为何从刀耕火种走向工程化/" rel="prev" title="深入浅出WebPack（一）- 前端们为何从刀耕火种走向工程化">
+                深入浅出WebPack（一）- 前端们为何从刀耕火种走向工程化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -518,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#转圈打印矩阵"><span class="nav-number">1.</span> <span class="nav-text">转圈打印矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要把视线局限在局部区域变化"><span class="nav-number">2.</span> <span class="nav-text">不要把视线局限在局部区域变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">3.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将原矩阵顺时针转90°"><span class="nav-number">4.</span> <span class="nav-text">将原矩阵顺时针转90°</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块化开发"><span class="nav-number">1.</span> <span class="nav-text">模块化开发</span></a></li></ol></div>
             
 
           </div>
