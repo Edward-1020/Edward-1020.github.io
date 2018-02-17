@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="web前端," />
+  <meta name="keywords" content="web前端,深入浅出WebPack," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值">
-<meta name="keywords" content="web前端">
+<meta name="description" content="WebPack 更迭 v1: 编译打包、HRM（热更新）、代码分割、文件处理。 v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。 v3: Scope Hoisting（作用域提升，提升了打包后的代码性能">
+<meta name="keywords" content="web前端,深入浅出WebPack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--一致性哈希">
-<meta property="og:url" content="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/index.html">
+<meta property="og:title" content="深入浅出WebPack（三）-你应该知道的WebPack基本知识">
+<meta property="og:url" content="http://yoursite.com/2018/02/17/深入浅出WebPack（三）-你应该知道的WebPack基本知识/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。 输入域无限，">
+<meta property="og:description" content="WebPack 更迭 v1: 编译打包、HRM（热更新）、代码分割、文件处理。 v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。 v3: Scope Hoisting（作用域提升，提升了打包后的代码性能。老版本的WebPack 将代码打包在闭包当中，这些封装的闭包会损耗浏览器性能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-23T05:43:47.802Z">
+<meta property="og:updated_time" content="2018-02-17T05:56:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--一致性哈希">
-<meta name="twitter:description" content="函数是哈希函数的要求 要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。 为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。 要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。 输入域无限，">
+<meta name="twitter:title" content="深入浅出WebPack（三）-你应该知道的WebPack基本知识">
+<meta name="twitter:description" content="WebPack 更迭 v1: 编译打包、HRM（热更新）、代码分割、文件处理。 v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。 v3: Scope Hoisting（作用域提升，提升了打包后的代码性能。老版本的WebPack 将代码打包在闭包当中，这些封装的闭包会损耗浏览器性能。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/17/深入浅出WebPack（三）-你应该知道的WebPack基本知识/"/>
 
 
 
 
 
-  <title>经典数据结构--一致性哈希 | 0.618:1</title>
+  <title>深入浅出WebPack（三）-你应该知道的WebPack基本知识 | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/经典数据结构-一致性哈希/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/17/深入浅出WebPack（三）-你应该知道的WebPack基本知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--一致性哈希</h1>
+          <h1 class="post-title" itemprop="name headline">深入浅出WebPack（三）-你应该知道的WebPack基本知识</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T14:00:10+08:00">
-                2018-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-17T14:20:00+08:00">
+                2018-02-17
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/经典数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">经典数据结构</span>
+                  <a href="/categories/深入浅出WebPack/" itemprop="url" rel="index">
+                    <span itemprop="name">深入浅出WebPack</span>
                   </a>
                 </span>
 
@@ -332,56 +332,55 @@
       
 
       
-        <h3 id="函数是哈希函数的要求"><a href="#函数是哈希函数的要求" class="headerlink" title="函数是哈希函数的要求"></a>函数是哈希函数的要求</h3><ul>
-<li>要求一：1. 你的输入域是无穷大的。例如：f(String str)，可以认为该函数的输入域是无穷大的。2. 你的输出域是有限的。大多哈希函数可以做到2^64 - 2^ 128。</li>
-<li>为什么有这两个要求。因为现实生活中，我们想让目标数经过哈希后落到一个有限的范围内。</li>
-<li>要求二：当输入参数一旦确定，返回值一定也确定了。即哈希函数没有随机成分，是用某种规则处理出来的信息。</li>
-<li>输入域无限，输出域有限，输入参数确定则输出值也确定，这3点会导致，不同的输入会有相同的输出。</li>
-<li>要求三：输入域无穷大，映射到一个较小的范围S（2^64 - 2^ 128）。我们要求：所有的输入值，映射后会均匀的摊在整个S上。例如：输出域S是0，1，2，不管你的输入值如何。如果输入是0，1，2 … 98，我们传进来99个值。则输出值是0的差不多33个，1差不多33个，2差不多33个。</li>
-<li>我们称“要求三”是指：哈希函数的离散性，一个哈希函数设计的好不好就是看它的离散性好不好。</li>
+        <h3 id="WebPack-更迭"><a href="#WebPack-更迭" class="headerlink" title="WebPack 更迭"></a>WebPack 更迭</h3><ul>
+<li>v1: 编译打包、HRM（热更新）、代码分割、文件处理。</li>
+<li>v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。</li>
+<li>v3: Scope Hoisting（作用域提升，提升了打包后的代码性能。老版本的WebPack 将代码打包在闭包当中，这些封装的闭包会损耗浏览器性能。因此。webpack学习他的对手rollup，将所有的代码的模块的作用域，提高到单一的作用域中，这样就提升了打包后代码的运行速度。）、Magic Comments （配合动态import使用，可以使得webpack懒加载一段代码。可以指定打包后的chunk的名字）。</li>
 </ul>
-<h3 id="哈希值取模（-）"><a href="#哈希值取模（-）" class="headerlink" title="哈希值取模（%）"></a>哈希值取模（%）</h3><ul>
-<li>一个参数经过哈希函数F后得到一个哈希值去模（%）m。大量的参数经过哈希函数F后得到一个哈希值去%m。最终，得到的返回值会均匀分布在m - 1 上。</li>
-<li>即哈希值在我们的S域上指均摊的，我们将S域给模上M，返回值就均摊在m - 1上。</li>
+<h3 id="版本迁移"><a href="#版本迁移" class="headerlink" title="版本迁移"></a>版本迁移</h3><ul>
+<li>V1 -&gt; V2 配置文件不兼容。</li>
+<li>V2 -&gt; V3 承诺尽可能兼容API。</li>
+<li>因此，webpack的配置正在趋于稳定。</li>
 </ul>
-<h3 id="经典缓存结构"><a href="#经典缓存结构" class="headerlink" title="经典缓存结构"></a>经典缓存结构</h3><ul>
-<li>三台服务器构成的一个服务器集群。上面存key-value形式的信息，我希望这三台服务器负载均衡。</li>
-<li>机器分别为0，1，2。来了个信息A[key, value]。信息A经过哈希，得到的哈希值再经过一个模3。得到的模值，出来0，到机器0上；出来1，到机器1上；出来2，到机器2上。</li>
-<li>插入的逻辑同上，查询的逻辑同理。</li>
-<li>因为哈希函数的特性，我们的信息插入时是均匀分摊在这3台机器上的，我们的查询也是均匀分摊在这三台机器上的。所以，负载均衡。</li>
+<h3 id="WebPack核心概念"><a href="#WebPack核心概念" class="headerlink" title="WebPack核心概念"></a>WebPack核心概念</h3><ul>
+<li>Entry</li>
 </ul>
-<h3 id="经典缓存结构副作用"><a href="#经典缓存结构副作用" class="headerlink" title="经典缓存结构副作用"></a>经典缓存结构副作用</h3><ul>
-<li>一旦加减机器，我们原来分摊在机器上的数据都需要变化。数据迁移的代价十分高。</li>
+<ol>
+<li>是代码入口：可以理解为某一段代码的入口。通过代码的入口，直接或间接找到所需要的所有依赖。</li>
+<li>是打包入口：告诉WebPack，以哪个文件为起点找到依赖，再找到依赖的依赖。</li>
+<li>可以是一个或者多个entry。例如：多页面程序，一个页面是一个入口。单页面程序，将业务代码和框架代码分为两个entry。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &apos;index.js&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: [&apos;index.js&apos;, &apos;vender.js&apos;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// index -&gt; &apos;index.js&apos;</span><br><span class="line">// 这种key -&gt; value 的形式表明，&apos;index.js&apos;是一个独立的chunk(一个代码块)，即index这个key对应的chunk是&apos;index.js&apos;。</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &#123;</span><br><span class="line">		index: &apos;index.js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 对象方式，也易于修改，直接增加key就可以了</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &#123;</span><br><span class="line">		index: [&apos;index.js&apos;, &apos;app.js&apos;],</span><br><span class="line">		vendor: &apos;vendor.js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>OutPut</li>
 </ul>
-<h3 id="解决方式-一致性哈希"><a href="#解决方式-一致性哈希" class="headerlink" title="解决方式-一致性哈希"></a>解决方式-一致性哈希</h3><ul>
-<li>假设哈希函数f，以下所有的操作使用的哈希函数均一致。</li>
-<li>假设输出域0 ~ 2^128，作为一个环。0~2^128均匀分布在环上，即2^128的下一个位置是0，0的下一个位置是1。</li>
-<li>假设有三台机器:M1，M2，M3，上面有自己的mac地址或其它专有信息。将这个信息生成一个hash值，认为该hash值代表这三台机器。</li>
-<li>此时，这个环上有了3台机器。</li>
-<li>在环上插值时，假设值为A。将A经过哈希得到的哈希值打在环上，哈希值在环上顺时针遇到的第一个机器便是它应该存放的地方。</li>
-<li>此时，每个机器负责环上的某段数据。</li>
-<li>加机器。原来是m1，m2，m3。在环上加入m4（m1，m2，m4，m3），此时不需要将所有的数据都迁移。我们将原本属于m3的部分数据，让它属于m4就可以了。</li>
-<li>m4机器删除，此时将m4上的数据顺时针给到下一个机器m3上，就可以了。<h3 id="如何顺时针找机器"><a href="#如何顺时针找机器" class="headerlink" title="如何顺时针找机器"></a>如何顺时针找机器</h3></li>
-<li>机器是环装结构，假设机器的哈希值分别是1，5，10。在前端，插入一个值，它的哈希值是6。那么它就可以在1-5-10中找到它的位置。</li>
+<ol>
+<li>打包生成的文件（bundle）。</li>
+<li>可以是一个或多个。</li>
+<li>如何定义一个entry和output对应起来呢？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 单个文件对应单个输出</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &apos;index.js&apos;,</span><br><span class="line">	output: &#123;</span><br><span class="line">		filename: &apos;index.min.js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 多个文件对应多个输出，webpack自定义了规则</span><br><span class="line">// [name]对应entry的key -&gt; value 中的key</span><br><span class="line">// 也是可以配合cdn的</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &#123;</span><br><span class="line">		index: &apos;index.js&apos;,</span><br><span class="line">		vendor: &apos;vendor.js&apos;</span><br><span class="line">	&#125;,</span><br><span class="line">	output: &#123;</span><br><span class="line">		filename: &apos;[name].min.[hash: 5].js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Loaders（处理JS之外的资源）</li>
 </ul>
-<h3 id="上面做法的问题"><a href="#上面做法的问题" class="headerlink" title="上面做法的问题"></a>上面做法的问题</h3><ul>
-<li>利用哈希函数的离散性，哈希在分割环时，在数据量很大的情况下，才会出现均摊。数据量小的时候，均分并不明显。</li>
-<li>比如：有一间屋子，打翻一瓶香水，可以充满屋子。但是几个颗粒，就不能。哈希是一个类似的过程。</li>
-<li>即便3台机器负载均衡了，在加入第四台机器时，一定会出现负载不均。</li>
+<ol>
+<li>处理文件</li>
+<li>将非JS的资源文件转换为模块<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 当你满足了test的条件，就是用use的Loader</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	module: &#123;</span><br><span class="line">		rules: [&#123;</span><br><span class="line">			test: /\.css$/,</span><br><span class="line">			use: &apos;css-loader&apos;</span><br><span class="line">		&#125;]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>Plugins（通过插件系统赋能）</li>
 </ul>
-<h3 id="虚拟节点技术"><a href="#虚拟节点技术" class="headerlink" title="虚拟节点技术"></a>虚拟节点技术</h3><ul>
-<li>真是机器是m1，m2，m3。但是，不使用m1，m2，m3去计算哈希值。分配虚拟路由节点，m1被分配：v1-1，v1-2，一直到v1-1000。</li>
-<li>环上不再放3台机器计算的哈希值，而是放虚拟节点的哈希值。此时m1，m2，m3就可以通过虚拟节点均分整个环了。</li>
-<li>加机器m4，将m4的虚拟节点的哈希值放在环上，虚拟节点会向m1，m2，m3要数据。这样数据就均摊在m1，m2，m3，m4上了。</li>
-<li>即通过虚拟节点，尽可能的将数据均摊。</li>
-</ul>
-<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><ul>
-<li>哈希表：有一个数组[0，1，3，4，5]，数组中的5个数代表5个数据域。每个数据域连着一个链表，链表上有数据。</li>
-<li>将一个(key，value)加入一个hashmap。value不用管，key经过hash以后会打到对应数据域上。例如（a, 31），a 经过哈希以后，再模上6。打到了数据域4上，4后面的链表就加一个节点（a, 31）。</li>
-<li>这么一个结构。当我有大量数据打到这个[1，2，3，4，5]上。其每个数据域后面的链表因为哈希一致性的性质，链表长度能够均匀增长（数据均摊）。</li>
-<li>hash表要扩容，增长到12，每个链表数据减半。</li>
-<li>新结构：每个数据域后面不跟链表，而跟一个红黑树，相同哈希值根据红黑树区分不同。扩容行为更新频率低，因红黑树的有序结构。</li>
-<li>使用哈希表的增删改查的时间复杂度都是O(1)。</li>
+<ol>
+<li>plugin参与打包的整个过程。</li>
+<li>有打包优化和压缩、配置编译时变量等功能。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	plugins: [</span><br><span class="line">		new webpack.optimize.UglifyJsPlugin()</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h3><ul>
+<li>chunk：块。在webpack中，代表了代码块。</li>
+<li>Bundle: 一捆。打包后的代码束。</li>
+<li>Module：模块，例如：loaders处理了一个图片，也可以看做一个模块。处理了css，也可以看做一个模块。</li>
 </ul>
 
       
@@ -402,6 +401,8 @@
           
             <a href="/tags/web前端/" rel="tag"># web前端</a>
           
+            <a href="/tags/深入浅出WebPack/" rel="tag"># 深入浅出WebPack</a>
+          
         </div>
       
 
@@ -413,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/09/经典数据结构-栈与队列/" rel="next" title="经典数据结构--栈与队列">
-                <i class="fa fa-chevron-left"></i> 经典数据结构--栈与队列
+              <a href="/2018/02/17/深入浅出WebPack（二）- 模块化的变迁/" rel="next" title="深入浅出WebPack（二）- 模块化的变迁">
+                <i class="fa fa-chevron-left"></i> 深入浅出WebPack（二）- 模块化的变迁
               </a>
             
           </div>
@@ -422,10 +423,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/16/经典数据结构--哈希相关题目/" rel="prev" title="经典数据结构--哈希相关题目">
-                经典数据结构--哈希相关题目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数是哈希函数的要求"><span class="nav-number">1.</span> <span class="nav-text">函数是哈希函数的要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希值取模（-）"><span class="nav-number">2.</span> <span class="nav-text">哈希值取模（%）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典缓存结构"><span class="nav-number">3.</span> <span class="nav-text">经典缓存结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典缓存结构副作用"><span class="nav-number">4.</span> <span class="nav-text">经典缓存结构副作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方式-一致性哈希"><span class="nav-number">5.</span> <span class="nav-text">解决方式-一致性哈希</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何顺时针找机器"><span class="nav-number">6.</span> <span class="nav-text">如何顺时针找机器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上面做法的问题"><span class="nav-number">7.</span> <span class="nav-text">上面做法的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟节点技术"><span class="nav-number">8.</span> <span class="nav-text">虚拟节点技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希表"><span class="nav-number">9.</span> <span class="nav-text">哈希表</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebPack-更迭"><span class="nav-number">1.</span> <span class="nav-text">WebPack 更迭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本迁移"><span class="nav-number">2.</span> <span class="nav-text">版本迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebPack核心概念"><span class="nav-number">3.</span> <span class="nav-text">WebPack核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名词"><span class="nav-number">4.</span> <span class="nav-text">名词</span></a></li></ol></div>
             
 
           </div>
