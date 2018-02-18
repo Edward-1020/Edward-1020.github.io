@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="web前端," />
+  <meta name="keywords" content="web前端,深入浅出Webpack," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="“之”字型打印给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：1 2     3   45 6     7   89 10 11 12“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12要求：额外空间复杂度为O(1)。 方案 宏观去想 从1开始建立坐标轴（x, y）。a朝x正坐">
-<meta name="keywords" content="web前端">
+<meta name="description" content="提取公用代码当前前端的开发模式是模块化开发，因此会有许多模块依赖的公共模块。  减少代码冗余 提高加载速度  CommonsChunkPlugin 其实是webpack内置的插件函数：webpack.opyimize.CommonChunkPlugin。 使用： 123plugins: [	new webpack.op">
+<meta name="keywords" content="web前端,深入浅出Webpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典数据结构--矩阵相关题目（三）">
-<meta property="og:url" content="http://yoursite.com/2018/01/18/经典数据结构--矩阵相关题目（三）/index.html">
+<meta property="og:title" content="深入浅出Webpack（五）-如何使用Webpack切分公共代码">
+<meta property="og:url" content="http://yoursite.com/2018/02/18/深入浅出Webpack（五）-如何使用Webpack切分公共代码/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="“之”字型打印给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：1 2     3   45 6     7   89 10 11 12“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12要求：额外空间复杂度为O(1)。 方案 宏观去想 从1开始建立坐标轴（x, y）。a朝x正坐标方向走，b朝y负坐标方向走。 第一次a到2，b到5，画出对角线：2，5 第二次">
+<meta property="og:description" content="提取公用代码当前前端的开发模式是模块化开发，因此会有许多模块依赖的公共模块。  减少代码冗余 提高加载速度  CommonsChunkPlugin 其实是webpack内置的插件函数：webpack.opyimize.CommonChunkPlugin。 使用： 123plugins: [	new webpack.optimize.CommonsChunkPlugin(option)]  这里的o">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-23T05:40:15.000Z">
+<meta property="og:updated_time" content="2018-02-18T06:48:19.744Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典数据结构--矩阵相关题目（三）">
-<meta name="twitter:description" content="“之”字型打印给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：1 2     3   45 6     7   89 10 11 12“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12要求：额外空间复杂度为O(1)。 方案 宏观去想 从1开始建立坐标轴（x, y）。a朝x正坐标方向走，b朝y负坐标方向走。 第一次a到2，b到5，画出对角线：2，5 第二次">
+<meta name="twitter:title" content="深入浅出Webpack（五）-如何使用Webpack切分公共代码">
+<meta name="twitter:description" content="提取公用代码当前前端的开发模式是模块化开发，因此会有许多模块依赖的公共模块。  减少代码冗余 提高加载速度  CommonsChunkPlugin 其实是webpack内置的插件函数：webpack.opyimize.CommonChunkPlugin。 使用： 123plugins: [	new webpack.optimize.CommonsChunkPlugin(option)]  这里的o">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/18/经典数据结构--矩阵相关题目（三）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/18/深入浅出Webpack（五）-如何使用Webpack切分公共代码/"/>
 
 
 
 
 
-  <title>经典数据结构--矩阵相关题目（三） | 0.618:1</title>
+  <title>深入浅出Webpack（五）-如何使用Webpack切分公共代码 | 0.618:1</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/经典数据结构--矩阵相关题目（三）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/18/深入浅出Webpack（五）-如何使用Webpack切分公共代码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yyyx">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">经典数据结构--矩阵相关题目（三）</h1>
+          <h1 class="post-title" itemprop="name headline">深入浅出Webpack（五）-如何使用Webpack切分公共代码</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T14:10:10+08:00">
-                2018-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T14:20:00+08:00">
+                2018-02-18
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/经典数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">经典数据结构</span>
+                  <a href="/categories/深入浅出Webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">深入浅出Webpack</span>
                   </a>
                 </span>
 
@@ -332,15 +332,37 @@
       
 
       
-        <h3 id="“之”字型打印"><a href="#“之”字型打印" class="headerlink" title="“之”字型打印"></a>“之”字型打印</h3><p>给定一个矩阵matrix，按照“之”字形的方式打印这个矩阵，例如：<br>1 2     3   4<br>5 6     7   8<br>9 10 11 12<br>“之”字型打印的结果为：1，2，5，9，6，3，4，7，10，11，8，12<br>要求：<br>额外空间复杂度为O(1)。</p>
-<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ul>
-<li>宏观去想</li>
-<li>从1开始建立坐标轴（x, y）。a朝x正坐标方向走，b朝y负坐标方向走。</li>
-<li>第一次a到2，b到5，画出对角线：2，5</li>
-<li>第二次，a到3，b向下走到9，画出对角线：3，6，9</li>
-<li>如此这般，能得到各个对角线。</li>
-<li>打印对角线，第一次打印从左下向右上，第二次从右上向左下，第三次从左下向右上。我们提供一个打印函数，给一个布尔值确定打印方向。</li>
+        <h3 id="提取公用代码"><a href="#提取公用代码" class="headerlink" title="提取公用代码"></a>提取公用代码</h3><p>当前前端的开发模式是模块化开发，因此会有许多模块依赖的公共模块。</p>
+<ul>
+<li>减少代码冗余</li>
+<li>提高加载速度</li>
 </ul>
+<h3 id="CommonsChunkPlugin"><a href="#CommonsChunkPlugin" class="headerlink" title="CommonsChunkPlugin"></a>CommonsChunkPlugin</h3><ul>
+<li>其实是webpack内置的插件函数：webpack.opyimize.CommonChunkPlugin。</li>
+<li><p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">	new webpack.optimize.CommonsChunkPlugin(option)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里的option:</p>
+</li>
+</ul>
+<ol>
+<li>options.name or options.names 表示chunk的名称</li>
+<li>options.filename 表示公用代码打包后的文件名</li>
+<li>options.minChunks 可以是数字，函数，特殊值。数字：例如为2，表示代码出现2次，就提取为公用代码。特殊值infinity：表示不会打包公共模块。函数：自定义提取逻辑。</li>
+<li>options.chunks 指定了提取代码的范围，你从哪几个模块提取公用代码。</li>
+<li>options.children  options.deepChildren 是否从子模块查找依赖</li>
+<li>options.async 创造异步公共代码块。</li>
+</ol>
+<h3 id="简单的配置介绍"><a href="#简单的配置介绍" class="headerlink" title="简单的配置介绍"></a>简单的配置介绍</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">var webpack = require(&apos;webpack&apos;)</span><br><span class="line">var path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    &apos;pageA&apos;: &apos;./src/PageA.js&apos;,</span><br><span class="line">    &apos;pageB&apos;: &apos;./src/PageB.js&apos;,</span><br><span class="line">    &apos;vendor&apos;: [&apos;lodash&apos;],</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, &apos;./dist&apos;),</span><br><span class="line">    filename: &apos;[name].bundle.js&apos;,</span><br><span class="line">    chunkFilename: &apos;[name].chunk.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">      name: &apos;common&apos;,</span><br><span class="line">      minChunks: 2,</span><br><span class="line">      chunks: [&apos;pageA&apos;, &apos;pageB&apos;]</span><br><span class="line">    &#125;),</span><br><span class="line">    new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">      names: [&apos;vendor&apos;, &apos;manifest&apos;],</span><br><span class="line">      minChunks: Infinity</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>以下内容将chunks指定的范围pageA和pageB两个js的公共代码部分打包为命名为common的chunk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">  name: &apos;common&apos;,</span><br><span class="line">  minChunks: 2,</span><br><span class="line">  chunks: [&apos;pageA&apos;, &apos;pageB&apos;]</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>以下内容将vendor中的第三方库lodash单独打包在名为vendor的chunk中，将webpack生成的代码打包在名为manifest的chunk中中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">entry: &#123;</span><br><span class="line">  &apos;pageA&apos;: &apos;./src/PageA.js&apos;,</span><br><span class="line">  &apos;pageB&apos;: &apos;./src/PageB.js&apos;,</span><br><span class="line">  &apos;vendor&apos;: [&apos;lodash&apos;],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">  names: [&apos;vendor&apos;, &apos;manifest&apos;],</span><br><span class="line">  minChunks: Infinity</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -360,6 +382,8 @@
           
             <a href="/tags/web前端/" rel="tag"># web前端</a>
           
+            <a href="/tags/深入浅出Webpack/" rel="tag"># 深入浅出Webpack</a>
+          
         </div>
       
 
@@ -371,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/18/经典数据结构--矩阵相关题目（二）/" rel="next" title="经典数据结构--矩阵相关题目（二）">
-                <i class="fa fa-chevron-left"></i> 经典数据结构--矩阵相关题目（二）
+              <a href="/2018/02/17/深入浅出Webpack（四）-如何使用Webpack编译ES6/" rel="next" title="深入浅出Webpack（四）-如何使用Webpack编译ES6">
+                <i class="fa fa-chevron-left"></i> 深入浅出Webpack（四）-如何使用Webpack编译ES6
               </a>
             
           </div>
@@ -381,8 +405,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/18/经典数据结构--链表（一）/" rel="prev" title="经典数据结构--链表（一）">
-                经典数据结构--链表（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/18/深入浅出Webpack（六）-代码分割及懒加载/" rel="prev" title="深入浅出Webpack（六）-代码分割及懒加载">
+                深入浅出Webpack（六）-代码分割及懒加载 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -517,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#“之”字型打印"><span class="nav-number">1.</span> <span class="nav-text">“之”字型打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案"><span class="nav-number">2.</span> <span class="nav-text">方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#提取公用代码"><span class="nav-number">1.</span> <span class="nav-text">提取公用代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CommonsChunkPlugin"><span class="nav-number">2.</span> <span class="nav-text">CommonsChunkPlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的配置介绍"><span class="nav-number">3.</span> <span class="nav-text">简单的配置介绍</span></a></li></ol></div>
             
 
           </div>
