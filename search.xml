@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[深入浅出Webpack（九）-文件处理]]></title>
+    <url>%2F2018%2F02%2F19%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebpack%EF%BC%88%E4%B9%9D%EF%BC%89-%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%2F</url>
+    <content type="text"><![CDATA[文件处理 图片 css中引入的图片 引入的图片优化快速加载2.1 自动合成雪碧图2.2 压缩图片2.3 较小的图片 base64编码 字体 第三方JS库 HTML 图片处理file-loader、url-loader、img-loader、postcss-sprites css中引入的图片 使用webpack打包CSS（CSS中包含图片资源文件）会报错，提示需要loader去处理图片资源。 在module的rules中添加file-loader去处理css依赖的图片文件。 通过options配置路径，文件会输出在dist/assets/imgs下。这里file-loader为background的url配置图片地址时，是会默认相对于css文件的地址进行配置的。通过publicPath:’’，让其配置地址是相对于根目录下的地址。 12345678910111213&#123; test: /\.(png|jpg|jpeg|gif)$/, use: [ &#123; loader: &apos;file-loader&apos;, options: &#123; publicPath: &apos;&apos;, outputPath: &apos;dist/&apos;, useRelativePath: true &#125; &#125; ]&#125; 较小的图片 base64编码当文件小于10kb，转为base64。当文件大于10kb，抽取出来。123456789&#123; loader: &apos;url-loader&apos;, options: &#123; limit: 100000, publicPath: &apos;&apos;, outputPath: &apos;dist/&apos;, useRelativePath: true &#125;&#125; img-loader 压缩图片图片会被压缩12345678910111213141516171819&#123; loader: &apos;url-loader&apos;, options: &#123; // 为插入的img指定名称 name: &apos;[name].min.[ext]&apos; limit: 100000, publicPath: &apos;&apos;, outputPath: &apos;dist/&apos;, useRelativePath: true &#125;&#125;,&#123; loader: &apos;img-loader&apos;, options: &#123; pngquant: &#123; quality: 80 &#125; &#125;&#125; postcss-sprites合成雪碧图 默认合成的图片都是在跟目录下，需要使用spritePath指定目录12345678910111213141516&#123; loader: &apos;postcss-loader&apos;, options: &#123; options: &#123; ident: &apos;postcss&apos;, plugins: [ require(&apos;postcss-sprites&apos;)(&#123; spritePath: &apos;dist/assets/imgs/sprites&apos;, // 对安卓和苹果图片做区分，如果图片以@2x结尾，例如niao@2x.png。那么postcss-sprites就能区分出来了。 retina: true &#125;), require(&apos;postcss-cssnext&apos;)() ] &#125; &#125;&#125; 字体处理url-loader，file-loader1234567891011121314test: /\.(eot|woff2|woff|ttf|svg)$/,use: [ &#123; loader: &apos;url-loader&apos;, options: &#123; // 为插入的img指定名称 name: &apos;[name].min.[ext]&apos; limit: 100000, publicPath: &apos;&apos;, outputPath: &apos;dist/&apos;, useRelativePath: true &#125; &#125;] 第三方JS库webpack.providePluginimports-loaderwindow 使用webpack.providePlugin 使用第三方库在webpack.config.js中的plugins123new webpack.ProvidePlugin(&#123; $: &apos;jquery&apos;&#125;) 因此，webpack.ProvidePlugin会为我们的代码中注入“$”，我们就可以使用$了。 使用webpack.providePlugin配合resolve使用本地库 假设jquery是我们的本地库 使用resolve功能 123456resolve: &#123; alias: &#123; // $符号表示将jquery别名是解析到某个目录的某个文件下，而不是整个目录 jquery$: path.resolve（__dirname, &apos;src/libs/jquery.min.js&apos;） &#125;&#125; 在webpack.config.js中的plugins 123new webpack.ProvidePlugin(&#123; $: &apos;jquery&apos;&#125;) 即webpack解析到jquery这个关键词时，会通过alias的别名系统，去对应的目录下找这个文件。 imports-loader这里imports-loader也可以和resolve中的alias配合使用，解析本地第三方库。1234567891011&#123; test: path.resolve(__dirname, &apos;src/app.js&apos;), use: [ &#123; loader: &apos;imports-loader&apos;, options: &#123; $: &apos;jquery&apos; &#125; &#125; ]&#125; HTML处理生成HTML HtmlWebpackPlugin: 根据给定的html模板，生成html文件。 options: template filename，指定文件名。 minify，是否压缩生成的html文件。 chunks，指定有几个entry chunk是加入到你的html页面中来的。例如：多页面应用，需要为各个页面生成html，且为各个页面插入相关的chunk。 inject，是否需要HtmlWebpackPlugin将你需要的标签插入到页面中。 实战以模板生成html文件1var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;) 12345// 在plugin中new HtmlWebpackPlugin(&#123; filename: &apos;index.html&apos;, template: &apos;./index.html&apos;&#125;) 生成的index.html中，HtmlWebpackPlugin会为我们自动插入生成的js和css标签。 以模板生成html文件（不插入标签）123456// 在plugin中new HtmlWebpackPlugin(&#123; filename: &apos;index.html&apos;, template: &apos;./index.html&apos;， inject: false&#125;) 生成的index.html中，HtmlWebpackPlugin“不会”为我们自动插入生成的js和css标签。 以模板生成html文件（多entry） 不指定chunks，所有entry打包的文件都会插入html中 123456// 在plugin中new HtmlWebpackPlugin(&#123; filename: &apos;index.html&apos;, template: &apos;./index.html&apos;， chunks: []，&#125;) 指定chunks，仅entry相关的文件都会插入html中 在entry有key为app的入口文件，还有其它的入口文件。仅仅需要将名为app的插入html中。123456// 在plugin中new HtmlWebpackPlugin(&#123; filename: &apos;index.html&apos;, template: &apos;./index.html&apos;， chunks: [&apos;app&apos;]，&#125;) 以模板生成html文件,压缩123456789// 在plugin中new HtmlWebpackPlugin(&#123; filename: &apos;index.html&apos;, template: &apos;./index.html&apos;， chunks: [&apos;app&apos;]， minify: &#123; collapseWhitespace: true &#125;&#125;) HTML中引入的图片 html-loader，帮助webpack判断html文件中哪些元素需要交给webpack处理。 options: attrs: [img: src]，告诉webpack对html文件中元素的打包规则。 实战1234567891011&#123; test: /\.html$/, use: [ &#123; loader: &apos;html-loader&apos;, options: &#123; attrs: [&apos;img:src&apos;, &apos;img:data-src&apos;] &#125; &#125; ]&#125; 这样，img标签引用的src的图片会被抽出。 路径问题 url-loader启用了相对路径，这会带来路径问题。其实，我们只需要根据ouput中的path，再在url-loader中如此编写路径即可。 取消的相对路径，就应使用绝对路径。在output中使用publicPath。12345678910``` &#123; loader: &apos;url-loader&apos;, options: &#123; // 为插入的img指定名称 name: &apos;[name].min.[ext]&apos; limit: 100000, outputPath: &apos;assets/imgs/&apos; &#125; &#125; 在HTML中Webpack配合优化提前载入Webpack的加载代码 有时，我们直接将共用的JS代码直接插入html中以减少网络请求。 inline-manifest-webpack-plugin html-webpack-inline-chunk-plugin html-webpack-inline-chunk-plugin 引入插件 1var htmlInlineChunkPlugin = require(&apos;html-webpack-inline-chunk-plugin&apos;) 使用时，告诉htmlInlineChunkPlugin，我们希望直接插入html的chunk名称 告诉htmlInlineChunkPlugin，我们希望直接在html中插入Webpack自己的生产代码，之前我们已经通过插件抽出并命名为manifest。123new HtmlInlineChunkPlugin(&#123; inlineChunks: [&apos;manifest&apos;]&#125;)]]></content>
+      <categories>
+        <category>深入浅出Webpack</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深入浅出Webpack（八）-JS与CSS的Tree Shaking]]></title>
+    <url>%2F2018%2F02%2F19%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebpack%EF%BC%88%E5%85%AB%EF%BC%89-JS%E4%B8%8ECSS%E7%9A%84Tree%20Shaking%2F</url>
+    <content type="text"><![CDATA[Tree Shaking JS Tree Shaking CSS Tree Shaking 使用场景 常规优化。 引入第三方库的某一功能。 JS Tree Shaking不使用 tree shaking 未使用JS Tree Shaking时，Webpack打包后的代码，会通过注释进行一个分类。例如 function a () {}是被使用的，function b() {} 是未使用的。 打包后的代码是12/* harmony export a*/ function a () &#123;&#125;/* unused harmony export b*/ function b () &#123;&#125; 本地代码使用 tree shaking 在plugins中 1new Webpack.optimize.UglifyJsPlugin() 这样，Webpack会将打包的JS文件压缩优化，且将未使用的funtion b () {}摒弃打包。 第三方库lodash直接使用 tree shaking1import &#123;chunk&#125; from &apos;lodash&apos; 不使用tree shaking，整个lodash都会被Webpack打包。 直接单单在plugins中，此时打包的结果仍然较大。因为lodash文件本身便十分庞大，且它是一个立即执行函数，并不是按照模块化输出的。 1new Webpack.optimize.UglifyJsPlugin() 因此，安装一个lodash的es module即可。 第三方库lodash使用es-module，再使用 tree shaking1import &#123;chunk&#125; from &apos;lodash-es&apos; 再次使用插件UglifyJsPlugin，再次打包，tree shaking仍然没有生效。 第三方库的tree-shaking因此，如果第三方库没有使用标准的模块化方案，webpack的tree shaking是不能正确工作的。 第三方库lodash使用babel-plugin-lodash，再使用 tree shaking12345loader: &apos;babel-loader&apos;,options: [ presets: [&apos;env&apos;], plugins: [&apos;lodash&apos;]] 此时，对lodash的tree shaking成功。 CSS Tree Shaking Purify CSSpurifycss-webpack（推荐） optionspaths: 告诉 purifycss-webpack，你针对我提供的这些路径进行CSS Tree Shaking。 purifycss-webpack 实战 引入purify、glob-all 12var PurifyCSS = require(&apos;purifycss-webpack&apos;)var glob = require(&apos;glob-all&apos;) glob.sync（）同步获取目录下所有文件名 在webpack的plugins的配置中加入purify，且purify一定要放置在ExtractTextWebpackPlugin的后面。 123456789plugins: [ new ExtractTextWebpackPlugin(), new PurifyCSS(&#123; paths: glob.sync([ path.join(__dirname, &apos;./index.html&apos;), path.join(__dirname, &apos;./src/*.js&apos;) ]) &#125;)] 结果：有可能会报bug。但结果上，purify可以检测到需要的css代码（无论是标签上表明需要的css，还是js代码动态拼接使其需要的css），进行一个tree-shaking。]]></content>
+      <categories>
+        <category>深入浅出Webpack</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[深入浅出Webpack（七）-处理CSS]]></title>
-    <url>%2F2018%2F02%2F18%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebpack%EF%BC%88%E4%B8%83%EF%BC%89-%E5%A4%84%E7%90%86CSS%2F</url>
+    <url>%2F2018%2F02%2F19%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebpack%EF%BC%88%E4%B8%83%EF%BC%89-%E5%A4%84%E7%90%86CSS%2F</url>
     <content type="text"><![CDATA[引入CSS style-loader：为我们要载入的页面创建style标签。 css-loader：让css可以被js模块化。 style-loader style-loader/url style-loader将css打包到js中，通过js执行，将css插入在html中生成的style标签中。 style-loader/url 配合 file-loader，file-loader会将css抽出单独进行打包，style-loader/url通过link将css引入。 多个样式会产生多个link标签，所以这么做不合适。 style-loader/useable style-loader/useable 配合 file-loader 可以通过css.use()，css.unuse()，插入或者不插入css。 options insertAt（插入位置） insertInto（插入到dom） singleton（是否使用一个Style标签） transform（转化，浏览器环境下，插入页面前）。 CSS-loader options alias（解析的别名） importLoader （@import） Minimize（是否压缩） modules（启用css-modules） Less/Sass loader提取CSS extract-loader ExtractTextWebpackPlugin（主流） ExtractTextWebpackPlugin 用于将所有的css提取成一个文件 fallback: 告诉ExtractTextWebpackPlugin，如果不需要该插件处理 ，那么需要什么loader去处理。 use: 告诉ExtractTextWebpackPlugin，将css提取出来以后，需要什么loader去处理。12345678910111213141516new ExtracTextWebPackPlugin.extract(&#123; fallback: &#123; loader: &apos;style-loader&apos;, options: &#123; singleton: true, transform: &apos;./css.transform.js&apos; &#125; &#125;, use: [ &#123; loader: &apos;css-loader&apos; &#125;,&#123; loader: &apos;less-loader&apos; &#125; ]&#125;) 1234567plugins: [ new ExtractTextWebpackPlugin(&#123; filename: &apos;[name].min.css&apos;, // 可以控制一些动态加载的样式，allChunks：false,写在js中css的代码不会被抽出一起被提取 allChunks: false &#125;)] 总结 如何在Webapck中引入css？style-loader，css-loader less/sass 预处理语言。 CSS module。 ExtractTextWebpackPlugin，提取为单独的css。 PostCSS A tool for transforming CSS with JavaScripit。 基于PostCSS生态产生了许多使用的工具：postcss、postcss-loaer、Autoprefixed、postcss-cssnano、postcss-cssnext。 Autoprefixer：浏览器前缀处理。 CSS-nano：压缩css。 CSS-next：可以让你使用CSS新特性。 实战12345678910111213&#123; loader: &apos;postcss-loader&apos;, options: &#123; options: &#123; ident: &apos;postcss&apos;, plugins: [ // postcss-cssnext包含autoprefixer // require(&apos;autoprefixer&apos;)(), require(&apos;postcss-cssnext&apos;)() ] &#125; &#125;&#125;]]></content>
       <categories>
         <category>深入浅出Webpack</category>
       </categories>
       <tags>
-        <tag>Webpack</tag>
+        <tag>web前端</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -19,7 +44,8 @@
         <category>深入浅出Webpack</category>
       </categories>
       <tags>
-        <tag>Webpack</tag>
+        <tag>web前端</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -30,18 +56,8 @@
         <category>深入浅出Webpack</category>
       </categories>
       <tags>
-        <tag>Webpack</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[深入浅出Webpack（三）-你应该知道的Webpack基本知识]]></title>
-    <url>%2F2018%2F02%2F17%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebpack%EF%BC%88%E4%B8%89%EF%BC%89-%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84WebPack%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%2F</url>
-    <content type="text"><![CDATA[Webpack 更迭 v1: 编译打包、HRM（热更新）、代码分割、文件处理。 v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。 v3: Scope Hoisting（作用域提升，提升了打包后的代码性能。老版本的webpack 将代码打包在闭包当中，这些封装的闭包会损耗浏览器性能。因此。webpack学习他的对手rollup，将所有的代码的模块的作用域，提高到单一的作用域中，这样就提升了打包后代码的运行速度。）、Magic Comments （配合动态import使用，可以使得webpack懒加载一段代码。可以指定打包后的chunk的名字）。 版本迁移 V1 -&gt; V2 配置文件不兼容。 V2 -&gt; V3 承诺尽可能兼容API。 因此，webpack的配置正在趋于稳定。 Webpack核心概念 Entry 是代码入口：可以理解为某一段代码的入口。通过代码的入口，直接或间接找到所需要的所有依赖。 是打包入口：告诉webpack，以哪个文件为起点找到依赖，再找到依赖的依赖。 可以是一个或者多个entry。例如：多页面程序，一个页面是一个入口。单页面程序，将业务代码和框架代码分为两个entry。1234567891011121314151617181920212223module.exports = &#123; entry: &apos;index.js&apos;&#125;module.exports = &#123; entry: [&apos;index.js&apos;, &apos;vender.js&apos;]&#125;// index -&gt; &apos;index.js&apos;// 这种key -&gt; value 的形式表明，&apos;index.js&apos;是一个独立的chunk(一个代码块)，即index这个key对应的chunk是&apos;index.js&apos;。module.exports = &#123; entry: &#123; index: &apos;index.js&apos; &#125;&#125;// 对象方式，也易于修改，直接增加key就可以了module.exports = &#123; entry: &#123; index: [&apos;index.js&apos;, &apos;app.js&apos;], vendor: &apos;vendor.js&apos; &#125;&#125; OutPut 打包生成的文件（bundle）。 可以是一个或多个。 如何定义一个entry和output对应起来呢？1234567// 单个文件对应单个输出module.exports = &#123; entry: &apos;index.js&apos;, output: &#123; filename: &apos;index.min.js&apos; &#125;&#125; 123456789101112// 多个文件对应多个输出，webpack自定义了规则// [name]对应entry的key -&gt; value 中的key// 也是可以配合cdn的module.exports = &#123; entry: &#123; index: &apos;index.js&apos;, vendor: &apos;vendor.js&apos; &#125;, output: &#123; filename: &apos;[name].min.[hash: 5].js&apos; &#125;&#125; Loaders（处理JS之外的资源） 处理文件 将非JS的资源文件转换为模块123456789// 当你满足了test的条件，就是用use的Loadermodule.exports = &#123; module: &#123; rules: [&#123; test: /\.css$/, use: &apos;css-loader&apos; &#125;] &#125;&#125; Plugins（通过插件系统赋能） plugin参与打包的整个过程。 有打包优化和压缩、配置编译时变量等功能。12345module.exports = &#123; plugins: [ new webpack.optimize.UglifyJsPlugin() ]&#125; 名词 chunk：块。在webpack中，代表了代码块。 Bundle: 一捆。打包后的代码束。 Module：模块，例如：loaders处理了一个图片，也可以看做一个模块。处理了css，也可以看做一个模块。]]></content>
-      <categories>
-        <category>深入浅出Webpack</category>
-      </categories>
-      <tags>
-        <tag>Webpack</tag>
+        <tag>web前端</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -52,18 +68,32 @@
         <category>深入浅出Webpack</category>
       </categories>
       <tags>
-        <tag>Webpack</tag>
+        <tag>web前端</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深入浅出Webpack（三）-你应该知道的Webpack基本知识]]></title>
+    <url>%2F2018%2F02%2F17%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebpack%EF%BC%88%E4%B8%89%EF%BC%89-%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84WebPack%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%2F</url>
+    <content type="text"><![CDATA[Webpack 更迭 v1: 编译打包、HRM（热更新）、代码分割、文件处理。 v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。 v3: Scope Hoisting（作用域提升，提升了打包后的代码性能。老版本的webpack 将代码打包在闭包当中，这些封装的闭包会损耗浏览器性能。因此。webpack学习他的对手rollup，将所有的代码的模块的作用域，提高到单一的作用域中，这样就提升了打包后代码的运行速度。）、Magic Comments （配合动态import使用，可以使得webpack懒加载一段代码。可以指定打包后的chunk的名字）。 版本迁移 V1 -&gt; V2 配置文件不兼容。 V2 -&gt; V3 承诺尽可能兼容API。 因此，webpack的配置正在趋于稳定。 Webpack核心概念Entry 是代码入口：可以理解为某一段代码的入口。通过代码的入口，直接或间接找到所需要的所有依赖。 是打包入口：告诉webpack，以哪个文件为起点找到依赖，再找到依赖的依赖。 可以是一个或者多个entry。例如：多页面程序，一个页面是一个入口。单页面程序，将业务代码和框架代码分为两个entry。1234567891011121314151617181920212223module.exports = &#123; entry: &apos;index.js&apos;&#125;module.exports = &#123; entry: [&apos;index.js&apos;, &apos;vender.js&apos;]&#125;// index -&gt; &apos;index.js&apos;// 这种key -&gt; value 的形式表明，&apos;index.js&apos;是一个独立的chunk(一个代码块)，即index这个key对应的chunk是&apos;index.js&apos;。module.exports = &#123; entry: &#123; index: &apos;index.js&apos; &#125;&#125;// 对象方式，也易于修改，直接增加key就可以了module.exports = &#123; entry: &#123; index: [&apos;index.js&apos;, &apos;app.js&apos;], vendor: &apos;vendor.js&apos; &#125;&#125; OutPut 打包生成的文件（bundle）。 可以是一个或多个。 如何定义一个entry和output对应起来呢？1234567// 单个文件对应单个输出module.exports = &#123; entry: &apos;index.js&apos;, output: &#123; filename: &apos;index.min.js&apos; &#125;&#125; 123456789101112// 多个文件对应多个输出，webpack自定义了规则// [name]对应entry的key -&gt; value 中的key// 也是可以配合cdn的module.exports = &#123; entry: &#123; index: &apos;index.js&apos;, vendor: &apos;vendor.js&apos; &#125;, output: &#123; filename: &apos;[name].min.[hash: 5].js&apos; &#125;&#125; Loaders（处理JS之外的资源） 处理文件 将非JS的资源文件转换为模块123456789// 当你满足了test的条件，就是用use的Loadermodule.exports = &#123; module: &#123; rules: [&#123; test: /\.css$/, use: &apos;css-loader&apos; &#125;] &#125;&#125; Plugins（通过插件系统赋能） plugin参与打包的整个过程。 有打包优化和压缩、配置编译时变量等功能。12345module.exports = &#123; plugins: [ new webpack.optimize.UglifyJsPlugin() ]&#125; 名词 chunk：块。在webpack中，代表了代码块。 Bundle: 一捆。打包后的代码束。 Module：模块，例如：loaders处理了一个图片，也可以看做一个模块。处理了css，也可以看做一个模块。]]></content>
+      <categories>
+        <category>深入浅出Webpack</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[深入浅出Webpack（二）- 模块化的变迁]]></title>
     <url>%2F2018%2F02%2F17%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAWebpack%EF%BC%88%E4%BA%8C%EF%BC%89-%20%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%8F%98%E8%BF%81%2F</url>
-    <content type="text"><![CDATA[模块化开发 JS模块化 命名空间 -&gt; commonjs(Node社区，只能用于服务端) -&gt; AMD/CMD/UMD -&gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &#123;&#125;NameSpace.type = NameSpace.type || &#123;&#125;NameSpace.type.method = function () &#123;&#125; CommonJS一个文件，是一个模块。模块内的文件，外界无法访问。只能模块内部通过module.exports暴露模块接口，才能被外界访问到。外界通过require引入模块，但是模块的加载是同步执行的。 AMDAsync Module Definition，异步模块定义。使用define定义模块，使用require加载模块。特点：依赖前置，提前执行。在初始化一个模块时，需要提前声明你初始化需要的所有模块，这些模块会提前全部执行初始化。 CMDCommon Module Definition。一个文件为一个模块。使用define定义模块，require来加载模块。特点：尽可能懒执行。在AMD某个模块执行初始化时，该模块的所有依赖是前置执行完成的。CMD不是，只有需要时，才会去执行，尽可能的懒执行。 UMDUniversal Module Definition。通用模块定义。首先判断是否支持AMD，其次判断是否支持CommonJS，都不支持就直接定义为全局变量。 ESM一个文件是一个模块。通过export/import输出输入模块 CSS模块化 CSS模块化说的更多的是一种设计模式。 例如oocss、smacss、atomic css、mcss、amcss、BEM、css modules]]></content>
+    <content type="text"><![CDATA[模块化开发JS模块化 命名空间 -&gt; commonjs(Node社区，只能用于服务端) -&gt; AMD/CMD/UMD -&gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &#123;&#125;NameSpace.type = NameSpace.type || &#123;&#125;NameSpace.type.method = function () &#123;&#125; CommonJS一个文件，是一个模块。模块内的文件，外界无法访问。只能模块内部通过module.exports暴露模块接口，才能被外界访问到。外界通过require引入模块，但是模块的加载是同步执行的。 AMDAsync Module Definition，异步模块定义。使用define定义模块，使用require加载模块。特点：依赖前置，提前执行。在初始化一个模块时，需要提前声明你初始化需要的所有模块，这些模块会提前全部执行初始化。 CMDCommon Module Definition。一个文件为一个模块。使用define定义模块，require来加载模块。特点：尽可能懒执行。在AMD某个模块执行初始化时，该模块的所有依赖是前置执行完成的。CMD不是，只有需要时，才会去执行，尽可能的懒执行。 UMDUniversal Module Definition。通用模块定义。首先判断是否支持AMD，其次判断是否支持CommonJS，都不支持就直接定义为全局变量。 ESM一个文件是一个模块。通过export/import输出输入模块 CSS模块化 CSS模块化说的更多的是一种设计模式。 例如oocss、smacss、atomic css、mcss、amcss、BEM、css modules]]></content>
       <categories>
         <category>深入浅出Webpack</category>
       </categories>
       <tags>
-        <tag>Webpack</tag>
+        <tag>web前端</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -75,7 +105,7 @@
       </categories>
       <tags>
         <tag>web前端</tag>
-        <tag>Webpack</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Webpack," />
+  <meta name="keywords" content="web前端,webpack," />
 
 
 
@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="模块化开发 JS模块化   命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave">
-<meta name="keywords" content="Webpack">
+<meta name="description" content="模块化开发JS模块化 命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = ">
+<meta name="keywords" content="web前端,webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入浅出Webpack（二）- 模块化的变迁">
 <meta property="og:url" content="http://yoursite.com/2018/02/17/深入浅出Webpack（二）- 模块化的变迁/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="模块化开发 JS模块化   命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &amp;#123;&amp;#125;NameSpace.type = NameSpace.type || &amp;#">
+<meta property="og:description" content="模块化开发JS模块化 命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &amp;#123;&amp;#125;NameSpace.type = NameSpace.type || &amp;#123">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/02/16/5a8688fc2c0dc.png">
 <meta property="og:image" content="https://i.loli.net/2018/02/16/5a86894e55e6f.png">
 <meta property="og:image" content="https://i.loli.net/2018/02/16/5a86897a05c2d.png">
 <meta property="og:image" content="https://i.loli.net/2018/02/16/5a868a099d607.png">
-<meta property="og:updated_time" content="2018-02-19T06:01:08.675Z">
+<meta property="og:updated_time" content="2018-02-19T06:43:02.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出Webpack（二）- 模块化的变迁">
-<meta name="twitter:description" content="模块化开发 JS模块化   命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &amp;#123;&amp;#125;NameSpace.type = NameSpace.type || &amp;#">
+<meta name="twitter:description" content="模块化开发JS模块化 命名空间 -&amp;gt; commonjs(Node社区，只能用于服务端) -&amp;gt; AMD/CMD/UMD -&amp;gt; ES6 module 命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。 123var NameSpave = &amp;#123;&amp;#125;NameSpace.type = NameSpace.type || &amp;#123">
 <meta name="twitter:image" content="https://i.loli.net/2018/02/16/5a8688fc2c0dc.png">
 
 
@@ -337,10 +337,7 @@
       
 
       
-        <h3 id="模块化开发"><a href="#模块化开发" class="headerlink" title="模块化开发"></a>模块化开发</h3><ul>
-<li>JS模块化</li>
-</ul>
-<ol>
+        <h3 id="模块化开发"><a href="#模块化开发" class="headerlink" title="模块化开发"></a>模块化开发</h3><h4 id="JS模块化"><a href="#JS模块化" class="headerlink" title="JS模块化"></a>JS模块化</h4><ol>
 <li>命名空间 -&gt; commonjs(Node社区，只能用于服务端) -&gt; AMD/CMD/UMD -&gt; ES6 module</li>
 <li><p>命名空间：库名.类别名.方法名。缺点：1. 命名空间被覆盖了，是无法检测到的。2. 易记错。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var NameSpave = &#123;&#125;</span><br><span class="line">NameSpace.type = NameSpace.type || &#123;&#125;</span><br><span class="line">NameSpace.type.method = function () &#123;&#125;</span><br></pre></td></tr></table></figure>
@@ -356,10 +353,7 @@
 <li><p>ESM<br>一个文件是一个模块。通过export/import输出输入模块</p>
 </li>
 </ol>
-<ul>
-<li>CSS模块化</li>
-</ul>
-<ol>
+<h4 id="CSS模块化"><a href="#CSS模块化" class="headerlink" title="CSS模块化"></a>CSS模块化</h4><ol>
 <li>CSS模块化说的更多的是一种设计模式。</li>
 <li>例如oocss、smacss、atomic css、mcss、amcss、BEM、css modules</li>
 </ol>
@@ -380,7 +374,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Webpack/" rel="tag"># Webpack</a>
+            <a href="/tags/web前端/" rel="tag"># web前端</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
           
         </div>
       
@@ -403,8 +399,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/17/深入浅出Webpack（四）-如何使用Webpack编译ES6/" rel="prev" title="深入浅出Webpack（四）-如何使用Webpack编译ES6">
-                深入浅出Webpack（四）-如何使用Webpack编译ES6 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/17/深入浅出Webpack（三）-你应该知道的WebPack基本知识/" rel="prev" title="深入浅出Webpack（三）-你应该知道的Webpack基本知识">
+                深入浅出Webpack（三）-你应该知道的Webpack基本知识 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -482,7 +478,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -539,7 +535,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块化开发"><span class="nav-number">1.</span> <span class="nav-text">模块化开发</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块化开发"><span class="nav-number">1.</span> <span class="nav-text">模块化开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS模块化"><span class="nav-number">1.1.</span> <span class="nav-text">JS模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS模块化"><span class="nav-number">1.2.</span> <span class="nav-text">CSS模块化</span></a></li></ol></li></ol></div>
             
 
           </div>

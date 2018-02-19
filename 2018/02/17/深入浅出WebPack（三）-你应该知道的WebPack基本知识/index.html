@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Webpack," />
+  <meta name="keywords" content="web前端,webpack," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="Webpack 更迭 v1: 编译打包、HRM（热更新）、代码分割、文件处理。 v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。 v3: Scope Hoisting（作用域提升，提升了打包后的代码性能">
-<meta name="keywords" content="Webpack">
+<meta name="keywords" content="web前端,webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入浅出Webpack（三）-你应该知道的Webpack基本知识">
 <meta property="og:url" content="http://yoursite.com/2018/02/17/深入浅出Webpack（三）-你应该知道的WebPack基本知识/index.html">
 <meta property="og:site_name" content="0.618:1">
 <meta property="og:description" content="Webpack 更迭 v1: 编译打包、HRM（热更新）、代码分割、文件处理。 v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。 v3: Scope Hoisting（作用域提升，提升了打包后的代码性能。老版本的webpack 将代码打包在闭包当中，这些封装的闭包会损耗浏览器性能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-19T06:01:21.635Z">
+<meta property="og:updated_time" content="2018-02-19T06:44:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出Webpack（三）-你应该知道的Webpack基本知识">
 <meta name="twitter:description" content="Webpack 更迭 v1: 编译打包、HRM（热更新）、代码分割、文件处理。 v2: Tree Shaking（打包引用的代码时，会去除未使用的代码）、ES module、动态 Import（是一个动态的Import函数）、新的更人性化的文档。 v3: Scope Hoisting（作用域提升，提升了打包后的代码性能。老版本的webpack 将代码打包在闭包当中，这些封装的闭包会损耗浏览器性能。">
@@ -342,37 +342,25 @@
 <li>V2 -&gt; V3 承诺尽可能兼容API。</li>
 <li>因此，webpack的配置正在趋于稳定。</li>
 </ul>
-<h3 id="Webpack核心概念"><a href="#Webpack核心概念" class="headerlink" title="Webpack核心概念"></a>Webpack核心概念</h3><ul>
-<li>Entry</li>
-</ul>
-<ol>
+<h3 id="Webpack核心概念"><a href="#Webpack核心概念" class="headerlink" title="Webpack核心概念"></a>Webpack核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><ol>
 <li>是代码入口：可以理解为某一段代码的入口。通过代码的入口，直接或间接找到所需要的所有依赖。</li>
 <li>是打包入口：告诉webpack，以哪个文件为起点找到依赖，再找到依赖的依赖。</li>
 <li>可以是一个或者多个entry。例如：多页面程序，一个页面是一个入口。单页面程序，将业务代码和框架代码分为两个entry。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &apos;index.js&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: [&apos;index.js&apos;, &apos;vender.js&apos;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// index -&gt; &apos;index.js&apos;</span><br><span class="line">// 这种key -&gt; value 的形式表明，&apos;index.js&apos;是一个独立的chunk(一个代码块)，即index这个key对应的chunk是&apos;index.js&apos;。</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &#123;</span><br><span class="line">		index: &apos;index.js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 对象方式，也易于修改，直接增加key就可以了</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &#123;</span><br><span class="line">		index: [&apos;index.js&apos;, &apos;app.js&apos;],</span><br><span class="line">		vendor: &apos;vendor.js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ul>
-<li>OutPut</li>
-</ul>
-<ol>
+<h4 id="OutPut"><a href="#OutPut" class="headerlink" title="OutPut"></a>OutPut</h4><ol>
 <li>打包生成的文件（bundle）。</li>
 <li>可以是一个或多个。</li>
 <li>如何定义一个entry和output对应起来呢？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 单个文件对应单个输出</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &apos;index.js&apos;,</span><br><span class="line">	output: &#123;</span><br><span class="line">		filename: &apos;index.min.js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 多个文件对应多个输出，webpack自定义了规则</span><br><span class="line">// [name]对应entry的key -&gt; value 中的key</span><br><span class="line">// 也是可以配合cdn的</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	entry: &#123;</span><br><span class="line">		index: &apos;index.js&apos;,</span><br><span class="line">		vendor: &apos;vendor.js&apos;</span><br><span class="line">	&#125;,</span><br><span class="line">	output: &#123;</span><br><span class="line">		filename: &apos;[name].min.[hash: 5].js&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Loaders（处理JS之外的资源）</li>
-</ul>
-<ol>
+<h4 id="Loaders（处理JS之外的资源）"><a href="#Loaders（处理JS之外的资源）" class="headerlink" title="Loaders（处理JS之外的资源）"></a>Loaders（处理JS之外的资源）</h4><ol>
 <li>处理文件</li>
 <li>将非JS的资源文件转换为模块<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 当你满足了test的条件，就是用use的Loader</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	module: &#123;</span><br><span class="line">		rules: [&#123;</span><br><span class="line">			test: /\.css$/,</span><br><span class="line">			use: &apos;css-loader&apos;</span><br><span class="line">		&#125;]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ul>
-<li>Plugins（通过插件系统赋能）</li>
-</ul>
-<ol>
+<h4 id="Plugins（通过插件系统赋能）"><a href="#Plugins（通过插件系统赋能）" class="headerlink" title="Plugins（通过插件系统赋能）"></a>Plugins（通过插件系统赋能）</h4><ol>
 <li>plugin参与打包的整个过程。</li>
 <li>有打包优化和压缩、配置编译时变量等功能。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	plugins: [</span><br><span class="line">		new webpack.optimize.UglifyJsPlugin()</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -399,7 +387,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Webpack/" rel="tag"># Webpack</a>
+            <a href="/tags/web前端/" rel="tag"># web前端</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
           
         </div>
       
@@ -412,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/17/深入浅出Webpack（四）-如何使用Webpack编译ES6/" rel="next" title="深入浅出Webpack（四）-如何使用Webpack编译ES6">
-                <i class="fa fa-chevron-left"></i> 深入浅出Webpack（四）-如何使用Webpack编译ES6
+              <a href="/2018/02/17/深入浅出Webpack（二）- 模块化的变迁/" rel="next" title="深入浅出Webpack（二）- 模块化的变迁">
+                <i class="fa fa-chevron-left"></i> 深入浅出Webpack（二）- 模块化的变迁
               </a>
             
           </div>
@@ -422,8 +412,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/18/深入浅出Webpack（五）-如何使用Webpack切分公共代码/" rel="prev" title="深入浅出Webpack（五）-如何使用Webpack切分公共代码">
-                深入浅出Webpack（五）-如何使用Webpack切分公共代码 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/17/深入浅出Webpack（四）-如何使用Webpack编译ES6/" rel="prev" title="深入浅出Webpack（四）-如何使用Webpack编译ES6">
+                深入浅出Webpack（四）-如何使用Webpack编译ES6 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -501,7 +491,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -558,7 +548,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack-更迭"><span class="nav-number">1.</span> <span class="nav-text">Webpack 更迭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本迁移"><span class="nav-number">2.</span> <span class="nav-text">版本迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack核心概念"><span class="nav-number">3.</span> <span class="nav-text">Webpack核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名词"><span class="nav-number">4.</span> <span class="nav-text">名词</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack-更迭"><span class="nav-number">1.</span> <span class="nav-text">Webpack 更迭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本迁移"><span class="nav-number">2.</span> <span class="nav-text">版本迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack核心概念"><span class="nav-number">3.</span> <span class="nav-text">Webpack核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Entry"><span class="nav-number">3.1.</span> <span class="nav-text">Entry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OutPut"><span class="nav-number">3.2.</span> <span class="nav-text">OutPut</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Loaders（处理JS之外的资源）"><span class="nav-number">3.3.</span> <span class="nav-text">Loaders（处理JS之外的资源）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Plugins（通过插件系统赋能）"><span class="nav-number">3.4.</span> <span class="nav-text">Plugins（通过插件系统赋能）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名词"><span class="nav-number">4.</span> <span class="nav-text">名词</span></a></li></ol></div>
             
 
           </div>

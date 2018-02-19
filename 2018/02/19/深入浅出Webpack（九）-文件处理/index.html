@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web前端,webpack," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文件处理 图片   css中引入的图片 引入的图片优化快速加载2.1 自动合成雪碧图2.2 压缩图片2.3 较小的图片 base64编码   字体 第三方JS库 HTML  图片处理file-loader、url-loader、img-loader、postcss-sprites css中引入的图片 使用webpack">
+<meta name="keywords" content="web前端,webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出Webpack（九）-文件处理">
+<meta property="og:url" content="http://yoursite.com/2018/02/19/深入浅出Webpack（九）-文件处理/index.html">
+<meta property="og:site_name" content="0.618:1">
+<meta property="og:description" content="文件处理 图片   css中引入的图片 引入的图片优化快速加载2.1 自动合成雪碧图2.2 压缩图片2.3 较小的图片 base64编码   字体 第三方JS库 HTML  图片处理file-loader、url-loader、img-loader、postcss-sprites css中引入的图片 使用webpack打包CSS（CSS中包含图片资源文件）会报错，提示需要loader去处理图片资源">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-19T11:13:22.815Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出Webpack（九）-文件处理">
+<meta name="twitter:description" content="文件处理 图片   css中引入的图片 引入的图片优化快速加载2.1 自动合成雪碧图2.2 压缩图片2.3 较小的图片 base64编码   字体 第三方JS库 HTML  图片处理file-loader、url-loader、img-loader、postcss-sprites css中引入的图片 使用webpack打包CSS（CSS中包含图片资源文件）会报错，提示需要loader去处理图片资源">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/19/深入浅出Webpack（九）-文件处理/"/>
+
+
+
+
+
+  <title>深入浅出Webpack（九）-文件处理 | 0.618:1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0.618:1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/19/深入浅出Webpack（九）-文件处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yyyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0.618:1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入浅出Webpack（九）-文件处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T19:03:00+08:00">
+                2018-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深入浅出Webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">深入浅出Webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="文件处理"><a href="#文件处理" class="headerlink" title="文件处理"></a>文件处理</h3><ul>
+<li>图片</li>
+</ul>
+<ol>
+<li>css中引入的图片</li>
+<li>引入的图片优化快速加载<br>2.1 自动合成雪碧图<br>2.2 压缩图片<br>2.3 较小的图片 base64编码</li>
+</ol>
+<ul>
+<li>字体</li>
+<li>第三方JS库</li>
+<li>HTML</li>
+</ul>
+<h4 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h4><p>file-loader、url-loader、img-loader、postcss-sprites</p>
+<h5 id="css中引入的图片"><a href="#css中引入的图片" class="headerlink" title="css中引入的图片"></a>css中引入的图片</h5><ul>
+<li>使用webpack打包CSS（CSS中包含图片资源文件）会报错，提示需要loader去处理图片资源。</li>
+<li>在module的rules中添加file-loader去处理css依赖的图片文件。</li>
+<li>通过options配置路径，文件会输出在dist/assets/imgs下。这里file-loader为background的url配置图片地址时，是会默认相对于css文件的地址进行配置的。通过publicPath:’’，让其配置地址是相对于根目录下的地址。</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	test: /\.(png|jpg|jpeg|gif)$/,</span><br><span class="line">	use: [</span><br><span class="line">		&#123;</span><br><span class="line">			loader: &apos;file-loader&apos;,</span><br><span class="line">			options: &#123;</span><br><span class="line">				publicPath: &apos;&apos;,</span><br><span class="line">				outputPath: &apos;dist/&apos;,</span><br><span class="line">				useRelativePath: true</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="较小的图片-base64编码"><a href="#较小的图片-base64编码" class="headerlink" title="较小的图片 base64编码"></a>较小的图片 base64编码</h5><p>当文件小于10kb，转为base64。当文件大于10kb，抽取出来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	loader: &apos;url-loader&apos;,</span><br><span class="line">	options: &#123;</span><br><span class="line">		limit: 100000,</span><br><span class="line">		publicPath: &apos;&apos;,</span><br><span class="line">		outputPath: &apos;dist/&apos;,</span><br><span class="line">		useRelativePath: true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="img-loader-压缩图片"><a href="#img-loader-压缩图片" class="headerlink" title="img-loader 压缩图片"></a>img-loader 压缩图片</h5><p>图片会被压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	loader: &apos;url-loader&apos;,</span><br><span class="line">	options: &#123;</span><br><span class="line">		// 为插入的img指定名称</span><br><span class="line">		name: &apos;[name].min.[ext]&apos;</span><br><span class="line">		limit: 100000,</span><br><span class="line">		publicPath: &apos;&apos;,</span><br><span class="line">		outputPath: &apos;dist/&apos;,</span><br><span class="line">		useRelativePath: true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">	loader: &apos;img-loader&apos;,</span><br><span class="line">	options: &#123;</span><br><span class="line">		pngquant: &#123;</span><br><span class="line">			quality: 80</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="postcss-sprites合成雪碧图"><a href="#postcss-sprites合成雪碧图" class="headerlink" title="postcss-sprites合成雪碧图"></a>postcss-sprites合成雪碧图</h5><ul>
+<li>默认合成的图片都是在跟目录下，需要使用spritePath指定目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	loader: &apos;postcss-loader&apos;,</span><br><span class="line">	options: &#123;</span><br><span class="line">		options: &#123;</span><br><span class="line">			ident: &apos;postcss&apos;,</span><br><span class="line">			plugins: [</span><br><span class="line">				require(&apos;postcss-sprites&apos;)(&#123;</span><br><span class="line">					spritePath: &apos;dist/assets/imgs/sprites&apos;,</span><br><span class="line">					// 对安卓和苹果图片做区分，如果图片以@2x结尾，例如niao@2x.png。那么postcss-sprites就能区分出来了。</span><br><span class="line">					retina: true</span><br><span class="line">				&#125;),</span><br><span class="line">				require(&apos;postcss-cssnext&apos;)()</span><br><span class="line">			]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="字体处理"><a href="#字体处理" class="headerlink" title="字体处理"></a>字体处理</h4><p>url-loader，file-loader<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">test: /\.(eot|woff2|woff|ttf|svg)$/,</span><br><span class="line">use: [</span><br><span class="line">	&#123;</span><br><span class="line">		loader: &apos;url-loader&apos;,</span><br><span class="line">		options: &#123;</span><br><span class="line">			// 为插入的img指定名称</span><br><span class="line">			name: &apos;[name].min.[ext]&apos;</span><br><span class="line">			limit: 100000,</span><br><span class="line">			publicPath: &apos;&apos;,</span><br><span class="line">			outputPath: &apos;dist/&apos;,</span><br><span class="line">			useRelativePath: true</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h4 id="第三方JS库"><a href="#第三方JS库" class="headerlink" title="第三方JS库"></a>第三方JS库</h4><p>webpack.providePlugin<br>imports-loader<br>window</p>
+<h5 id="使用webpack-providePlugin-使用第三方库"><a href="#使用webpack-providePlugin-使用第三方库" class="headerlink" title="使用webpack.providePlugin 使用第三方库"></a>使用webpack.providePlugin 使用第三方库</h5><p>在webpack.config.js中的plugins<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new webpack.ProvidePlugin(&#123;</span><br><span class="line">	$: &apos;jquery&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>因此，webpack.ProvidePlugin会为我们的代码中注入“$”，我们就可以使用$了。</p>
+<h5 id="使用webpack-providePlugin配合resolve使用本地库"><a href="#使用webpack-providePlugin配合resolve使用本地库" class="headerlink" title="使用webpack.providePlugin配合resolve使用本地库"></a>使用webpack.providePlugin配合resolve使用本地库</h5><ul>
+<li>假设jquery是我们的本地库</li>
+<li><p>使用resolve功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">	alias: &#123;</span><br><span class="line">		// $符号表示将jquery别名是解析到某个目录的某个文件下，而不是整个目录</span><br><span class="line">		jquery$: path.resolve（__dirname, &apos;src/libs/jquery.min.js&apos;）</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在webpack.config.js中的plugins</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new webpack.ProvidePlugin(&#123;</span><br><span class="line">	$: &apos;jquery&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>即webpack解析到jquery这个关键词时，会通过alias的别名系统，去对应的目录下找这个文件。</p>
+</li>
+</ul>
+<h5 id="imports-loader"><a href="#imports-loader" class="headerlink" title="imports-loader"></a>imports-loader</h5><p>这里imports-loader也可以和resolve中的alias配合使用，解析本地第三方库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	test: path.resolve(__dirname, &apos;src/app.js&apos;),</span><br><span class="line">	use: [</span><br><span class="line">		 &#123;</span><br><span class="line">			loader: &apos;imports-loader&apos;,</span><br><span class="line">			options: &#123;</span><br><span class="line">			$: &apos;jquery&apos;</span><br><span class="line">		    &#125;</span><br><span class="line">		 &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="HTML处理"><a href="#HTML处理" class="headerlink" title="HTML处理"></a>HTML处理</h4><h5 id="生成HTML"><a href="#生成HTML" class="headerlink" title="生成HTML"></a>生成HTML</h5><ul>
+<li>HtmlWebpackPlugin: 根据给定的html模板，生成html文件。</li>
+<li>options:</li>
+</ul>
+<ol>
+<li>template</li>
+<li>filename，指定文件名。</li>
+<li>minify，是否压缩生成的html文件。</li>
+<li>chunks，指定有几个entry chunk是加入到你的html页面中来的。例如：多页面应用，需要为各个页面生成html，且为各个页面插入相关的chunk。</li>
+<li>inject，是否需要HtmlWebpackPlugin将你需要的标签插入到页面中。</li>
+</ol>
+<h5 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h5><h6 id="以模板生成html文件"><a href="#以模板生成html文件" class="headerlink" title="以模板生成html文件"></a>以模板生成html文件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在plugin中</span><br><span class="line">new HtmlWebpackPlugin(&#123;</span><br><span class="line">	filename: &apos;index.html&apos;,</span><br><span class="line">	template: &apos;./index.html&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成的index.html中，HtmlWebpackPlugin会为我们自动插入生成的js和css标签。</li>
+</ul>
+<h6 id="以模板生成html文件（不插入标签）"><a href="#以模板生成html文件（不插入标签）" class="headerlink" title="以模板生成html文件（不插入标签）"></a>以模板生成html文件（不插入标签）</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在plugin中</span><br><span class="line">new HtmlWebpackPlugin(&#123;</span><br><span class="line">	filename: &apos;index.html&apos;,</span><br><span class="line">	template: &apos;./index.html&apos;，</span><br><span class="line">	inject: false</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成的index.html中，HtmlWebpackPlugin“不会”为我们自动插入生成的js和css标签。</li>
+</ul>
+<h6 id="以模板生成html文件（多entry）"><a href="#以模板生成html文件（多entry）" class="headerlink" title="以模板生成html文件（多entry）"></a>以模板生成html文件（多entry）</h6><ul>
+<li><p>不指定chunks，所有entry打包的文件都会插入html中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在plugin中</span><br><span class="line">new HtmlWebpackPlugin(&#123;</span><br><span class="line">	filename: &apos;index.html&apos;,</span><br><span class="line">	template: &apos;./index.html&apos;，</span><br><span class="line">	chunks: []，</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定chunks，仅entry相关的文件都会插入html中</p>
+</li>
+<li>在entry有key为app的入口文件，还有其它的入口文件。仅仅需要将名为app的插入html中。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在plugin中</span><br><span class="line">new HtmlWebpackPlugin(&#123;</span><br><span class="line">	filename: &apos;index.html&apos;,</span><br><span class="line">	template: &apos;./index.html&apos;，</span><br><span class="line">	chunks: [&apos;app&apos;]，</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h6 id="以模板生成html文件-压缩"><a href="#以模板生成html文件-压缩" class="headerlink" title="以模板生成html文件,压缩"></a>以模板生成html文件,压缩</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 在plugin中</span><br><span class="line">new HtmlWebpackPlugin(&#123;</span><br><span class="line">	filename: &apos;index.html&apos;,</span><br><span class="line">	template: &apos;./index.html&apos;，</span><br><span class="line">	chunks: [&apos;app&apos;]，</span><br><span class="line">	minify: &#123;</span><br><span class="line">		collapseWhitespace: true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="HTML中引入的图片"><a href="#HTML中引入的图片" class="headerlink" title="HTML中引入的图片"></a>HTML中引入的图片</h4><ul>
+<li>html-loader，帮助webpack判断html文件中哪些元素需要交给webpack处理。</li>
+<li>options:</li>
+</ul>
+<ol>
+<li>attrs: [img: src]，告诉webpack对html文件中元素的打包规则。</li>
+</ol>
+<h5 id="实战-1"><a href="#实战-1" class="headerlink" title="实战"></a>实战</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	test: /\.html$/,</span><br><span class="line">	use:  [</span><br><span class="line">		&#123;</span><br><span class="line">			loader: &apos;html-loader&apos;,</span><br><span class="line">			options: &#123;</span><br><span class="line">				attrs: [&apos;img:src&apos;, &apos;img:data-src&apos;] </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，img标签引用的src的图片会被抽出。</p>
+<h5 id="路径问题"><a href="#路径问题" class="headerlink" title="路径问题"></a>路径问题</h5><ul>
+<li>url-loader启用了相对路径，这会带来路径问题。其实，我们只需要根据ouput中的path，再在url-loader中如此编写路径即可。</li>
+<li>取消的相对路径，就应使用绝对路径。在output中使用publicPath。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">	&#123;</span><br><span class="line">		loader: &apos;url-loader&apos;,</span><br><span class="line">		options: &#123;</span><br><span class="line">			// 为插入的img指定名称</span><br><span class="line">			name: &apos;[name].min.[ext]&apos;</span><br><span class="line">			limit: 100000,</span><br><span class="line">			outputPath: &apos;assets/imgs/&apos;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="在HTML中Webpack配合优化"><a href="#在HTML中Webpack配合优化" class="headerlink" title="在HTML中Webpack配合优化"></a>在HTML中Webpack配合优化</h4><h5 id="提前载入Webpack的加载代码"><a href="#提前载入Webpack的加载代码" class="headerlink" title="提前载入Webpack的加载代码"></a>提前载入Webpack的加载代码</h5><ul>
+<li>有时，我们直接将共用的JS代码直接插入html中以减少网络请求。</li>
+<li>inline-manifest-webpack-plugin</li>
+<li>html-webpack-inline-chunk-plugin</li>
+</ul>
+<h5 id="html-webpack-inline-chunk-plugin"><a href="#html-webpack-inline-chunk-plugin" class="headerlink" title="html-webpack-inline-chunk-plugin"></a>html-webpack-inline-chunk-plugin</h5><ul>
+<li><p>引入插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var htmlInlineChunkPlugin = require(&apos;html-webpack-inline-chunk-plugin&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用时，告诉htmlInlineChunkPlugin，我们希望直接插入html的chunk名称</p>
+</li>
+<li>告诉htmlInlineChunkPlugin，我们希望直接在html中插入Webpack自己的生产代码，之前我们已经通过插件抽出并命名为manifest。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new HtmlInlineChunkPlugin(&#123;</span><br><span class="line">	inlineChunks: [&apos;manifest&apos;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web前端/" rel="tag"># web前端</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/19/深入浅出Webpack（八）-JS与CSS的Tree Shaking/" rel="next" title="深入浅出Webpack（八）-JS与CSS的Tree Shaking">
+                <i class="fa fa-chevron-left"></i> 深入浅出Webpack（八）-JS与CSS的Tree Shaking
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yyyx</p>
+              <p class="site-description motion-element" itemprop="description">iezzuyoung@gmail.com</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件处理"><span class="nav-number">1.</span> <span class="nav-text">文件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#图片处理"><span class="nav-number">1.1.</span> <span class="nav-text">图片处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#css中引入的图片"><span class="nav-number">1.1.1.</span> <span class="nav-text">css中引入的图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#较小的图片-base64编码"><span class="nav-number">1.1.2.</span> <span class="nav-text">较小的图片 base64编码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#img-loader-压缩图片"><span class="nav-number">1.1.3.</span> <span class="nav-text">img-loader 压缩图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#postcss-sprites合成雪碧图"><span class="nav-number">1.1.4.</span> <span class="nav-text">postcss-sprites合成雪碧图</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字体处理"><span class="nav-number">1.2.</span> <span class="nav-text">字体处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三方JS库"><span class="nav-number">1.3.</span> <span class="nav-text">第三方JS库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用webpack-providePlugin-使用第三方库"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用webpack.providePlugin 使用第三方库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用webpack-providePlugin配合resolve使用本地库"><span class="nav-number">1.3.2.</span> <span class="nav-text">使用webpack.providePlugin配合resolve使用本地库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#imports-loader"><span class="nav-number">1.3.3.</span> <span class="nav-text">imports-loader</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML处理"><span class="nav-number">1.4.</span> <span class="nav-text">HTML处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#生成HTML"><span class="nav-number">1.4.1.</span> <span class="nav-text">生成HTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实战"><span class="nav-number">1.4.2.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#以模板生成html文件"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">以模板生成html文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#以模板生成html文件（不插入标签）"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">以模板生成html文件（不插入标签）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#以模板生成html文件（多entry）"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">以模板生成html文件（多entry）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#以模板生成html文件-压缩"><span class="nav-number">1.4.2.4.</span> <span class="nav-text">以模板生成html文件,压缩</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML中引入的图片"><span class="nav-number">1.5.</span> <span class="nav-text">HTML中引入的图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实战-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">实战</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#路径问题"><span class="nav-number">1.5.2.</span> <span class="nav-text">路径问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在HTML中Webpack配合优化"><span class="nav-number">1.6.</span> <span class="nav-text">在HTML中Webpack配合优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#提前载入Webpack的加载代码"><span class="nav-number">1.6.1.</span> <span class="nav-text">提前载入Webpack的加载代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#html-webpack-inline-chunk-plugin"><span class="nav-number">1.6.2.</span> <span class="nav-text">html-webpack-inline-chunk-plugin</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yyyx</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  
+    <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+</body>
+</html>
