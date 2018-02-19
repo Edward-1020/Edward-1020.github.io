@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="require.ensure []: dependencies。依赖，加载但并不执行。 callback中真正执行。 errorCallback。 chunkName。  require.include引入模块不执行。用于提前加载2个及以上依赖的第三方模块。 ES 2015 Loader Spec System.imp">
+<meta name="description" content="引入CSS style-loader：为我们要载入的页面创建style标签。 css-loader：让css可以被js模块化。  style-loader style-loader/url   style-loader将css打包到js中，通过js执行，将css插入在html中生成的style标签中。 style-lo">
 <meta name="keywords" content="web前端,深入浅出Webpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出Webpack（六）-代码分割及懒加载">
+<meta property="og:title" content="深入浅出Webpack（七）-处理CSS">
 <meta property="og:url" content="http://yoursite.com/2018/02/18/深入浅出Webpack（七）-处理CSS/index.html">
 <meta property="og:site_name" content="0.618:1">
-<meta property="og:description" content="require.ensure []: dependencies。依赖，加载但并不执行。 callback中真正执行。 errorCallback。 chunkName。  require.include引入模块不执行。用于提前加载2个及以上依赖的第三方模块。 ES 2015 Loader Spec System.import() -&amp;gt; import() import() -&amp;gt; 返回pr">
+<meta property="og:description" content="引入CSS style-loader：为我们要载入的页面创建style标签。 css-loader：让css可以被js模块化。  style-loader style-loader/url   style-loader将css打包到js中，通过js执行，将css插入在html中生成的style标签中。 style-loader/url 配合 file-loader，file-loader会将css">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-18T08:08:43.338Z">
+<meta property="og:updated_time" content="2018-02-19T05:57:20.173Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出Webpack（六）-代码分割及懒加载">
-<meta name="twitter:description" content="require.ensure []: dependencies。依赖，加载但并不执行。 callback中真正执行。 errorCallback。 chunkName。  require.include引入模块不执行。用于提前加载2个及以上依赖的第三方模块。 ES 2015 Loader Spec System.import() -&amp;gt; import() import() -&amp;gt; 返回pr">
+<meta name="twitter:title" content="深入浅出Webpack（七）-处理CSS">
+<meta name="twitter:description" content="引入CSS style-loader：为我们要载入的页面创建style标签。 css-loader：让css可以被js模块化。  style-loader style-loader/url   style-loader将css打包到js中，通过js执行，将css插入在html中生成的style标签中。 style-loader/url 配合 file-loader，file-loader会将css">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>深入浅出Webpack（六）-代码分割及懒加载 | 0.618:1</title>
+  <title>深入浅出Webpack（七）-处理CSS | 0.618:1</title>
   
 
 
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入浅出Webpack（六）-代码分割及懒加载</h1>
+          <h1 class="post-title" itemprop="name headline">深入浅出Webpack（七）-处理CSS</h1>
         
 
         <div class="post-meta">
@@ -332,86 +332,68 @@
       
 
       
-        <h3 id="require-ensure"><a href="#require-ensure" class="headerlink" title="require.ensure"></a>require.ensure</h3><ul>
-<li>[]: dependencies。依赖，加载但并不执行。</li>
-<li>callback中真正执行。</li>
-<li>errorCallback。</li>
-<li>chunkName。</li>
+        <h3 id="引入CSS"><a href="#引入CSS" class="headerlink" title="引入CSS"></a>引入CSS</h3><ul>
+<li>style-loader：为我们要载入的页面创建style标签。</li>
+<li>css-loader：让css可以被js模块化。</li>
 </ul>
-<h3 id="require-include"><a href="#require-include" class="headerlink" title="require.include"></a>require.include</h3><p>引入模块不执行。用于提前加载2个及以上依赖的第三方模块。</p>
-<h3 id="ES-2015-Loader-Spec"><a href="#ES-2015-Loader-Spec" class="headerlink" title="ES 2015 Loader Spec"></a>ES 2015 Loader Spec</h3><ul>
-<li>System.import() -&gt; import()</li>
-<li>import() -&gt; 返回promise</li>
-<li>import().then() 这是提倡的</li>
+<h4 id="style-loader"><a href="#style-loader" class="headerlink" title="style-loader"></a>style-loader</h4><ul>
+<li>style-loader/url</li>
 </ul>
-<h3 id="webpack-import-function"><a href="#webpack-import-function" class="headerlink" title="webpack import function"></a>webpack import function</h3><h3 id="代码分割"><a href="#代码分割" class="headerlink" title="代码分割"></a>代码分割</h3><ul>
-<li>分离业务代码 和 第三方依赖</li>
-<li>分离业务代码 和 业务公共代码 和 第三方依赖</li>
-<li>分离首次加载 和 访问后加载的代码</li>
-</ul>
-<h3 id="代码分割实战"><a href="#代码分割实战" class="headerlink" title="代码分割实战"></a>代码分割实战</h3><h4 id="使用require-ensure-异步加载"><a href="#使用require-ensure-异步加载" class="headerlink" title="使用require.ensure 异步加载"></a>使用require.ensure 异步加载</h4><h5 id="不使用"><a href="#不使用" class="headerlink" title="不使用"></a>不使用</h5><ul>
-<li>4份文件。pageA、subpageA、subpageB、moduleA。</li>
-<li>pageA依赖于subpageA和subpageB及第三方依赖库lodash。subpageA和subpageB均依赖于moduleA。</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var webpack = require(&apos;webpack&apos;)</span><br><span class="line">var path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    &apos;pageA&apos;: &apos;./src/PageA.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, &apos;./dist&apos;),</span><br><span class="line">    filename: &apos;[name].bundle.js&apos;,</span><br><span class="line">    chunkFilename: &apos;[name].chunk.js&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>此时打出的包为一份。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">     Asset       Size       </span><br><span class="line">pageA.bundle.js  545 kB       0  [emitted]  [big]  pageA</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="在pageA中使用require-ensure"><a href="#在pageA中使用require-ensure" class="headerlink" title="在pageA中使用require.ensure"></a>在pageA中使用require.ensure</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import &apos;./subPageA&apos;</span><br><span class="line">import &apos;./subPageB&apos;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 仅仅require.ensure([&apos;lodash&apos;])而不传入回调，</span><br><span class="line"> * 代码仅加载，不执行</span><br><span class="line"> */</span><br><span class="line">require.ensure([&apos;lodash&apos;], function () &#123;</span><br><span class="line">  var _ = require(&apos;lodash&apos;)</span><br><span class="line">&#125;, &apos;vendor&apos;)</span><br><span class="line"></span><br><span class="line">export default &apos;pageA&apos;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>style-loader将css打包到js中，通过js执行，将css插入在html中生成的style标签中。</li>
+<li>style-loader/url 配合 file-loader，file-loader会将css抽出单独进行打包，style-loader/url通过link将css引入。</li>
+<li>多个样式会产生多个link标签，所以这么做不合适。</li>
+</ol>
 <ul>
-<li>此时打包结果，chunkName也是我们在output中指定的chunkFilename: ‘[name].chunk.js’。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vendor.chunk.js   541 kB       0  [emitted]  [big]  vendor</span><br><span class="line">pageA.bundle.js  7.14 kB       1  [emitted]         pageA</span><br></pre></td></tr></table></figure>
-</li>
+<li>style-loader/useable</li>
 </ul>
-<h5 id="在pageA中多次使用require-ensure"><a href="#在pageA中多次使用require-ensure" class="headerlink" title="在pageA中多次使用require.ensure"></a>在pageA中多次使用require.ensure</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">require.ensure(&apos;./subPageA&apos;, function () &#123;&#125;)</span><br><span class="line">require.ensure(&apos;./subPageB&apos;, function () &#123;&#125;)</span><br><span class="line"></span><br><span class="line">require.ensure([&apos;lodash&apos;], function () &#123;</span><br><span class="line">  var _ = require(&apos;lodash&apos;)</span><br><span class="line">&#125;, &apos;vendor&apos;)</span><br><span class="line"></span><br><span class="line">export default &apos;pageA&apos;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>style-loader/useable 配合 file-loader</li>
+<li>可以通过css.use()，css.unuse()，插入或者不插入css。</li>
+</ol>
 <ul>
-<li>此时打包结果为<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">          Asset       Size       Chunks            Chunk Names</span><br><span class="line">vendor.chunk.js     541 kB       0  [emitted]  [big]  vendor</span><br><span class="line">     1.chunk.js  581 bytes       1  [emitted]</span><br><span class="line">     2.chunk.js  581 bytes       2  [emitted]</span><br><span class="line">pageA.bundle.js    6.41 kB       3  [emitted]         pageA</span><br></pre></td></tr></table></figure>
+<li>options</li>
+</ul>
+<ol>
+<li>insertAt（插入位置）</li>
+<li>insertInto（插入到dom）</li>
+<li>singleton（是否使用一个Style标签）</li>
+<li>transform（转化，浏览器环境下，插入页面前）。</li>
+</ol>
+<h4 id="CSS-loader"><a href="#CSS-loader" class="headerlink" title="CSS-loader"></a>CSS-loader</h4><ul>
+<li>options</li>
+</ul>
+<ol>
+<li>alias（解析的别名）</li>
+<li>importLoader （@import）</li>
+<li>Minimize（是否压缩）</li>
+<li>modules（启用css-modules）</li>
+</ol>
+<h4 id="Less-Sass-loader"><a href="#Less-Sass-loader" class="headerlink" title="Less/Sass loader"></a>Less/Sass loader</h4><h4 id="提取CSS"><a href="#提取CSS" class="headerlink" title="提取CSS"></a>提取CSS</h4><ul>
+<li>extract-loader</li>
+<li>ExtractTextWebpackPlugin（主流）</li>
+</ul>
+<h5 id="ExtractTextWebpackPlugin"><a href="#ExtractTextWebpackPlugin" class="headerlink" title="ExtractTextWebpackPlugin"></a>ExtractTextWebpackPlugin</h5><ul>
+<li>用于将所有的css提取成一个文件</li>
+<li>fallback: 告诉ExtractTextWebpackPlugin，如果不需要该插件处理 ，那么需要什么loader去处理。</li>
+<li>use: 告诉ExtractTextWebpackPlugin，将css提取出来以后，需要什么loader去处理。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">new ExtracTextWebPackPlugin.extract(&#123;</span><br><span class="line">	fallback: &#123;</span><br><span class="line">		loader: &apos;style-loader&apos;,</span><br><span class="line">		options: &#123;</span><br><span class="line">			singleton: true,</span><br><span class="line">			transform: &apos;./css.transform.js&apos;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	use: [</span><br><span class="line">		&#123;</span><br><span class="line">			loader: &apos;css-loader&apos;</span><br><span class="line">		&#125;,&#123;</span><br><span class="line">			loader: &apos;less-loader&apos;</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="在pageA中多次使用require-ensure，并对chunk命名"><a href="#在pageA中多次使用require-ensure，并对chunk命名" class="headerlink" title="在pageA中多次使用require.ensure，并对chunk命名"></a>在pageA中多次使用require.ensure，并对chunk命名</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">require.ensure(&apos;./subPageA&apos;, function () &#123;&#125;, &apos;subPageA&apos;)</span><br><span class="line">require.ensure(&apos;./subPageB&apos;, function () &#123;&#125;, &apos;subPageB&apos;)</span><br><span class="line"></span><br><span class="line">require.ensure([&apos;lodash&apos;], function () &#123;</span><br><span class="line">  var _ = require(&apos;lodash&apos;)</span><br><span class="line">&#125;, &apos;vendor&apos;)</span><br><span class="line"></span><br><span class="line">export default &apos;pageA&apos;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>此时打包结果为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">            Asset     Size      Chunks  Chunk Names</span><br><span class="line">  vendor.chunk.js     541 kB       0  [emitted]  [big]  vendor</span><br><span class="line">subPageB.chunk.js  581 bytes       1  [emitted]         subPageB</span><br><span class="line">subPageA.chunk.js  581 bytes       2  [emitted]         subPageA</span><br><span class="line">  pageA.bundle.js    6.44 kB       3  [emitted]         pageA</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>由于subPageA和subPageB均依赖于moduleA，所以打的两个包中都有moduleA的代码。</p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">	new ExtractTextWebpackPlugin(&#123;</span><br><span class="line">		filename: &apos;[name].min.css&apos;,</span><br><span class="line">		// 可以控制一些动态加载的样式，allChunks：false,写在js中css的代码不会被抽出一起被提取</span><br><span class="line">		allChunks: false</span><br><span class="line">	&#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>如何在Webapck中引入css？<br>style-loader，css-loader</li>
+<li>less/sass 预处理语言。</li>
+<li>CSS module。</li>
+<li>ExtractTextWebpackPlugin，提取为单独的css。</li>
 </ul>
-<h5 id="使用require-include提前加载公共依赖moduleA。"><a href="#使用require-include提前加载公共依赖moduleA。" class="headerlink" title="使用require.include提前加载公共依赖moduleA。"></a>使用require.include提前加载公共依赖moduleA。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">require.include(&apos;./moduleA.js&apos;)</span><br><span class="line"></span><br><span class="line">require.ensure(&apos;./subPageA&apos;, function () &#123;&#125;, &apos;subPageA&apos;)</span><br><span class="line">require.ensure(&apos;./subPageB&apos;, function () &#123;&#125;, &apos;subPageB&apos;)</span><br><span class="line"></span><br><span class="line">require.ensure([&apos;lodash&apos;], function () &#123;</span><br><span class="line">  var _ = require(&apos;lodash&apos;)</span><br><span class="line">&#125;, &apos;vendor&apos;)</span><br><span class="line"></span><br><span class="line">export default &apos;pageA&apos;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>subpageA和subpageB的chunk均变小了，且两个chunk中均没有moduleA的代码了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  Asset               Size       Chunks   Chunk Names</span><br><span class="line">  vendor.chunk.js     541 kB       0  [emitted]  [big]  vendor</span><br><span class="line">subPageB.chunk.js  369 bytes       1  [emitted]         subPageB</span><br><span class="line">subPageA.chunk.js  369 bytes       2  [emitted]         subPageA</span><br><span class="line">  pageA.bundle.js    6.67 kB       3  [emitted]         pageA</span><br></pre></td></tr></table></figure>
-</li>
+<h3 id="PostCSS"><a href="#PostCSS" class="headerlink" title="PostCSS"></a>PostCSS</h3><ul>
+<li>A tool for transforming CSS with JavaScripit。</li>
+<li>基于PostCSS生态产生了许多使用的工具：postcss、postcss-loaer、Autoprefixed、postcss-cssnano、postcss-cssnext。</li>
+<li>Autoprefixer：浏览器前缀处理。</li>
+<li>CSS-nano：压缩css。</li>
+<li>CSS-next：可以让你使用CSS新特性。</li>
 </ul>
-<h5 id="在index-html中引入我们使用懒加载机制的代码"><a href="#在index-html中引入我们使用懒加载机制的代码" class="headerlink" title="在index.html中引入我们使用懒加载机制的代码"></a>在index.html中引入我们使用懒加载机制的代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;script src=&quot;../dist/pageA.bundle.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>此时会报错，这是因为webpack并不知道这些打包出来的chunck的位置，需要在output中配置publicpath，这个地址也可以是cdn。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Loading chunk 2 failed.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>加入publicPath，为webpack指明打包出来的chunk的位置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, &apos;./dist&apos;),</span><br><span class="line">    publicPath: &apos;../dist/&apos;,</span><br><span class="line">    filename: &apos;[name].bundle.js&apos;,</span><br><span class="line">    chunkFilename: &apos;[name].chunk.js&apos;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="require-ensure懒加载机制注意事项"><a href="#require-ensure懒加载机制注意事项" class="headerlink" title="require.ensure懒加载机制注意事项"></a>require.ensure懒加载机制注意事项</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">require.ensure(&apos;./subPageA&apos;, function () &#123;</span><br><span class="line">&#125;, &apos;subPageA&apos;)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">require.ensure(&apos;./subPageA&apos;, function () &#123;</span><br><span class="line">  require(&apos;./subPageA&apos;)</span><br><span class="line">&#125;, &apos;subPageA&apos;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>如果我们不在回调内部 require 一次懒加载的subPageA模块，subPageA是不会执行的。它仅仅只加载进来分割的chunk。</li>
-<li>因为 require.ensure仅仅是将分割的代码引入到我们的页面中，Webpack3动态的import，能够加载。</li>
-</ul>
-<h3 id="Webpack3动态import"><a href="#Webpack3动态import" class="headerlink" title="Webpack3动态import"></a>Webpack3动态import</h3><p>Webpack3动态import，不仅仅是将代码引入到我们的页面中，它还会将代码执行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">require.include(&apos;./moduleA.js&apos;)</span><br><span class="line"></span><br><span class="line">import(</span><br><span class="line">  /* webpackChunkName:&apos;subpageA&apos; */</span><br><span class="line">  &apos;./subPageA&apos;</span><br><span class="line">).then()</span><br><span class="line">import(</span><br><span class="line">  /* webpackChunkName:&apos;subpageB&apos; */</span><br><span class="line">  &apos;./subPageB&apos;</span><br><span class="line">).then()</span><br><span class="line">import(</span><br><span class="line">  /* webpackChunkName:&apos;vendor&apos; */</span><br><span class="line">  &apos;lodash&apos;</span><br><span class="line">).then()</span><br><span class="line"></span><br><span class="line">export default &apos;pageA&apos;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>/<em> webpackChunkName:’subpageA’ </em>/，是魔法注释，为chunk指定名称</li>
-<li>打包结果<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Asset       Size    Chunks         Chunk Names</span><br><span class="line">  vendor.chunk.js     541 kB       0  [emitted]  [big]  vendor</span><br><span class="line">subpageB.chunk.js  369 bytes       1  [emitted]         subpageB</span><br><span class="line">subpageA.chunk.js  394 bytes       2  [emitted]         subpageA</span><br><span class="line">  pageA.bundle.js    6.53 kB       3  [emitted]         pageA</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="Webpack代码分割使用async"><a href="#Webpack代码分割使用async" class="headerlink" title="Webpack代码分割使用async"></a>Webpack代码分割使用async</h3><ul>
-<li>我们的subPageA和subPageB都依赖于moduleA.</li>
-<li><p>添加plugin配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">  async: &apos;async-common&apos;,</span><br><span class="line">  children: true,</span><br><span class="line">  minChunks: 2</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>此时将公共的moduleA提取出来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">async-common-pageA.chunk.js</span><br></pre></td></tr></table></figure></li>
-</ul>
-
+<h4 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	loader: &apos;postcss-loader&apos;,</span><br><span class="line">	options: &#123;</span><br><span class="line">		options: &#123;</span><br><span class="line">			ident: &apos;postcss&apos;,</span><br><span class="line">			plugins: [</span><br><span class="line">				// postcss-cssnext包含autoprefixer</span><br><span class="line">				// require(&apos;autoprefixer&apos;)(),</span><br><span class="line">				require(&apos;postcss-cssnext&apos;)()</span><br><span class="line">			]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -585,7 +567,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#require-ensure"><span class="nav-number">1.</span> <span class="nav-text">require.ensure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#require-include"><span class="nav-number">2.</span> <span class="nav-text">require.include</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES-2015-Loader-Spec"><span class="nav-number">3.</span> <span class="nav-text">ES 2015 Loader Spec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-import-function"><span class="nav-number">4.</span> <span class="nav-text">webpack import function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码分割"><span class="nav-number">5.</span> <span class="nav-text">代码分割</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码分割实战"><span class="nav-number">6.</span> <span class="nav-text">代码分割实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用require-ensure-异步加载"><span class="nav-number">6.1.</span> <span class="nav-text">使用require.ensure 异步加载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不使用"><span class="nav-number">6.1.1.</span> <span class="nav-text">不使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在pageA中使用require-ensure"><span class="nav-number">6.1.2.</span> <span class="nav-text">在pageA中使用require.ensure</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在pageA中多次使用require-ensure"><span class="nav-number">6.1.3.</span> <span class="nav-text">在pageA中多次使用require.ensure</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在pageA中多次使用require-ensure，并对chunk命名"><span class="nav-number">6.1.4.</span> <span class="nav-text">在pageA中多次使用require.ensure，并对chunk命名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用require-include提前加载公共依赖moduleA。"><span class="nav-number">6.1.5.</span> <span class="nav-text">使用require.include提前加载公共依赖moduleA。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在index-html中引入我们使用懒加载机制的代码"><span class="nav-number">6.1.6.</span> <span class="nav-text">在index.html中引入我们使用懒加载机制的代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#require-ensure懒加载机制注意事项"><span class="nav-number">6.1.7.</span> <span class="nav-text">require.ensure懒加载机制注意事项</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack3动态import"><span class="nav-number">7.</span> <span class="nav-text">Webpack3动态import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack代码分割使用async"><span class="nav-number">8.</span> <span class="nav-text">Webpack代码分割使用async</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入CSS"><span class="nav-number">1.</span> <span class="nav-text">引入CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#style-loader"><span class="nav-number">1.1.</span> <span class="nav-text">style-loader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS-loader"><span class="nav-number">1.2.</span> <span class="nav-text">CSS-loader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Less-Sass-loader"><span class="nav-number">1.3.</span> <span class="nav-text">Less/Sass loader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提取CSS"><span class="nav-number">1.4.</span> <span class="nav-text">提取CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ExtractTextWebpackPlugin"><span class="nav-number">1.4.1.</span> <span class="nav-text">ExtractTextWebpackPlugin</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostCSS"><span class="nav-number">2.</span> <span class="nav-text">PostCSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实战"><span class="nav-number">2.1.</span> <span class="nav-text">实战</span></a></li></ol></li></ol></div>
             
 
           </div>
