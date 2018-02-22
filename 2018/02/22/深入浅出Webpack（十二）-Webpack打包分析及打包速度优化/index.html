@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web前端,webpack," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="打包分析工具 Offical Anylyse Tool：针对chunk进行分析，并给出一定的建议。 webpack-bundle-analyzer：可视化模块打包过程。  Offical Anylyse Tool 命令行：webpack –profile –json &amp;gt; stats.json：所有的打包信">
+<meta name="keywords" content="web前端,webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出Webpack（十二）-Webpack打包分析及打包速度优化">
+<meta property="og:url" content="http://yoursite.com/2018/02/22/深入浅出Webpack（十二）-Webpack打包分析及打包速度优化/index.html">
+<meta property="og:site_name" content="0.618:1">
+<meta property="og:description" content="打包分析工具 Offical Anylyse Tool：针对chunk进行分析，并给出一定的建议。 webpack-bundle-analyzer：可视化模块打包过程。  Offical Anylyse Tool 命令行：webpack –profile –json &amp;gt; stats.json：所有的打包信息都会在json文件中。 http://webpack.github.io/analys">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/02/22/5a8e6766eca4b.png">
+<meta property="og:image" content="https://i.loli.net/2018/02/22/5a8e69b94edcc.png">
+<meta property="og:image" content="https://i.loli.net/2018/02/22/5a8e70885fcd9.png">
+<meta property="og:image" content="https://i.loli.net/2018/02/22/5a8e71a432971.png">
+<meta property="og:image" content="https://i.loli.net/2018/02/22/5a8e7880bc650.png">
+<meta property="og:updated_time" content="2018-02-22T14:50:07.293Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出Webpack（十二）-Webpack打包分析及打包速度优化">
+<meta name="twitter:description" content="打包分析工具 Offical Anylyse Tool：针对chunk进行分析，并给出一定的建议。 webpack-bundle-analyzer：可视化模块打包过程。  Offical Anylyse Tool 命令行：webpack –profile –json &amp;gt; stats.json：所有的打包信息都会在json文件中。 http://webpack.github.io/analys">
+<meta name="twitter:image" content="https://i.loli.net/2018/02/22/5a8e6766eca4b.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/22/深入浅出Webpack（十二）-Webpack打包分析及打包速度优化/"/>
+
+
+
+
+
+  <title>深入浅出Webpack（十二）-Webpack打包分析及打包速度优化 | 0.618:1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0.618:1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/深入浅出Webpack（十二）-Webpack打包分析及打包速度优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yyyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0.618:1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入浅出Webpack（十二）-Webpack打包分析及打包速度优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T20:03:00+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深入浅出Webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">深入浅出Webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="打包分析工具"><a href="#打包分析工具" class="headerlink" title="打包分析工具"></a>打包分析工具</h3><ul>
+<li>Offical Anylyse Tool：针对chunk进行分析，并给出一定的建议。</li>
+<li>webpack-bundle-analyzer：可视化模块打包过程。</li>
+</ul>
+<h3 id="Offical-Anylyse-Tool"><a href="#Offical-Anylyse-Tool" class="headerlink" title="Offical Anylyse Tool"></a>Offical Anylyse Tool</h3><ul>
+<li>命令行：webpack –profile –json &gt; stats.json：所有的打包信息都会在json文件中。</li>
+<li><a href="http://webpack.github.io/analyse/" target="_blank" rel="noopener">http://webpack.github.io/analyse/</a> 上传打包结果，官方会更加友好的反馈打包信息，提供建议。我们可以根据建议进行一个优化。</li>
+</ul>
+<h3 id="webpack-bundle-analyzer"><a href="#webpack-bundle-analyzer" class="headerlink" title="webpack-bundle-analyzer"></a>webpack-bundle-analyzer</h3><ul>
+<li>插件：BundleAn alyzerPlugin</li>
+<li>命令行：webpack-bundle-analyzer stats.json 通过命令行分析Offical Anylyse Tool生成的json文件。</li>
+</ul>
+<h4 id="打包结果分析"><a href="#打包结果分析" class="headerlink" title="打包结果分析"></a>打包结果分析</h4><ul>
+<li><img src="https://i.loli.net/2018/02/22/5a8e6766eca4b.png" alt=""></li>
+<li>webpack打包后会在命令行输出一定的打包信息。每个chunk有唯一的chunk Id，有唯一的module Id，以及针对性的命名chunkName。</li>
+</ul>
+<h4 id="引入插件下的plugin"><a href="#引入插件下的plugin" class="headerlink" title="引入插件下的plugin"></a>引入插件下的plugin</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var BundleAnalyzerPlugin = require(&apos;webpack-bundle-analyzer&apos;).BundleAnalyzerPlugin()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  new BundleAnalyzerPlugin()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>再次打包后，浏览器会弹出打包分析页面。</li>
+<li><img src="https://i.loli.net/2018/02/22/5a8e69b94edcc.png" alt=""></li>
+<li>有时我们会发现我们的多个bundle中，会出现相同的模块。这就说明，我们没有作公共模块的提取。我们就可以进行针对性的配置。</li>
+<li>因此，打包分析可以帮助我们调整打包的策略。</li>
+</ul>
+<h3 id="优化打包速度"><a href="#优化打包速度" class="headerlink" title="优化打包速度"></a>优化打包速度</h3><ul>
+<li>文件多：随着项目的复杂度提高，文件数增加，打包速度会越来会慢，甚至会耗费大量时间。</li>
+<li>依赖多：Webpack进行大量的语法分析。</li>
+<li>页面多：业务逻辑多。</li>
+</ul>
+<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><ul>
+<li>分开vendor（第三方代码） 和 app（业务代码）。第三方代码基本不修改，对于没有修改的代码，不去打包。</li>
+<li>DLLPlugin和DLLReferencePlugin，专门打包第三方代码。插件会生成map（映射关系），在打包业务代码的时候，碰到了第三方代码，会引用这个映射关系。即告诉Webpack，这个第三方库我已经打包好了，你不需要打包，直接引用即可。</li>
+<li>这样，就可以大大节约打包第三方库的时间。</li>
+</ul>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><ul>
+<li>UglifyJsPlugin会对代码进行压缩和混淆，耗时巨大，限定它的工作范围。</li>
+<li>parallel为true时，将串行任务变成并行，进行多任务打包。</li>
+<li>缓存</li>
+</ul>
+<h4 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h4><ul>
+<li>HappyPack</li>
+<li>将串行的loader成为并行</li>
+<li>HappyPack.ThreadPool</li>
+</ul>
+<h4 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h4><ul>
+<li>babel-loader，编译耗时大</li>
+<li>options.cacheDirectory，将babel的缓存开启。</li>
+<li>通过include和exclude，规定我们的打包范围。</li>
+</ul>
+<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><ul>
+<li>减少resolve，当resolve过多，会增加webpack的查找时间。</li>
+<li>Devtool: 去除sourcemap。生成sourcemap也会增加webpack的打包时间。</li>
+<li>cache-loader：缓存所有的处理结果。</li>
+<li>升级node和升级webpack。</li>
+</ul>
+<h3 id="实战优化打包速度：使用DLL分离第三方代码和业务代码的打包"><a href="#实战优化打包速度：使用DLL分离第三方代码和业务代码的打包" class="headerlink" title="实战优化打包速度：使用DLL分离第三方代码和业务代码的打包"></a>实战优化打包速度：使用DLL分离第三方代码和业务代码的打包</h3><ul>
+<li>使用vue-cli快速初始化项目环境</li>
+<li>打包<br><img src="https://i.loli.net/2018/02/22/5a8e70885fcd9.png" alt=""></li>
+<li>引入第三方库（elment-ui）以后，webpack打包时间会明显增加。</li>
+<li>打包<br><img src="https://i.loli.net/2018/02/22/5a8e71a432971.png" alt=""></li>
+<li>引入dll打包公共库</li>
+<li><p>在build目录下新建文件 webpack.dll.conf.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">const webpack = require(&apos;webpack&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    vue: [&apos;vue&apos;, &apos;vue-router&apos;],</span><br><span class="line">    ui: [&apos;element-ui&apos;]</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  // 不直接输出在dist目录下，因为dist目录在打包前都会被删除</span><br><span class="line">  // 我们希望第三方代码可以持续的使用</span><br><span class="line"></span><br><span class="line">  output: &#123;</span><br><span class="line">    // 输出在src下的dll目录下</span><br><span class="line">    path: path.join(__dirname, &apos;../src/dll/&apos;),</span><br><span class="line">    filename: &apos;[name].dll.js&apos;,</span><br><span class="line">    // 定义引用者如何使用第三方库，一般直接定义为全局变量</span><br><span class="line">    library: &apos;[name]&apos;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  plugins: [</span><br><span class="line">    new webpack.DllPlugin(&#123;</span><br><span class="line">      // 不放在dist目录下，因为每次打包前都会删除</span><br><span class="line">      path: path.join(__dirname, &apos;../src/dll/&apos;, &apos;[name]-manifest.json&apos;),</span><br><span class="line">      name: &apos;[name]&apos;</span><br><span class="line">    &#125;),</span><br><span class="line">    // 至此，上述内容告诉了webpack如何打包dll</span><br><span class="line">    new webpack.optimize.UglifyJsPlugin()</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打包后，生成dll文件。 ui.dll.js、ui-manifest.json、vue.dll.js、vue-manifest.json</p>
+</li>
+<li><p>这两个json文件，告诉我们的业务webpack如何去引入我们打包为dll的第三方插件。在build下，webpack.prod.conf.js中的plugins中，使用DLLReferencePlugin</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">    new webpack.DllReferencePlugin(&#123;</span><br><span class="line">      manifest: require(&apos;../src/dll/ui-manifest.json&apos;)</span><br><span class="line">    &#125;),</span><br><span class="line">    new webpack.DllReferencePlugin(&#123;</span><br><span class="line">      manifest: require(&apos;../src/dll/vue-manifest.json&apos;)</span><br><span class="line">    &#125;)]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此时，再次打包，打包时间大大降低。<br><img src="https://i.loli.net/2018/02/22/5a8e7880bc650.png" alt=""></p>
+</li>
+</ul>
+<h3 id="实战优化打包速度：UglifyJsPlugin串行变并行，开启缓存"><a href="#实战优化打包速度：UglifyJsPlugin串行变并行，开启缓存" class="headerlink" title="实战优化打包速度：UglifyJsPlugin串行变并行，开启缓存"></a>实战优化打包速度：UglifyJsPlugin串行变并行，开启缓存</h3><ul>
+<li>UglifyJsPlugin 的parallel为true，开启缓存 cache:true，去除source map<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">new UglifyJsPlugin(&#123;</span><br><span class="line">  uglifyOptions: &#123;</span><br><span class="line">    compress: &#123;</span><br><span class="line">      warnings: false</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  // sourceMap: config.build.productionSourceMap,</span><br><span class="line">  parallel: true,</span><br><span class="line">  cache: true</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="实战优化打包速度：减少babel-loader的include范围"><a href="#实战优化打包速度：减少babel-loader的include范围" class="headerlink" title="实战优化打包速度：减少babel-loader的include范围"></a>实战优化打包速度：减少babel-loader的include范围</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: /\.js$/,</span><br><span class="line">  loader: &apos;babel-loader&apos;,</span><br><span class="line">  include: [resolve(&apos;src&apos;), resolve(&apos;test&apos;), resolve(&apos;node_modules/webpack-dev-server/client&apos;)]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>test和client是开发环境下使用的，为加速打包，我们去除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: /\.js$/,</span><br><span class="line">  loader: &apos;babel-loader&apos;,</span><br><span class="line">  include: [resolve(&apos;src&apos;)]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="实战优化打包速度：Happypack，loader串行变并行"><a href="#实战优化打包速度：Happypack，loader串行变并行" class="headerlink" title="实战优化打包速度：Happypack，loader串行变并行"></a>实战优化打包速度：Happypack，loader串行变并行</h3><ul>
+<li><p>base配置中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: /\.vue$/,</span><br><span class="line">  loader: &apos;happypack/loader?id=vue&apos;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>prod配置中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">new Happypack(&#123;</span><br><span class="line">  id: &apos;vue&apos;,</span><br><span class="line">  loader: [&#123;</span><br><span class="line">    loader: &apos;vue-loader&apos;,</span><br><span class="line">    option: require(&apos;./vue-loader.conf&apos;)</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>id为vue时，happypack使用vue-loader去处理相关文件。代码较小时，效果其实不明显。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web前端/" rel="tag"># web前端</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/20/深入浅出Webpack（十一）-区分开发与生产环境/" rel="next" title="深入浅出Webpack（十一）-区分开发与生产环境">
+                <i class="fa fa-chevron-left"></i> 深入浅出Webpack（十一）-区分开发与生产环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/22/深入浅出Webpack（十三）-长缓存优化/" rel="prev" title="深入浅出Webpack（十三）-长缓存优化">
+                深入浅出Webpack（十三）-长缓存优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yyyx</p>
+              <p class="site-description motion-element" itemprop="description">iezzuyoung@gmail.com</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#打包分析工具"><span class="nav-number">1.</span> <span class="nav-text">打包分析工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Offical-Anylyse-Tool"><span class="nav-number">2.</span> <span class="nav-text">Offical Anylyse Tool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-bundle-analyzer"><span class="nav-number">3.</span> <span class="nav-text">webpack-bundle-analyzer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打包结果分析"><span class="nav-number">3.1.</span> <span class="nav-text">打包结果分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引入插件下的plugin"><span class="nav-number">3.2.</span> <span class="nav-text">引入插件下的plugin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化打包速度"><span class="nav-number">4.</span> <span class="nav-text">优化打包速度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一"><span class="nav-number">4.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二"><span class="nav-number">4.2.</span> <span class="nav-text">方法二</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法三"><span class="nav-number">4.3.</span> <span class="nav-text">方法三</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法四"><span class="nav-number">4.4.</span> <span class="nav-text">方法四</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它"><span class="nav-number">4.5.</span> <span class="nav-text">其它</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战优化打包速度：使用DLL分离第三方代码和业务代码的打包"><span class="nav-number">5.</span> <span class="nav-text">实战优化打包速度：使用DLL分离第三方代码和业务代码的打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战优化打包速度：UglifyJsPlugin串行变并行，开启缓存"><span class="nav-number">6.</span> <span class="nav-text">实战优化打包速度：UglifyJsPlugin串行变并行，开启缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战优化打包速度：减少babel-loader的include范围"><span class="nav-number">7.</span> <span class="nav-text">实战优化打包速度：减少babel-loader的include范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战优化打包速度：Happypack，loader串行变并行"><span class="nav-number">8.</span> <span class="nav-text">实战优化打包速度：Happypack，loader串行变并行</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yyyx</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  
+    <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+</body>
+</html>
