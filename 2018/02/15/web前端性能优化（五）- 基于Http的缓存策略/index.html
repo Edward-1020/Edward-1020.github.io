@@ -88,7 +88,9 @@
 <meta property="og:description" content="基于Http的缓存策略在大规模系统中，我们希望有一个自动的缓存策略，而不是手动的通过localstorage去缓存。通过服务端和浏览器端基于http请求头的协商的方式，形成一个通用的缓存文件的策略。  httpheader Cache-Control：Cache-Control可以出现在Response的Header中，也可以出现在Request的Header中。 Cache-Control具有以">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/02/11/5a7fc30236512.png">
-<meta property="og:updated_time" content="2018-02-15T03:38:58.377Z">
+<meta property="og:image" content="https://i.loli.net/2018/03/06/5a9e5f772eac0.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/06/5a9e62009a883.png">
+<meta property="og:updated_time" content="2018-03-06T09:49:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web前端性能优化（五）- 基于Http的缓存策略">
 <meta name="twitter:description" content="基于Http的缓存策略在大规模系统中，我们希望有一个自动的缓存策略，而不是手动的通过localstorage去缓存。通过服务端和浏览器端基于http请求头的协商的方式，形成一个通用的缓存文件的策略。  httpheader Cache-Control：Cache-Control可以出现在Response的Header中，也可以出现在Request的Header中。 Cache-Control具有以">
@@ -379,6 +381,30 @@
 <li>针对大量的静态资源，服务端基于http header配置缓存策略。</li>
 <li><img src="https://i.loli.net/2018/02/11/5a7fc30236512.png" alt=""></li>
 </ul>
+<h3 id="缓存流程"><a href="#缓存流程" class="headerlink" title="缓存流程"></a>缓存流程</h3><h4 id="弱缓存流程图"><a href="#弱缓存流程图" class="headerlink" title="弱缓存流程图"></a>弱缓存流程图</h4><ul>
+<li><img src="https://i.loli.net/2018/03/06/5a9e5f772eac0.png" alt=""></li>
+<li>用户发出请求去请求资源。</li>
+<li>浏览器根据url判断资源是否存在缓存。</li>
+<li>没有缓存。会去向服务器发出请求，服务端响应请求，并下发缓存的协商策略。最终浏览器拿到这个协商策略，展示我们的页面。</li>
+<li>存在缓存，就去解析缓存文件。</li>
+<li>浏览器先通过expires和max-age去检查缓存是否已经过期。缓存没有过期，就会直接使用缓存的内容，展示我们的页面。</li>
+<li>缓存过期，浏览器取找ETag属性。v</li>
+<li>有ETag，会向服务器请求带上if-none-match字段。服务器根据if-none-match，判断浏览器上的文件和我们最新的文件的hash值是否相同。相同，返回304，浏览器读取本地缓存，展示页面。返回200，表示服务器文件更新了，我们的浏览器会拿到新的文件，新的ETag.</li>
+<li>没有Etag,就走last-modified逻辑。</li>
+</ul>
+<h4 id="强缓存流程图"><a href="#强缓存流程图" class="headerlink" title="强缓存流程图"></a>强缓存流程图</h4><ul>
+<li><img src="https://i.loli.net/2018/03/06/5a9e62009a883.png" alt=""></li>
+<li>cache-control决定我们的浏览器是否使用缓存存储。</li>
+<li>不使用缓存存储，那么cache-control对应的就是no-store。</li>
+<li>如果使用缓存存储，就判断每次请求是否重新验证。</li>
+<li>需要重新验证，那就不会从强缓存去读缓存的文件，而是通过http的header去和服务端进行一个协商。</li>
+<li>就是说，no-cache，我的每个请求都会发到服务端，由服务端决定缓存是否生效。</li>
+<li>不需要重新验证，那我们就需要使用我们的max-age,s-maxage。</li>
+<li>看是否允许被代理服务缓存。</li>
+<li>不允许就是Private，也就是浏览器层面的缓存，我们就去设max-age。</li>
+<li>允许就是Public，表示缓存能被很多人访问，我们就去设s-maxage。</li>
+<li>通过这个过期时间，判断缓存是否生效。</li>
+</ul>
 
       
     </div>
@@ -557,7 +583,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于Http的缓存策略"><span class="nav-number">1.</span> <span class="nav-text">基于Http的缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#httpheader"><span class="nav-number">2.</span> <span class="nav-text">httpheader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expires"><span class="nav-number">3.</span> <span class="nav-text">Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#max-age和Expires"><span class="nav-number">4.</span> <span class="nav-text">max-age和Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#last-modified-if-modified-since"><span class="nav-number">5.</span> <span class="nav-text">last-modified/if-modified-since</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Etag-If-None-Match"><span class="nav-number">6.</span> <span class="nav-text">Etag/If-None-Match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分级缓存策略"><span class="nav-number">7.</span> <span class="nav-text">分级缓存策略</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于Http的缓存策略"><span class="nav-number">1.</span> <span class="nav-text">基于Http的缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#httpheader"><span class="nav-number">2.</span> <span class="nav-text">httpheader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expires"><span class="nav-number">3.</span> <span class="nav-text">Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#max-age和Expires"><span class="nav-number">4.</span> <span class="nav-text">max-age和Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#last-modified-if-modified-since"><span class="nav-number">5.</span> <span class="nav-text">last-modified/if-modified-since</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Etag-If-None-Match"><span class="nav-number">6.</span> <span class="nav-text">Etag/If-None-Match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分级缓存策略"><span class="nav-number">7.</span> <span class="nav-text">分级缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存流程"><span class="nav-number">8.</span> <span class="nav-text">缓存流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#弱缓存流程图"><span class="nav-number">8.1.</span> <span class="nav-text">弱缓存流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强缓存流程图"><span class="nav-number">8.2.</span> <span class="nav-text">强缓存流程图</span></a></li></ol></li></ol></div>
             
 
           </div>
