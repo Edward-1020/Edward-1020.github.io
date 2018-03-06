@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/02/11/5a7fc30236512.png">
 <meta property="og:image" content="https://i.loli.net/2018/03/06/5a9e5f772eac0.png">
 <meta property="og:image" content="https://i.loli.net/2018/03/06/5a9e62009a883.png">
-<meta property="og:updated_time" content="2018-03-06T09:49:22.000Z">
+<meta property="og:updated_time" content="2018-03-06T10:02:14.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web前端性能优化（五）- 基于Http的缓存策略">
 <meta name="twitter:description" content="基于Http的缓存策略在大规模系统中，我们希望有一个自动的缓存策略，而不是手动的通过localstorage去缓存。通过服务端和浏览器端基于http请求头的协商的方式，形成一个通用的缓存文件的策略。  httpheader Cache-Control：Cache-Control可以出现在Response的Header中，也可以出现在Request的Header中。 Cache-Control具有以">
@@ -405,6 +405,7 @@
 <li>允许就是Public，表示缓存能被很多人访问，我们就去设s-maxage。</li>
 <li>通过这个过期时间，判断缓存是否生效。</li>
 </ul>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>强缓存和协商缓存最大也是最根本的区别是：强缓存命中的话不会发请求到服务器（比如chrome中的200 from memory cache），协商缓存一定会发请求到服务器，通过资源的请求首部字段验证资源是否命中协商缓存，如果协商缓存命中，服务器会将这个请求返回，但是不会返回这个资源的实体，而是通知客户端可以从缓存中加载这个资源（304 not modified）。</p>
 
       
     </div>
@@ -583,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于Http的缓存策略"><span class="nav-number">1.</span> <span class="nav-text">基于Http的缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#httpheader"><span class="nav-number">2.</span> <span class="nav-text">httpheader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expires"><span class="nav-number">3.</span> <span class="nav-text">Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#max-age和Expires"><span class="nav-number">4.</span> <span class="nav-text">max-age和Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#last-modified-if-modified-since"><span class="nav-number">5.</span> <span class="nav-text">last-modified/if-modified-since</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Etag-If-None-Match"><span class="nav-number">6.</span> <span class="nav-text">Etag/If-None-Match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分级缓存策略"><span class="nav-number">7.</span> <span class="nav-text">分级缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存流程"><span class="nav-number">8.</span> <span class="nav-text">缓存流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#弱缓存流程图"><span class="nav-number">8.1.</span> <span class="nav-text">弱缓存流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强缓存流程图"><span class="nav-number">8.2.</span> <span class="nav-text">强缓存流程图</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于Http的缓存策略"><span class="nav-number">1.</span> <span class="nav-text">基于Http的缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#httpheader"><span class="nav-number">2.</span> <span class="nav-text">httpheader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expires"><span class="nav-number">3.</span> <span class="nav-text">Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#max-age和Expires"><span class="nav-number">4.</span> <span class="nav-text">max-age和Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#last-modified-if-modified-since"><span class="nav-number">5.</span> <span class="nav-text">last-modified/if-modified-since</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Etag-If-None-Match"><span class="nav-number">6.</span> <span class="nav-text">Etag/If-None-Match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分级缓存策略"><span class="nav-number">7.</span> <span class="nav-text">分级缓存策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存流程"><span class="nav-number">8.</span> <span class="nav-text">缓存流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#弱缓存流程图"><span class="nav-number">8.1.</span> <span class="nav-text">弱缓存流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强缓存流程图"><span class="nav-number">8.2.</span> <span class="nav-text">强缓存流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区别"><span class="nav-number">8.3.</span> <span class="nav-text">区别</span></a></li></ol></li></ol></div>
             
 
           </div>
