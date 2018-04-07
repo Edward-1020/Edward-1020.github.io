@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[切入大前端安卓篇--初识Java（一）]]></title>
+    <title><![CDATA[切入大前端安卓篇（二）--初识Java]]></title>
+    <url>%2F2018%2F04%2F07%2F%E5%88%87%E5%85%A5%E5%A4%A7%E5%89%8D%E7%AB%AF%E5%AE%89%E5%8D%93%E7%AF%87--Java%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%98%E9%87%8F%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[12345public class HelloImooc &#123; public static void main(String[] args) &#123; System.out.println(&quot;Hello,imooc!&quot;) &#125;&#125; 标识符 HelloImooc便是标识符 可以以字母、数字、下划线和美元符组成，数字不能作为标识符的首字母 标识符严格区分大小写 标识符不能是Java的关键字和保留字 标识符的命名是要有意义的 关键字特殊意义的词 变量 变量的三个元素：变量类型、变量名和变量值 变量命名规则 标识符命名规则 驼峰法命名规则 见名知意 类命名规则 标识符命名规则 首字母大写（Pascal命名规则） 数据类型基本数据类型数值型 整数类型(byte,short,int,long) byte 字节型 1字节 short 短整型 2字节 int 整型 4字节 long 长整型 8字节 浮点类型(float,double) float 单精度浮点型 4字节 double 双精度浮点型 8字节字符型(char)char 字符型 2字节布尔型(boolean)boolean 布尔型 1字节 引用数据类型 类(class) 接口(interface) 数组 整型字面值Java中有三种表示整数的方法：十进制、八进制、十六进制。 八进制：以0开头，包括0-7数字。如037，056 十六进制：以0x或0X开头，包括0-9即其A到F，如0xabcf。 0xabcfL，是一个长整型。 变量声明12int n; // 声明整型变量nlong count; // 声明长整型变量count 赋值12345int n = 3; // 赋值n为十进制3int n = 037; // 赋值n为八进制037long longNumber = 0xa2cdf3ffL // 定义变量存放十六进制长整型数据short shorNumber = 123; // 定义变量存放短整型数据byte b = 10; // 定义变量存放byte类型数据 浮点型字面值 默认情况表示double类型。例如：123.4表示的是一个单精度浮点型 123.4d或123.4D表示双精度浮点型。 123.4f或123.4F表示单精度浮点型。 双精度浮点型比单精度浮点型范围大，所以将双精度浮点型转为单精度浮点型会发生精度丢失。 数据类型存储数据类型按照作用范围分为：类级、对象实例级、方法级、块级。方法级内的变量可以称为局部变量。 内存：Java中内存分为栈、堆、常量池。 方法级内的局部变量在栈中如何存取？12345int a = 1/*在内存的栈中开辟int类型大小空间，占用4字节（32个二进制位），将1存入。这里将a看作1所在内存空间的别名，a便代表这个1.*/ 字符型字面值 字符型字面值使用单引号的单个字符表达。 12char a = &apos;a&apos;; // achar ch = 65; // ASICII码，表示A ASICII码 是一个约定的规则，保证了通信传达信息的一致性。 7位二进制数 - 标准ASICII码 8位二进制数 - 扩展ASICII码 总而言之，char ch = 65 表示的是A,即利用ASCII码表，使得整型对应一个字符，即整型和字符互相转换。 char类型是2个字节，即16个二进制位，数据范围是0~65535。char类型代表的无符号整数位。 unicode编码称为统一码，万国码。目标是支持世界上所有的字符集。1234char c = &apos;\u005d&apos;;/*Unicode表示法，在值加前缀\u*/ 布尔类型字面值 布尔值只能定义为true和false boolean b = true 字符串字面值字符串不属于基本数据类型，它是类。是双引号引起来的0个或多个字符。123String s = &quot;&quot;;// 使用unicode编码表示字符String s1 = &quot;\u005d\u005f&quot;; //]_ 变量定义变量初始化1int x1 = 0; 1int x = 0, y = 0; 123int x,y;x=3;x=5; 字符‘\t’是对字符转义，会转义为ASICCII对应的整型。 科学计数法12double d= 1.23E5; // 1.23 * 10^5float f = 1.23e5f; // 1.23 * 10^5 类型转换 类型转换分为自动类型转换和强制类型转换12long n = 254 // int类型自动转为nchar ch = (char)65536 // 强制类型转换 自动类型转换（隐式类型转换）自动类型转换顺序int -&gt; float，long -&gt; float long -&gt; double，会精度丢失。 强制类型转换如果A类型的数据表示范围比B类型大，则将A类型的值赋值给B类型需要强制类型转换。12double d = 123.4float f = (float)d 举例1234567891011// char类型和int类型之间的转换char c = (char)65536;int n;n = c;//隐式类型转换,char类型的数据范围比int类型的小c = (char)n;//整型和浮点型的类型转换问题int x = 100;long y = x;x = (int)y;// 数据范围大的赋值给数据范围小的，需要强制类型转换float f = 103948583923948L; //精度丢失 常量123final int N = 5final double PI = 3.14159 //定义常量，一个单词，这个单词大写final double MIN_VALUE = 0; //两个单词，用下划线隔开]]></content>
+      <categories>
+        <category>切入大前端安卓篇</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[切入大前端安卓篇（一）--初识Java]]></title>
     <url>%2F2018%2F04%2F03%2F%E5%88%87%E5%85%A5%E5%A4%A7%E5%89%8D%E7%AB%AF%E5%AE%89%E5%8D%93%E7%AF%87--%E5%88%9D%E8%AF%86Java%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
     <content type="text"><![CDATA[Java简介JVM JVM，Java虚拟机 JVM是实现Java跨平台的关键 Java程序执行流程 program.java的源文件。 经过编译器compiler，编译为Program.class的字节码文件 字节码文件交由解释器interpreter执行，JVM虚拟机解释执行Java编译而成字节码文件，将字节码文件解释成具体机器上的机器码这样的二进制指令。 这样，JVM保证Java可以一次编译，到处执行。 JDKJDK是Java语言的软件开发工具包。JDK中的两个主要组件 javac -编译器，将源程序转成字节码 java 运行编译后的java程序 JRE JRE是Java Runtime Environment，Java运行环境 包括Java虚拟机（JVM），Java核心类库和支持文件 JRE和JDK区别 JRE负责运行Java环境。 JDK面向开发人员，JDK附带JRE。 JRE、JDK、JVM关系 JDK = JRE + JVM JDK = JRE + 开发工具集 JRE = JVM + JavaSE标准类库 Java平台 JavaSE Java标准版，一般用于开发桌面程序 JavaEE JavaSE为JavaEE提供基础，是Java企业版，开发Web程序。 JavaME 开发移动设备。]]></content>
       <categories>
